@@ -4,7 +4,10 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 export default class MaterialButtonViolet extends Component {
   render() {
     return (
-      <TouchableOpacity style={[styles.container, this.props.style]}>
+      <TouchableOpacity 
+        style={[styles.container, this.props.style]}
+
+      >
         <Text style={styles.caption}>LOGIN</Text>
       </TouchableOpacity>
     );
