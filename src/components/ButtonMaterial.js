@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-export default class MaterialButtonViolet1 extends Component {
+export default class ButtonMaterial extends Component {
   render() {
     return (
-      <TouchableOpacity style={[styles.container, this.props.style]}>
-        <Text style={styles.caption}>REGISTER</Text>
+      <TouchableOpacity 
+        style={[styles.container, this.props.style]}
+        onPress={this.props.onPress}
+      >
+        <Text style={styles.caption}>{this.props.text}</Text>
       </TouchableOpacity>
     );
   }

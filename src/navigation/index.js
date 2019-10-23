@@ -1,12 +1,26 @@
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import LoginScreen from "../screens/Login";
-import Register from "../screens/Register";
+import RegisterScreen from "../screens/Register";
+import MapScreen from "../screens/Map";
+import SettingsScreen from "../screens/Settings";
+// import ListPackegesScreen from 
 
-const logInNavigator = createStackNavigator({
+const mainNavigator = createMaterialBottomTabNavigator({
+    MapScreen,
+    SettingsScreen
+},{
+    initialRouteName: 'MapScreen',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+});
+
+const logInNavigator = createSwitchNavigator({
     LoginScreen,
-    Register
+    RegisterScreen,
+    mainNavigator
 }, {
     initialRouteName: 'LoginScreen',
     headerMode: 'none'

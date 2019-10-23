@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-export default class MaterialUnderlineTextbox1 extends Component {
+export default class InputText extends Component {
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
         <TextInput
-          placeholder="Email"
+          placeholder={this.props.placeholder}
           placeholderTextColor="rgba(78,76,76,1)"
           style={styles.inputStyle}
         />

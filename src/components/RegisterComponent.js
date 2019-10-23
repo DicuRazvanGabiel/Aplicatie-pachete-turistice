@@ -3,15 +3,13 @@ import { StyleSheet, View, Text } from "react-native";
 import InputText from "./InputText";
 import ButtonMaterial from "./ButtonMaterial";
 
-export default class LoginComponent extends Component {
+export default class RegisterComponent extends Component {
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
         <InputText style={styles.materialUnderlineTextbox1} placeholder='Email'/>
         <InputText style={styles.materialUnderlineTextbox2} placeholder='Parola'/>
-        <ButtonMaterial style={styles.ButtonMaterial} text="LOGIN" onPress={() => {this.props.navigation.navigate('mainNavigator')}}/>
-        <Text style={styles.text}>SAU</Text>
-        <ButtonMaterial style={styles.ButtonMaterial} text="CONT NOU" onPress={() => {this.props.navigation.navigate('RegisterScreen')}}/>
+        <ButtonMaterial style={styles.ButtonMaterial} text="CONT NOU" onPress={() => {this.props.navigation.navigate('mainNavigator')}}/>
       </View>
     );
   }

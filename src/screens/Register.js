@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, ImageBackground } from "react-native";
-import MaterialUnderlineTextbox1 from "../components/MaterialUnderlineTextbox1";
-import MaterialUnderlineTextbox2 from "../components/MaterialUnderlineTextbox2";
-import MaterialButtonViolet1 from "../components/MaterialButtonViolet1";
+import RegisterComponent from "../components/RegisterComponent"
 
 export default class Register extends Component {
   render() {
@@ -13,15 +11,7 @@ export default class Register extends Component {
           resizeMode="stretch"
           style={styles.image}
         >
-          <View style={styles.rect}>
-            <MaterialUnderlineTextbox1
-              style={styles.materialUnderlineTextbox1}
-            />
-            <MaterialUnderlineTextbox2
-              style={styles.materialUnderlineTextbox2}
-            />
-            <MaterialButtonViolet1 style={styles.materialButtonViolet1} />
-          </View>
+          <RegisterComponent style={styles.loginComponent} />
         </ImageBackground>
       </View>
     );
@@ -30,34 +20,13 @@ export default class Register extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center"
+    flex: 1
   },
   image: {
-    height: 812,
-    width: '100%',
-    justifyContent: "center",
-    alignSelf: "center"
+    flex: 1
   },
-  rect: {
-    height: 335,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  materialUnderlineTextbox1: {
-    width: 360,
-    height: 43,
-    marginBottom: 5
-  },
-  materialUnderlineTextbox2: {
-    width: 360,
-    height: 43,
-    marginTop: 5,
-    marginBottom: 5
-  },
-  materialButtonViolet1: {
-    width: 100,
-    height: 36,
-    marginTop: 5
+  loginComponent: {
+    height: 322,
+    marginTop: 245
   }
 });

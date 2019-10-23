@@ -11,7 +11,7 @@ export default class Login extends Component {
           resizeMode="stretch"
           style={styles.image}
         >
-          <LoginComponent style={styles.loginComponent} />
+          <LoginComponent style={styles.loginComponent} navigation={this.props.navigation}/>
         </ImageBackground>
       </View>
     );
