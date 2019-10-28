@@ -7,7 +7,7 @@ export default class Map extends React.Component {
     static navigationOptions = {
         title: "Harta",
         tabBarColor: 'white',
-        tabBarIcon:() =>  <Foundation name="map" size={28}/>
+        // tabBarIcon:() =>  <Foundation name="map" size={28}/>
 
     }
     render() {

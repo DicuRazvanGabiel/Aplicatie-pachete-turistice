@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
 export default class InputText extends Component {
+
+  onChangeText= (text) =>{
+    this.props.onChangeText(text);
+  }
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
@@ -9,6 +13,7 @@ export default class InputText extends Component {
           placeholder={this.props.placeholder}
           placeholderTextColor="rgba(78,76,76,1)"
           style={styles.inputStyle}
+          onChangeText={text => this.onChangeText(text)}
         />
       </View>
     );

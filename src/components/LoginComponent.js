@@ -4,12 +4,31 @@ import InputText from "./InputText";
 import ButtonMaterial from "./ButtonMaterial";
 
 export default class LoginComponent extends Component {
+
+  state={
+    user: '',
+    pass: ''
+  }
+
+  onChangeTextUser = (textUser) => {
+    console.log(textUser);
+    this.setState({user: textUser})
+  } 
+
+  onChangeTextPass = (testPass) => {
+    this.setState({user: testPass})
+  }
+
+  handleLogin = () => {
+    this.props.getUserAndPass(this.state);
+  }
+
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <InputText style={styles.materialUnderlineTextbox1} placeholder='Email'/>
-        <InputText style={styles.materialUnderlineTextbox2} placeholder='Parola'/>
-        <ButtonMaterial style={styles.ButtonMaterial} text="LOGIN" onPress={() => {this.props.navigation.navigate('mainNavigator')}}/>
+        <InputText style={styles.materialUnderlineTextbox1} placeholder='Email' onChangeText={this.onChangeTextUser}/>
+        <InputText style={styles.materialUnderlineTextbox2} placeholder='Parola' onChangeText={this.onChangeTextPass}/>
+        <ButtonMaterial style={styles.ButtonMaterial} text="LOGIN" onPress={() => {this.handleLogin()}}/>
         <Text style={styles.text}>SAU</Text>
         <ButtonMaterial style={styles.ButtonMaterial} text="CONT NOU" onPress={() => {this.props.navigation.navigate('RegisterScreen')}}/>
       </View>

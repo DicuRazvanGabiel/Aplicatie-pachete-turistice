@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 export default class Settings extends Component {
     static navigationOptions = {
         title: "Setari",
-        tabBarIcon:() =>  <MaterialIcons name="settings" size={28}/>
+        // tabBarIcon:() =>  <MaterialIcons name="settings" size={28}/>
 
     }
     render() {

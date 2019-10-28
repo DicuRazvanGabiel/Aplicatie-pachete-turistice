@@ -6,7 +6,8 @@ import LoginScreen from "../screens/Login";
 import RegisterScreen from "../screens/Register";
 import MapScreen from "../screens/Map";
 import SettingsScreen from "../screens/Settings";
-// import ListPackegesScreen from 
+import ChooseLangScreen from "../screens/ChooseLang"
+import PakagesListScreen from "../screens/PackagesList"
 
 const mainNavigator = createMaterialBottomTabNavigator({
     MapScreen,
@@ -18,11 +19,13 @@ const mainNavigator = createMaterialBottomTabNavigator({
 });
 
 const logInNavigator = createSwitchNavigator({
+    ChooseLangScreen,
     LoginScreen,
     RegisterScreen,
-    mainNavigator
+    mainNavigator,
+    PakagesListScreen
 }, {
-    initialRouteName: 'LoginScreen',
+    initialRouteName: 'ChooseLangScreen',
     headerMode: 'none'
 });
 

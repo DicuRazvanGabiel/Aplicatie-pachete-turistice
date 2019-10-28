@@ -3,12 +3,15 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
 import AppContainer from './src/navigation';
 import { white } from 'ansi-colors';
+
+import HeaderLogosRo from './src/components/HeaderLogosRo';
+import Disclamer from './src/components/Disclamer';
 
 const images = [
   require('./assets/images/01_NATBIOT_CMYK.png'),
@@ -19,6 +22,9 @@ const images = [
   require('./assets/images/Background.png'),
   require('./assets/images/Background1.png'),
   require('./assets/images/mrc.png'),
+  require('./assets/images/languages/bg.jpg'),
+  require('./assets/images/languages/eng.png'),
+  require('./assets/images/languages/ro.jpg'),
 ]
 
 export default class App extends React.Component {
@@ -54,43 +60,12 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        <View style={{height: 100, width: '100%', flexDirection: "row", alignItems: "stretch", justifyContent: "space-between"}}>
-          <Image
-            source={require("./assets/images/eu.png")}
-            style={{
-              height: 50,
-              width: 110,
-              marginLeft: 5,
-              marginRight: 5,
-              marginTop: 35,
-              resizeMode: 'stretch'
-            }}
-          />
-          <Image
-            source={require("./assets/images/guvern.png")}
-            style={styles.image}
-          />
-          <Image
-            source={require("./assets/images/Interreg_ro.jpg")}
-            style={styles.image}
-          />
-          <Image
-            source={require("./assets/images/mrc.png")}
-            style={styles.image}
-          />
+        <HeaderLogosRo />
+        <View style={{flex: 1}}>
+          <AppContainer />
         </View>
-        <AppContainer />
+        <Disclamer />
       </Container>
     );
   }
 }
-const styles = StyleSheet.create({
-  image: {
-    height: 100,
-    width: 80,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
-    resizeMode: 'contain'
-  }
-});

@@ -1,18 +1,45 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, ImageBackground } from "react-native";
+import { StyleSheet, View, Image, ImageBackground, AsyncStorage } from "react-native";
 import LoginComponent from "../components/LoginComponent";
 
 export default class Login extends Component {
+  getUserAndPass = (user) => {
+    console.log(user);
+    const userObj = {
+      username: user.user,
+      password: user.pass
+    }
+
+    this.props.navigation.navigate('mainNavigator');
+  }
+
+  _storeData = async (key, obj) => {
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(obj));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TASKS');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../../assets/images/Background.png")}
-          resizeMode="stretch"
-          style={styles.image}
-        >
-          <LoginComponent style={styles.loginComponent} navigation={this.props.navigation}/>
-        </ImageBackground>
+        <LoginComponent style={styles.loginComponent} 
+          navigation={this.props.navigation} 
+          getUserAndPass={this.getUserAndPass}
+        />
       </View>
     );
   }
