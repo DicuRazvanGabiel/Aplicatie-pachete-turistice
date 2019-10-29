@@ -6,15 +6,32 @@ import PackegesBg from "../components/PackegesBg"
 
 export default class PackagesList extends Component {
     render() {
-        
-        return (
-            <View>
-                <Text> PackagesList </Text>
-            </View>
-        )
+        const lang = this.props.screenProps
+
+        if(lang === "ro"){
+            return (
+                <View style={styles.container}>
+                    <PakegesRo />
+                </View>
+            )
+        }else if(lang === "en"){
+            return (
+                <View style={styles.container}>
+                    <Text> PackagesList {lang} </Text>
+                </View>
+            )
+        }else{
+            return (
+                <View style={styles.container}>
+                    <PackegesBg />
+                </View>
+            )
+        }
     }
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1
+    }
 })

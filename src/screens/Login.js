@@ -4,7 +4,6 @@ import LoginComponent from "../components/LoginComponent";
 
 export default class Login extends Component {
   getUserAndPass = (user) => {
-    console.log(user);
     const userObj = {
       username: user.user,
       password: user.pass

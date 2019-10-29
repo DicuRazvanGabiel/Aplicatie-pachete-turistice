@@ -11,7 +11,6 @@ export default class LoginComponent extends Component {
   }
 
   onChangeTextUser = (textUser) => {
-    console.log(textUser);
     this.setState({user: textUser})
   } 
 

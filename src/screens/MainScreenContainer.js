@@ -12,13 +12,12 @@ import DisclamerBg from "../components/DisclamerBg"
 export default class MainScreenContainer extends Component {
     render() {
         const lang = this.props.navigation.getParam('lang');
-        console.log(lang);
         
         if(lang === "ro"){
             return (
                 <View style={styles.container}>
                     <HeaderLogosRo />
-                    <PackegesContainer />
+                    <PackegesContainer screenProps={lang}/>
                     <DisclamerRo />
                 </View>
             )
@@ -26,7 +25,7 @@ export default class MainScreenContainer extends Component {
             return (
                 <View>
                     <HeaderLogosBg />
-                    <PackegesContainer />
+                    <PackegesContainer screenProps={lang}/>
                     <DisclamerBg />
                 </View>
             )
@@ -34,7 +33,7 @@ export default class MainScreenContainer extends Component {
             return (
                 <View>
                     <HeaderLogosEn />
-                    <PackegesContainer />
+                    <PackegesContainer screenProps={lang}/>
                     <DisclamerEn />
                 </View>
             )

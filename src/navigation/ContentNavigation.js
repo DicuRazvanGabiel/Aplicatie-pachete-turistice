@@ -1,5 +1,6 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import LoginScreen from "../screens/Login";
 import RegisterScreen from "../screens/Register";
@@ -16,7 +17,7 @@ const mainNavigator = createMaterialBottomTabNavigator({
     inactiveColor: '#3e2465',
 });
 
-const pakagesListNavigation = createSwitchNavigator({
+const pakagesListNavigation = createStackNavigator({
     LoginScreen,
     RegisterScreen,
     PakagesListScreen
