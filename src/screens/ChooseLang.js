@@ -1,57 +1,58 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, Image, } from 'react-native'
+
+import HeaderLogosRo from '../components/HeaderLogosRo'
+import DisclamerRo from '../components/DisclamerRo'
 
 export default class ChooseLang extends Component {
 
-    changeScreen = (lang) => {
-        // await this._storeData('lang', lang)
-        this.props.navigation.navigate('PakagesListScreen', {
+    changeScreen = async (lang) => {
+        this.props.navigation.navigate('MainScreenContainer', {
             lang
         });
     }
 
-    _storeData = async (key, obj) => {
-        try {
-          await AsyncStorage.setItem(key, JSON.stringify(obj));
-        } catch (error) {
-          console.log(error);
-        }
-    };
-
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                    <TouchableOpacity onPress={() => this.changeScreen("ro")}>
-                        <Image
-                            style={styles.image}
-                            source={require('../../assets/images/languages/ro.jpg')}
-                        />
-                    </TouchableOpacity>
+                <HeaderLogosRo />
+                <View style={styles.containerLang}>
+                    <View>
+                        <TouchableOpacity onPress={() => this.changeScreen("ro")}>
+                            <Image
+                                style={styles.image}
+                                source={require('../../assets/images/languages/ro.jpg')}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => this.changeScreen("en")}>
+                            <Image
+                                style={styles.image}
+                                source={require('../../assets/images/languages/eng.png')}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => this.changeScreen("bg")}>
+                            <Image
+                                style={styles.image}
+                                source={require('../../assets/images/languages/bg.jpg')}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View>
-                    <TouchableOpacity onPress={() => this.changeScreen("en")}>
-                        <Image
-                            style={styles.image}
-                            source={require('../../assets/images/languages/eng.png')}
-                        />
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() => this.changeScreen("bg")}>
-                        <Image
-                            style={styles.image}
-                            source={require('../../assets/images/languages/bg.jpg')}
-                        />
-                    </TouchableOpacity>
-                </View>
+                <DisclamerRo />
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container:{
+        flex: 1
+    },  
+    containerLang: {
         flex: 1,
         margin: 20,
         alignItems: "center",

@@ -6,23 +6,12 @@ import PackegesBg from "../components/PackegesBg"
 
 export default class PackagesList extends Component {
     render() {
-        const lang = this.props.navigation.getParam('lang');
-        console.log(lang)
-        if(lang === "ro" || lang === "en"){
-            console.log("aici");
-            
-            return (
-                <View>
-                    <PakegesRo />
-                </View>
-            )
-        } else if(lang === "bg"){
-            return (
-                <View>
-                    <PackegesBg />
-                </View>
-            )
-        }
+        
+        return (
+            <View>
+                <Text> PackagesList </Text>
+            </View>
+        )
     }
 }
 

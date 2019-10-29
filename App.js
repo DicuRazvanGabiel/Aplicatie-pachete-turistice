@@ -8,10 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 import AppContainer from './src/navigation';
-import { white } from 'ansi-colors';
-
-import HeaderLogosRo from './src/components/HeaderLogosRo';
-import Disclamer from './src/components/Disclamer';
 
 const images = [
   require('./assets/images/01_NATBIOT_CMYK.png'),
@@ -58,14 +54,20 @@ export default class App extends React.Component {
       )
     }
 
+    // return (
+    //   <Container>
+    //     <HeaderLogosRo />
+    //     <View style={{flex: 1}}>
+    //       <AppContainer />
+    //     </View>
+    //     <Disclamer />
+    //   </Container>
+    // );
+
     return (
-      <Container>
-        <HeaderLogosRo />
-        <View style={{flex: 1}}>
-          <AppContainer />
-        </View>
-        <Disclamer />
-      </Container>
+      <View style={{flex:1}}>
+        <AppContainer />
+      </View>
     );
   }
 }

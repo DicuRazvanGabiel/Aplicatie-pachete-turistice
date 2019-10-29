@@ -1,0 +1,30 @@
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+
+import LoginScreen from "../screens/Login";
+import RegisterScreen from "../screens/Register";
+import MapScreen from "../screens/Map";
+import SettingsScreen from "../screens/Settings";
+import PakagesListScreen from "../screens/PackagesList"
+
+const mainNavigator = createMaterialBottomTabNavigator({
+    MapScreen,
+    SettingsScreen
+},{
+    initialRouteName: 'MapScreen',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+});
+
+const pakagesListNavigation = createSwitchNavigator({
+    LoginScreen,
+    RegisterScreen,
+    PakagesListScreen
+}, {
+    initialRouteName: 'PakagesListScreen',
+    headerMode: 'none'
+});
+
+const PackegesContainer  = createAppContainer(pakagesListNavigation);
+
+export default PackegesContainer;
