@@ -1,13 +1,12 @@
 {
   "expo": {
-    "name": "Pachete Turistice",
-    "slug": "PacheteTuristice",
+    "name": "Natbiot travelling",
+    "slug": "natbiot-travelling",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",

@@ -153,44 +153,8 @@ export default class VisitingPoints extends Component {
           </Row>
           <Row>
           <Col>
-          <TouchableOpacity onPress={() => {
-              const lat = 43.344532;
-              const lng = 24.532953;
-              const latLng = `${lat},${lng}`;
-              const label = 'Chernelka';
-              const url = Platform.select({
-                ios: `${scheme}${label}@${latLng}`,
-                android: `${scheme}${latLng}(${label})`
-              });
-              Linking.openURL(url); 
-
-            }}>
-            <Image
-              style={{height: 100, width: width / 2 - 10}}
-              resizeMode="stretch"
-              source={require('../../assets/images/packeges/ro/p3/Chernelka.png')}/>
-              <Text>Chernelka</Text>
-              </TouchableOpacity>
           </Col>
           <Col>
-          <TouchableOpacity onPress={() => {
-              const lat = 44.930205;
-              const lng = 25.460558;
-              const latLng = `${lat},${lng}`;
-              const label = 'History Museum';
-              const url = Platform.select({
-                ios: `${scheme}${label}@${latLng}`,
-                android: `${scheme}${latLng}(${label})`
-              });
-              Linking.openURL(url); 
-
-            }}>
-            <Image
-              style={{height: 100, width: width / 2 - 10}}
-              resizeMode="stretch"
-              source={require('../../assets/images/packeges/ro/p3/history_museum.png')}/>
-              <Text>History Museum</Text>
-              </TouchableOpacity>
           </Col>
           </Row>
         </Grid>
@@ -242,44 +206,9 @@ export default class VisitingPoints extends Component {
           </Row>
           <Row>
           <Col>
-          <TouchableOpacity onPress={() => {
-              const lat = 43.194950;
-              const lng = 23.287746;
-              const latLng = `${lat},${lng}`;
-              const label = 'Galeriile de arta din Varshets';
-              const url = Platform.select({
-                ios: `${scheme}${label}@${latLng}`,
-                android: `${scheme}${latLng}(${label})`
-              });
-              Linking.openURL(url); 
-
-            }}>
-            <Image
-              style={{height: 100, width: width / 2 - 10}}
-              resizeMode="stretch"
-              source={require('../../assets/images/packeges/ro/p4/galeriile.png')}/>
-              <Text>Galeriile de arta din Varshets</Text>
-              </TouchableOpacity>
           </Col>
           <Col>
-          <TouchableOpacity onPress={() => {
-              const lat = 49.090904;
-              const lng = 19.407839;
-              const latLng = `${lat},${lng}`;
-              const label = 'Poiana Ivanchova';
-              const url = Platform.select({
-                ios: `${scheme}${label}@${latLng}`,
-                android: `${scheme}${latLng}(${label})`
-              });
-              Linking.openURL(url); 
 
-            }}>
-            <Image
-              style={{height: 100, width: width / 2 - 10}}
-              resizeMode="stretch"
-              source={require('../../assets/images/packeges/ro/p4/PoianaIvanchova.png')}/>
-              <Text>Poiana Ivanchova</Text>
-              </TouchableOpacity>
           </Col>
           </Row>
         </Grid>

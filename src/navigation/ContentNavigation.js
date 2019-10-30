@@ -3,7 +3,6 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { createStackNavigator } from 'react-navigation-stack';
 
 import LoginScreen from "../screens/Login";
-import RegisterScreen from "../screens/Register";
 import MapScreen from "../screens/Map";
 import SettingsScreen from "../screens/Settings";
 import PakagesListScreen from "../screens/PackagesList"
@@ -20,7 +19,6 @@ const mainNavigator = createMaterialBottomTabNavigator({
 
 const pakagesListNavigation = createStackNavigator({
     LoginScreen,
-    RegisterScreen,
     PakagesListScreen,
     VisitingPoints
 }, {

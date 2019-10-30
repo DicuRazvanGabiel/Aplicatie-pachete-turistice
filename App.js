@@ -11,16 +11,15 @@ import AppContainer from './src/navigation';
 
 const images = [
   require('./assets/images/01_NATBIOT_CMYK.png'),
-  require('./assets/images/Interreg_ro.jpg'),
-  require('./assets/images/eu.png'),
-  require('./assets/images/Logo-BgGov_ro.jpg'),
-  require('./assets/images/guvern.png'),
-  require('./assets/images/Background.png'),
-  require('./assets/images/Background1.png'),
-  require('./assets/images/mrc.png'),
-  require('./assets/images/languages/bg.jpg'),
-  require('./assets/images/languages/eng.png'),
-  require('./assets/images/languages/ro.jpg'),
+  // require('./assets/images/eu.png'),
+  // require('./assets/images/Logo-BgGov_ro.jpg'),
+  // require('./assets/images/guvern.png'),
+  // require('./assets/images/Background.png'),
+  // require('./assets/images/Background1.png'),
+  // require('./assets/images/mrc.png'),
+  // require('./assets/images/languages/bg.jpg'),
+  // require('./assets/images/languages/eng.png'),
+  // require('./assets/images/languages/ro.jpg'),
 ]
 
 export default class App extends React.Component {
