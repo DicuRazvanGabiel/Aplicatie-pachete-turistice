@@ -23,7 +23,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier":"com.natbiottravelling",
+      "buildNumber":"1.0.0", 
       "supportsTablet": true
+    },
+    "android": {
+      "package":"com.natbiottravelling",
+      "versionCode": 1
     }
   }
 }
