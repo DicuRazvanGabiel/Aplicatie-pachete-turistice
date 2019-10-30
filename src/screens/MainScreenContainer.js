@@ -23,7 +23,7 @@ export default class MainScreenContainer extends Component {
             )
         } else if(lang === "bg"){
             return (
-                <View>
+                <View style={styles.container}>
                     <HeaderLogosBg />
                     <PackegesContainer screenProps={lang}/>
                     <DisclamerBg />
@@ -31,7 +31,7 @@ export default class MainScreenContainer extends Component {
             )
         } else if(lang === "en"){
             return (
-                <View>
+                <View style={styles.container}>
                     <HeaderLogosEn />
                     <PackegesContainer screenProps={lang}/>
                     <DisclamerEn />

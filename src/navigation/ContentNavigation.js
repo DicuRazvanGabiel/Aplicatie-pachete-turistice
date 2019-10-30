@@ -7,6 +7,7 @@ import RegisterScreen from "../screens/Register";
 import MapScreen from "../screens/Map";
 import SettingsScreen from "../screens/Settings";
 import PakagesListScreen from "../screens/PackagesList"
+import VisitingPoints from "../screens/VisitingPoints"
 
 const mainNavigator = createMaterialBottomTabNavigator({
     MapScreen,
@@ -20,7 +21,8 @@ const mainNavigator = createMaterialBottomTabNavigator({
 const pakagesListNavigation = createStackNavigator({
     LoginScreen,
     RegisterScreen,
-    PakagesListScreen
+    PakagesListScreen,
+    VisitingPoints
 }, {
     initialRouteName: 'PakagesListScreen',
     headerMode: 'none'

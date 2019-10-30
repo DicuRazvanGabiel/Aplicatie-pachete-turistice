@@ -25,7 +25,7 @@ export default class Login extends Component {
       const value = await AsyncStorage.getItem('TASKS');
       if (value !== null) {
         // We have data!!
-        console.log(value);
+        // console.log(value);
       }
     } catch (error) {
       // Error retrieving data

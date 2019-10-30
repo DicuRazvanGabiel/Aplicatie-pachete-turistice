@@ -6,9 +6,9 @@ export default class DisclamerRo extends Component {
       return (
         <View style={[styles.container, this.props.style]}>
           <Text style={styles.Disclaimer}>
-            www.interregrobg.eu{"\n"} Conținutul acestei aplicatii nu reprezintă
+            www.interregrobg.eu{"\n"} Conținutul acestei aplicaţii nu reprezintă
             în mod necesar poziția oficiala a Uniunii Europene.Iniţiatorii
-            aplicatiei sunt singurii responsabili de informaţiile prezentate în
+            aplicaţiei sunt singurii responsabili de informaţiile prezentate în
             aplicatie.
           </Text>
           <Image

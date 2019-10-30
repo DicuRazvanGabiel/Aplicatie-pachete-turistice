@@ -11,19 +11,20 @@ export default class PackagesList extends Component {
         if(lang === "ro"){
             return (
                 <View style={styles.container}>
-                    <PakegesRo />
+                    <PakegesRo navigation={this.props.navigation}/>
                 </View>
             )
         }else if(lang === "en"){
             return (
                 <View style={styles.container}>
-                    <Text> PackagesList {lang} </Text>
+                    <PakegesRo navigation={this.props.navigation}/>
                 </View>
             )
         }else{
             return (
                 <View style={styles.container}>
-                    <PackegesBg />
+                    {/* <PackegesBg  navigation={this.props.navigation}/> */}
+                    <PakegesRo navigation={this.props.navigation}/>
                 </View>
             )
         }

@@ -6,8 +6,8 @@ export default class DisclamerRo extends Component {
       return (
         <View style={[styles.container, this.props.style]}>
           <Text style={styles.Disclaimer}>
-            www.interregrobg.eu{"\n"} The content of this website does not necessarily represent the official position of the European Union.
-The initiators of the site are the sole responsibles for the information provided through the site.
+            www.interregrobg.eu{"\n"} The content of this application does not necessarily represent the official position of the European Union.
+The initiators of the application are the sole responsibles for the information provided through the application.
           </Text>
           <Image
             source={require("../../assets/images/01_NATBIOT_CMYK.png")}

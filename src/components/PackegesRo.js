@@ -6,13 +6,15 @@ const {width, height} = Dimensions.get('window')
 export default class PackegesRo extends Component {
 
     changeScreen = (packeg) => {
-        console.log(packeg)
+        this.props.navigation.navigate('VisitingPoints', {
+            packeg
+        });
     }
 
     render() {
         return (
             <ScrollView contentContainerStyle={styles.contentContainer}>
-                <TouchableOpacity onPress={() => this.changeScreen(1)} > 
+                <TouchableOpacity onPress={() => this.changeScreen(0)} > 
                     <View style={styles.packege}>
                         <Image
                             style={{height: 200, width: width - 10}}
@@ -21,7 +23,7 @@ export default class PackegesRo extends Component {
                         <Text>Pachet 1</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeScreen(2)} > 
+                <TouchableOpacity onPress={() => this.changeScreen(1)} > 
                     <View style={styles.packege}>
                         <Image
                             style={{height: 200, width: width - 10}}
@@ -30,7 +32,7 @@ export default class PackegesRo extends Component {
                         <Text>Pachet 2</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeScreen(3)} > 
+                <TouchableOpacity onPress={() => this.changeScreen(2)} > 
                     <View style={styles.packege}>
                         <Image
                             style={{height: 200, width: width - 10}}
@@ -39,7 +41,7 @@ export default class PackegesRo extends Component {
                         <Text>Pachet 3</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeScreen(4)} > 
+                <TouchableOpacity onPress={() => this.changeScreen(3)} > 
                     <View style={styles.packege}>
                         <Image
                             style={{height: 200, width: width - 10}}
