@@ -1,38 +1,35 @@
-import React from 'react';
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import { Container, Text } from 'native-base';
-import * as Font from 'expo-font';
-import { View, StyleSheet, Image, ImageBackground } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import { View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
+//redux import
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
-import AppContainer from './src/navigation';
+import packagesReducers from "./store/reducers/packages";
+//end
 
-const images = [
-  require('./assets/images/01_NATBIOT_CMYK.png'),
-  // require('./assets/images/eu.png'),
-  // require('./assets/images/Logo-BgGov_ro.jpg'),
-  // require('./assets/images/guvern.png'),
-  // require('./assets/images/Background.png'),
-  // require('./assets/images/Background1.png'),
-  // require('./assets/images/mrc.png'),
-  // require('./assets/images/languages/bg.jpg'),
-  // require('./assets/images/languages/eng.png'),
-  // require('./assets/images/languages/ro.jpg'),
-]
+import AppContainer from "./src/navigation";
+
+const rootReducer = combineReducers({
+  packages: packagesReducers
+});
+const store = createStore(rootReducer);
+const images = [require("./assets/images/01_NATBIOT_CMYK.png")];
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false,
-  }
+    isLoadingComplete: false
+  };
 
-  handleResourcesAsync = async () => { 
-
+  handleResourcesAsync = async () => {
     await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      ...Ionicons.font
     });
 
     const cacheImages = images.map(image => {
@@ -40,7 +37,7 @@ export default class App extends React.Component {
     });
 
     return Promise.all(cacheImages);
-  }
+  };
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -50,23 +47,15 @@ export default class App extends React.Component {
           onError={error => console.warn(error)}
           onFinish={() => this.setState({ isLoadingComplete: true })}
         />
-      )
+      );
     }
 
-    // return (
-    //   <Container>
-    //     <HeaderLogosRo />
-    //     <View style={{flex: 1}}>
-    //       <AppContainer />
-    //     </View>
-    //     <Disclamer />
-    //   </Container>
-    // );
-
     return (
-      <View style={{flex:1}}>
-        <AppContainer />
-      </View>
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <AppContainer />
+        </View>
+      </Provider>
     );
   }
 }
