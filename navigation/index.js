@@ -2,14 +2,12 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import ChooseLangScreen from "../screens/ChooseLang"
 import MainScreenContainer from "../screens/MainScreenContainer"
-import TestRedux from "../../screens/TestRedux"
 
 const langNavigator = createSwitchNavigator({
     ChooseLangScreen,
-    MainScreenContainer,
-    TestRedux
+    MainScreenContainer
 }, {
-    initialRouteName: 'TestRedux',
+    initialRouteName: 'ChooseLangScreen',
     headerMode: 'none'
 })
 
