@@ -6,19 +6,43 @@ import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 //redux import
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
 
 import packagesReducers from "./store/reducers/packages";
+import langugeReducer from "./store/reducers/languge";
 //end
 
-import AppContainer from "./src/navigation";
+import Header from './components/Header'
+import Disclaimer from './components/Disclaimer'
+
+import AppContainer from "./navigation";
 
 const rootReducer = combineReducers({
-  packages: packagesReducers
+  packages: packagesReducers,
+  language: langugeReducer
 });
-const store = createStore(rootReducer);
-const images = [require("./assets/images/01_NATBIOT_CMYK.png")];
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const images = [
+  require("./assets/images/01_NATBIOT_CMYK.png"),
+  require("./assets/images/languages/ro.jpg"),
+  require("./assets/images/languages/bg.jpg"),
+  require("./assets/images/languages/eng.png"),
+  require("./assets/images/header/bg/LogoEU.jpg"),
+  require("./assets/images/header/bg/Logo-BgGov.jpg"),
+  require("./assets/images/header/bg/LogoInterreg_bg.jpg"),
+  require("./assets/images/header/bg/mrc.png"),
+  require("./assets/images/header/en/LogoEU_en.jpg"),
+  require("./assets/images/header/en/Logo-ROGov_en.jpg"),
+  require("./assets/images/header/en/Logo-BgGov_en.jpg"),
+  require("./assets/images/header/en/Intereg_en.jpg"),
+  require("./assets/images/header/en/mrc.png"),
+  require("./assets/images/header/ro/LogoEuRoCorecta2.png"),
+  require("./assets/images/header/ro/Logo-ROGov_ro.jpg"),
+  require("./assets/images/header/ro/Interreg_ro.jpg"),
+  require("./assets/images/header/ro/mrc.png")
+];
 
 export default class App extends React.Component {
   state = {
@@ -53,7 +77,9 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
+          <Header />
           <AppContainer />
+          <Disclaimer />
         </View>
       </Provider>
     );
