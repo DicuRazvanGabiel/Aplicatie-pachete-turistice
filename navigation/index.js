@@ -1,13 +1,17 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from 'react-navigation-stack';
 
 import LanguageSelectScreen from "../screens/LanguageSelect";
 import PeckagesScreen from "../screens/Peckages"
+import PeckageDetailScreen from "../screens/PeckageDetailScreen"
 
-const langNavigator = createSwitchNavigator({
+
+const langNavigator = createStackNavigator({
     LanguageSelectScreen,
-    PeckagesScreen
+    PeckagesScreen,
+    PeckageDetailScreen
 }, {
-    initialRouteName: 'PeckagesScreen',
+    initialRouteName: 'LanguageSelectScreen',
     headerMode: 'none'
 })
 

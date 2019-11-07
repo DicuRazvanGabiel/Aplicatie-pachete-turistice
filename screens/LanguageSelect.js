@@ -10,6 +10,7 @@ const LeanguageSelectScreen = props => {
 
     const languageSelectHandler = (language) => {
         dispatch(changeLanguage(language))
+        props.navigation.navigate('PeckagesScreen');
     }
     
     return(
