@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import MapView, {Marker} from "react-native-maps";
-
 import { useSelector } from "react-redux";
+import { getCenterOfBounds } from "geolib";
 
 import Colors from '../constants/Colors'
 
@@ -13,10 +13,29 @@ const PeckageDetailScreen = props => {
     packege.obiective.forEach(element => {
         listObjectives.push(objectivesAvailable[element]);
     });
+    const coordsForCenter = [];
+    listObjectives.map(object => {
+        coordsForCenter.push({
+            latitude: parseFloat(object.latitudine),
+            longitude: parseFloat(object.longitudine)
+        })
+    })
+
+    const {latitude, longitude} = getCenterOfBounds(coordsForCenter);
+    const region = {
+        latitude,
+        longitude,
+        latitudeDelta: 1.2922,
+        longitudeDelta: 1.2421,
+    }
+    
     
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle}>
+      <MapView 
+        style={styles.mapStyle}
+        region={region}
+        >
           {listObjectives.map( object => {
 
               const latlng = {
