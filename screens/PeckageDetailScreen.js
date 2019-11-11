@@ -8,6 +8,8 @@ import Colors from '../constants/Colors'
 
 const PeckageDetailScreen = props => {
     const objectivesAvailable = useSelector(state => state.packages.objectives);
+    
+    const currentLocation = useSelector(state => state.location.location);
     const packege = props.navigation.getParam('package');
     const listObjectives = [];
     packege.obiective.forEach(element => {
@@ -28,8 +30,8 @@ const PeckageDetailScreen = props => {
         latitudeDelta: 1.2922,
         longitudeDelta: 1.2421,
     }
-    
-    
+       
+
   return (
     <View style={styles.container}>
       <MapView 

@@ -2,8 +2,11 @@ import React from "react";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Constants from 'expo-constants';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
 //redux import
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -12,7 +15,10 @@ import ReduxThunk from "redux-thunk";
 
 import packagesReducers from "./store/reducers/packages";
 import langugeReducer from "./store/reducers/languge";
+import locationReducer from "./store/reducers/location"
 //end
+
+import { setLocation } from "./store/actions/location";
 
 import Header from './components/Header'
 import Disclaimer from './components/Disclaimer'
@@ -21,9 +27,11 @@ import AppContainer from "./navigation";
 
 const rootReducer = combineReducers({
   packages: packagesReducers,
-  language: langugeReducer
+  language: langugeReducer,
+  location: locationReducer
 });
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
 const images = [
   require("./assets/images/01_NATBIOT_CMYK.png"),
   require("./assets/images/languages/ro.jpg"),
@@ -46,7 +54,31 @@ const images = [
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    location: null,
+    errorMessage: null,
+  };
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this._getLocationAsync();
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
   };
 
   handleResourcesAsync = async () => {
@@ -72,6 +104,10 @@ export default class App extends React.Component {
           onFinish={() => this.setState({ isLoadingComplete: true })}
         />
       );
+    }
+
+    if(this.state.location){
+      store.dispatch(setLocation(this.state.location));
     }
 
     return (

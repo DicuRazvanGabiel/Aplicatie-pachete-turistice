@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  View,
+  Button
+} from "react-native";
 import { Container, Content, Card, CardItem, Body, Text } from "native-base";
 import { FlatList } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPachages } from "../store/actions/packages";
 
-import Colors from "../constants/Colors"
+import Colors from "../constants/Colors";
+import DrawerButton from "../components/DrawerButton";
 
 const Peckages = props => {
   const [isLoaded, setisLoaded] = useState(false);
@@ -16,12 +22,12 @@ const Peckages = props => {
     dispatch(fetchPachages()).then(setisLoaded(true));
   }, [dispatch]);
 
-  const packagePressHandler = (pack) =>{
-    props.navigation.navigate('PeckageDetailScreen',{
+  const packagePressHandler = pack => {
+    props.navigation.navigate("PeckageDetailScreen", {
       package: pack
-    })
-  }
-  
+    });
+  };
+
   const renderPeckageComponent = itemObj => {
     const { item } = itemObj;
 
@@ -29,10 +35,10 @@ const Peckages = props => {
       <Content style={{ padding: 10 }}>
         <TouchableOpacity onPress={() => packagePressHandler(item)}>
           <Card>
-            <CardItem style={{backgroundColor: Colors.lightGreen}}>
+            <CardItem style={{ backgroundColor: Colors.lightGreen }}>
               <Body>
-                <Text style={{color: 'white'}}>{item.title}</Text>
-                <Text style={{color: 'white'}}>{item.content}</Text>
+                <Text style={{ color: "white" }}>{item.title}</Text>
+                <Text style={{ color: "white" }}>{item.content}</Text>
               </Body>
             </CardItem>
           </Card>
@@ -44,6 +50,7 @@ const Peckages = props => {
   if (isLoaded && dataPeckages) {
     return (
       <Container>
+        <DrawerButton navigation={props.navigation}/>
         <FlatList
           data={dataPeckages}
           renderItem={renderPeckageComponent}

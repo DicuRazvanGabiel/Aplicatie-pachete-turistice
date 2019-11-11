@@ -1,5 +1,6 @@
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from "react-navigation-drawer";
 
 import LanguageSelectScreen from "../screens/LanguageSelect";
 import PeckagesScreen from "../screens/Peckages"
@@ -15,6 +16,15 @@ const langNavigator = createStackNavigator({
     headerMode: 'none'
 })
 
-const AppContainer  = createAppContainer(langNavigator);
+const drawer = createDrawerNavigator({
+    PrezentarePachete: {
+        screen: langNavigator,
+        navigationOptions: ({ navigation }) => ({
+            title: `Pachete Natbiot`,
+        }),
+    }
+})
+
+const AppContainer  = createAppContainer(drawer);
 
 export default AppContainer;
