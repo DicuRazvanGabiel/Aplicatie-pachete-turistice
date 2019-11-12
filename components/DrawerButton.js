@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const DrawerButton = (props) => {
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-            <AntDesign name="menu-fold" size={32} color="black"/>
+            <Ionicons name="ios-menu" size={32} color="black"/>
+            {/*<Text style={{fontSize: 25}}>-></Text>*/}
         </TouchableOpacity>
       <View style={styles.cotainerText}>
         <Text style={{fontSize: 25}}>Natbiot Travelling</Text>

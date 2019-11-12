@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Platform,
-  Linking
+  Linking,
+  TouchableOpacity
 } from "react-native";
 import { useSelector } from "react-redux";
 import {
@@ -19,7 +20,7 @@ import {
 import { getDistance } from "geolib";
 
 import Color from "../constants/Colors";
-const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
 
 const ObjectiveList = props => {
   const [typeObjetivesToShow, setTypeObjetivesToShow] = useState("naturale");
@@ -69,22 +70,32 @@ const ObjectiveList = props => {
     });
 
     return (
-      <View style={styles.containerCard}>
-        <View style={{ height: 100, width: 100 }}>
-          <Image
-            style={{ height: 100, width: 100 }}
-            source={{ uri: item.imageObiectiv[0].imageUrl }}
-            resizeMode="contain"
-          />
+      <TouchableOpacity onPress={() => {props.navigation.navigate('ObjectiveDetail',{
+        objectiv: item
+      })}}>
+        <View style={styles.containerCard}>
+          <View style={{ height: 100, width: 100 }}>
+            <Image
+              style={{ height: 90, width: 90 }}
+              source={{ uri: item.imageObiectiv[0].imageUrl }}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={styles.containerText}>
+            <Text>{item.title}</Text>
+            {userLocation ? <Text>{distance / 1000} KM</Text> : <Text></Text>}
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL(url);
+            }}
+          >
+            <View style={styles.cotumeButton}>
+              <Text style={styles.textButtonView}>Navigate</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        <View style={styles.containerText}>
-          <Text>{item.title}</Text>
-          {userLocation ? <Text>{distance / 1000} KM</Text> : <Text></Text>}
-        </View>
-        <Button success onPress={() => {Linking.openURL(url)}}>
-          <Text>Navigate TO</Text>
-        </Button>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -134,12 +145,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#dff2e0"
+    justifyContent: "space-between"
   },
   containerText: {
     margin: 5,
     fontSize: 30
+  },
+  cotumeButton: {
+    backgroundColor: Color.lightGreen,
+    padding: 5
+  },
+  textButtonView: {
+    color: "white"
   }
 });
 

@@ -1,32 +1,43 @@
 import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
 import LanguageSelectScreen from "../screens/LanguageSelect";
-import PeckagesScreen from "../screens/Peckages"
-import PeckageDetailScreen from "../screens/PeckageDetailScreen"
-import ObjectiveList from "../screens/ObjectiveList"
+import PeckagesScreen from "../screens/Peckages";
+import PeckageDetailScreen from "../screens/PeckageDetailScreen";
+import ObjectiveList from "../screens/ObjectiveList";
+import ObjectiveDetail from "../screens/ObjectiveDetail";
+import SearchObjective from "../screens/SearchObjective"
 
-
-const langNavigator = createStackNavigator({
+const langNavigator = createStackNavigator(
+  {
     LanguageSelectScreen,
     PeckagesScreen,
     PeckageDetailScreen,
-    ObjectiveList
-}, {
-    initialRouteName: 'LanguageSelectScreen',
-    headerMode: 'none'
-})
+    ObjectiveList,
+    ObjectiveDetail
+  },
+  {
+    initialRouteName: "LanguageSelectScreen",
+    headerMode: "none"
+  }
+);
 
 const drawer = createDrawerNavigator({
-    PrezentarePachete: {
-        screen: langNavigator,
-        navigationOptions: ({ navigation }) => ({
-            title: `Pachete Natbiot`,
-        }),
-    }
-})
+  PrezentarePachete: {
+    screen: langNavigator,
+    navigationOptions: ({ navigation }) => ({
+      title: `Pachete Natbiot`
+    })
+  },
+  SearchObjective: {
+      screen: SearchObjective,
+      navigationOptions: ({ navigation }) => ({
+        title: `Cautare`
+      })
+  }
+});
 
-const AppContainer  = createAppContainer(drawer);
+const AppContainer = createAppContainer(drawer);
 
 export default AppContainer;

@@ -1,16 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  Button
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { getCenterOfBounds } from "geolib";
+import MapViewDirections from "react-native-maps-directions";
+import randomColor from "randomcolor";
 
+import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
-
   const currentLocation = useSelector(state => state.location.location);
+
   const packege = props.navigation.getParam("package");
   const listObjectives = [];
   packege.obiective.forEach(element => {
@@ -32,12 +42,12 @@ const PeckageDetailScreen = props => {
     longitudeDelta: 1.2421
   };
 
-  const viewObjectivesHandler = (country) => {
+  const viewObjectivesHandler = country => {
     props.navigation.navigate("ObjectiveList", {
       listObjectives,
       country
     });
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -51,24 +61,56 @@ const PeckageDetailScreen = props => {
             <Marker key={object.id} coordinate={latlng} title={object.title} />
           );
         })}
+
+        {listObjectives.map(object => {
+          if (object.latitudine === null || currentLocation === null) {
+            return;
+          }
+          const destination = {
+            latitude: parseFloat(object.latitudine),
+            longitude: parseFloat(object.longitudine)
+          };
+
+          const origin = {
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude
+          };
+
+          const googleApi = GOOGLE_API_KEY;
+          const color = randomColor({
+            luminosity: 'dark'
+          });
+
+          return (
+            <MapViewDirections
+              key={object.id * 2}
+              origin={origin}
+              destination={destination}
+              apikey={googleApi}
+              strokeWidth={3}
+              strokeColor={color}
+            />
+          );
+        })}
       </MapView>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => viewObjectivesHandler('ro')}>
-          <View style={styles.card}>
-            <Text style={styles.text}>Obiective</Text>
-            <Text style={styles.text}>Romania</Text>
-          </View>
-        </TouchableOpacity>
+      <ScrollView style={styles.scrollViewButtons}>
+        <View style={styles.buttonView}>
+          <Button
+            title="Obiective Romania"
+            onPress={() => viewObjectivesHandler("ro")}
+            color={Colors.lightGreen}
+          />
+        </View>
 
-        <TouchableOpacity onPress={() => viewObjectivesHandler('bg')}>
-          <View style={styles.card}>
-            <Text style={styles.text}>Obiective</Text>
-            <Text style={styles.text}>Bulgaria</Text>
-          </View>
-        </TouchableOpacity>
-
-      </View>
+        <View style={styles.buttonView}>
+          <Button
+            title="Obiective Bulgaria"
+            onPress={() => viewObjectivesHandler("bg")}
+            color={Colors.lightGreen}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -101,6 +143,12 @@ const styles = StyleSheet.create({
     borderColor: Colors.darkGreen,
     borderWidth: 1,
     borderRadius: 5
+  },
+  scrollViewButtons: {
+    width: '90%'
+  },  
+  buttonView: {
+    marginVertical: 5,
   }
 });
 
