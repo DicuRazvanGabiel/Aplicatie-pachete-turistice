@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { useScreens } from 'react-native-screens';
 
 //redux import
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -24,6 +25,8 @@ import Header from './components/Header'
 import Disclaimer from './components/Disclaimer'
 
 import AppContainer from "./navigation";
+
+useScreens();
 
 const rootReducer = combineReducers({
   packages: packagesReducers,
@@ -94,6 +97,8 @@ export default class App extends React.Component {
 
     return Promise.all(cacheImages);
   };
+
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
