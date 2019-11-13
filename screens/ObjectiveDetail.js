@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import ImageViewer from "react-native-image-zoom-viewer";
 import { AntDesign } from "@expo/vector-icons";
+import DrawerButton from "../components/DrawerButton"
 
 const { width, height } = Dimensions.get("screen");
 
@@ -43,6 +44,7 @@ const ObjectiveDetail = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <DrawerButton navigation={navigation} backButton={true} />
       <View>
         <TouchableOpacity onPress={toggleModal}>
           <Image

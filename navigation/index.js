@@ -9,7 +9,7 @@ import ObjectiveList from "../screens/ObjectiveList";
 import ObjectiveDetail from "../screens/ObjectiveDetail";
 import SearchObjective from "../screens/SearchObjective"
 
-const langNavigator = createStackNavigator(
+const packegNavigator = createStackNavigator(
   {
     LanguageSelectScreen,
     PeckagesScreen,
@@ -25,7 +25,7 @@ const langNavigator = createStackNavigator(
 
 const drawer = createDrawerNavigator({
   PrezentarePachete: {
-    screen: langNavigator,
+    screen: packegNavigator,
     navigationOptions: ({ navigation }) => ({
       title: `Pachete Natbiot`
     })

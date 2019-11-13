@@ -15,7 +15,7 @@ import randomColor from "randomcolor";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import DrawerButton from "../components/DrawerButton"
 
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
@@ -51,6 +51,7 @@ const PeckageDetailScreen = props => {
 
   return (
     <View style={styles.container}>
+      <DrawerButton navigation={props.navigation} backButton={true} />
       <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
         {listObjectives.map(object => {
           const latlng = {

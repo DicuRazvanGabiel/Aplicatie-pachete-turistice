@@ -19,8 +19,8 @@ import {
 } from "native-base";
 import { getDistance } from "geolib";
 
-import Color from "../constants/Colors";
 import ObjectivItemList from "../components/ObjectiveItemList"
+import DrawerButton from "../components/DrawerButton"
 
 const ObjectiveList = props => {
   const [typeObjetivesToShow, setTypeObjetivesToShow] = useState("naturale");
@@ -59,6 +59,7 @@ const ObjectiveList = props => {
   return (
     <Container>
       <Content>
+        <DrawerButton navigation={props.navigation} backButton={true} />
         <FlatList
           data={
             typeObjetivesToShow === "naturale"

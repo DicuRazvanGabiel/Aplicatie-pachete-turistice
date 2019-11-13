@@ -50,7 +50,7 @@ const Peckages = props => {
   if (isLoaded && dataPeckages) {
     return (
       <Container>
-        <DrawerButton navigation={props.navigation}/>
+        <DrawerButton navigation={props.navigation} backButton={true}/>
         <FlatList
           data={dataPeckages}
           renderItem={renderPeckageComponent}
