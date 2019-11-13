@@ -33,11 +33,13 @@ const drawer = createDrawerNavigator({
     })
   },
   SearchObjective: {
-      screen: SearchObjective,
-      navigationOptions: ({ navigation }) => ({
-        title: `Cautare`
-      })
+    screen: SearchObjective,
+    navigationOptions: ({ navigation }) => ({
+      title: `Cautare`
+    })
   }
+},{
+  edgeWidth: 0
 });
 
 const AppContainer = createAppContainer(drawer);

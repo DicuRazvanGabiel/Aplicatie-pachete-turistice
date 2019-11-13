@@ -17,7 +17,6 @@ import {
   Button,
   Text
 } from "native-base";
-import { getDistance } from "geolib";
 
 import ObjectivItemList from "../components/ObjectiveItemList"
 import DrawerButton from "../components/DrawerButton"
@@ -55,7 +54,7 @@ const ObjectiveList = props => {
   const toogleButton = type => {
     setTypeObjetivesToShow(type);
   };
-
+ 
   return (
     <Container>
       <Content>

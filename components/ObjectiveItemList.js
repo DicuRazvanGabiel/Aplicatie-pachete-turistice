@@ -10,6 +10,7 @@ import {
     Text
   } from "react-native";
   import Color from "../constants/Colors";
+  import { getDistance } from "geolib";
 
 const ObjectiveItemList = ({ item, userLocation, navigation}) => {
     const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
