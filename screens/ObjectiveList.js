@@ -20,7 +20,7 @@ import {
 import { getDistance } from "geolib";
 
 import Color from "../constants/Colors";
-const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
+import ObjectivItemList from "../components/ObjectiveItemList"
 
 const ObjectiveList = props => {
   const [typeObjetivesToShow, setTypeObjetivesToShow] = useState("naturale");
@@ -49,54 +49,7 @@ const ObjectiveList = props => {
   const renderObjectiv = itemObj => {
     const { item } = itemObj;
 
-    let distance = null;
-    if (userLocation) {
-      distance = getDistance(
-        { latitude: item.latitudine, longitude: item.longitudine },
-        {
-          latitude: userLocation.coords.latitude,
-          longitude: userLocation.coords.longitude
-        }
-      );
-    }
-
-    const lat = item.latitudine;
-    const lng = item.longitudine;
-    const latLng = `${lat},${lng}`;
-    const label = item.title;
-    const url = Platform.select({
-      ios: `${scheme}${label}@${latLng}`,
-      android: `${scheme}${latLng}(${label})`
-    });
-
-    return (
-      <TouchableOpacity onPress={() => {props.navigation.navigate('ObjectiveDetail',{
-        objectiv: item
-      })}}>
-        <View style={styles.containerCard}>
-          <View style={{ height: 100, width: 100 }}>
-            <Image
-              style={{ height: 90, width: 90 }}
-              source={{ uri: item.imageObiectiv[0].imageUrl }}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.containerText}>
-            <Text>{item.title}</Text>
-            {userLocation ? <Text>{distance / 1000} KM</Text> : <Text></Text>}
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL(url);
-            }}
-          >
-            <View style={styles.cotumeButton}>
-              <Text style={styles.textButtonView}>Navigate</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
-    );
+    return ( <ObjectivItemList item={item} navigation={props.navigation} userLocation={userLocation}/>)
   };
 
   const toogleButton = type => {
@@ -137,27 +90,7 @@ const ObjectiveList = props => {
 };
 
 const styles = StyleSheet.create({
-  containerCard: {
-    padding: 5,
-    flexDirection: "row",
-    margin: 5,
-    borderColor: Color.darkGreen,
-    borderWidth: 1,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  containerText: {
-    margin: 5,
-    fontSize: 30
-  },
-  cotumeButton: {
-    backgroundColor: Color.lightGreen,
-    padding: 5
-  },
-  textButtonView: {
-    color: "white"
-  }
+
 });
 
 export default ObjectiveList;

@@ -1,24 +1,50 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Keyboard,
+  FlatList
+} from "react-native";
 import DrawerButton from "../components/DrawerButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-let matchingObjetives = []
+import ObjectivItemList from "../components/ObjectiveItemList"
+
+let matchingObjetives = [];
 
 const SearchObjective = ({ navigation }) => {
+  const userLocation = useSelector(state => state.location.location);
   const [valueTextInput, onChangeText] = useState("");
-    const objetives = useSelector(state => state.packages.objectives)
-    const listOfObjectives = []
-    for (const [ id, value ] of Object.entries(objetives)) {
-        listOfObjectives.push(value)
-    }
-    const searchIconPressHandler = () => {
-        Keyboard.dismiss();
-        onChangeText('');
-        matchingObjetives = listOfObjectives.filter(objectiv => objectiv.title.toLowerCase().includes(valueTextInput.toLowerCase()));
-        
-    }
+  const objetives = useSelector(state => state.packages.objectives);
+  const listOfObjectives = [];
+
+  for (const [id, value] of Object.entries(objetives)) {
+    listOfObjectives.push(value);
+  }
+
+  const searchIconPressHandler = () => {
+    Keyboard.dismiss();
+    onChangeText("");
+    matchingObjetives = listOfObjectives.filter(objectiv =>
+      objectiv.title.toLowerCase().includes(valueTextInput.toLowerCase())
+    );
+  };
+
+  const renderObjectiv = itemObj => {
+    const { item } = itemObj;
+
+    return (
+      <ObjectivItemList
+        item={item}
+        navigation={navigation}
+        userLocation={userLocation}
+      />
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -30,15 +56,15 @@ const SearchObjective = ({ navigation }) => {
           value={valueTextInput}
         />
         <TouchableOpacity onPress={searchIconPressHandler}>
-            <AntDesign name="search1" size={32} color="green" />
+          <AntDesign name="search1" size={32} color="green" />
         </TouchableOpacity>
       </View>
       <View>
-          {matchingObjetives.map(objectiv =>{
-              return(
-                  <Text key={objectiv.id}>{objectiv.title}</Text>
-              )
-          })}
+        <FlatList
+          data={matchingObjetives}
+          renderItem={renderObjectiv}
+          keyExtractor={item => item.title}
+        />
       </View>
     </View>
   );
