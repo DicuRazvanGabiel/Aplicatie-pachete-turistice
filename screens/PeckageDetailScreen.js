@@ -111,6 +111,22 @@ const PeckageDetailScreen = props => {
             color={Colors.lightGreen}
           />
         </View>
+        
+        <View style={styles.buttonView}>
+          <Button
+            title="Unitati de cazare"
+            onPress={() => {}}
+            color={Colors.lightGreen}
+          />
+        </View>
+
+        <View style={styles.buttonView}>
+          <Button
+            title="Unitati de servire a mesei"
+            onPress={() => {}}
+            color={Colors.lightGreen}
+          />
+        </View>
       </ScrollView>
     </View>
   );
