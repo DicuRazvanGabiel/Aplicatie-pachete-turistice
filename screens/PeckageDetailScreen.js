@@ -127,6 +127,14 @@ const PeckageDetailScreen = props => {
             color={Colors.lightGreen}
           />
         </View>
+
+        <View style={styles.buttonView}>
+          <Button
+            title="Rezerva Pachet"
+            onPress={() => {props.navigation.navigate('RezervationForm')}}
+            color={Colors.lightGreen}
+          />
+        </View>
       </ScrollView>
     </View>
   );

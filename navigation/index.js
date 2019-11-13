@@ -8,6 +8,7 @@ import PeckageDetailScreen from "../screens/PeckageDetailScreen";
 import ObjectiveList from "../screens/ObjectiveList";
 import ObjectiveDetail from "../screens/ObjectiveDetail";
 import SearchObjective from "../screens/SearchObjective"
+import RezervationForm from "../screens/RezervationForm"
 
 const packegNavigator = createStackNavigator(
   {
@@ -15,7 +16,8 @@ const packegNavigator = createStackNavigator(
     PeckagesScreen,
     PeckageDetailScreen,
     ObjectiveList,
-    ObjectiveDetail
+    ObjectiveDetail,
+    RezervationForm
   },
   {
     initialRouteName: "LanguageSelectScreen",
