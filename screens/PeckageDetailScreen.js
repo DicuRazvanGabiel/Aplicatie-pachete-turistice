@@ -131,7 +131,9 @@ const PeckageDetailScreen = props => {
         <View style={styles.buttonView}>
           <Button
             title="Rezerva Pachet"
-            onPress={() => {props.navigation.navigate('RezervationForm')}}
+            onPress={() => {props.navigation.navigate('RezervationForm', {
+              packege
+            })}}
             color={Colors.lightGreen}
           />
         </View>
