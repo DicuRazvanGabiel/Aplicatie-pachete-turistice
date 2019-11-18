@@ -17,9 +17,10 @@ const Peckages = props => {
   const [isLoaded, setisLoaded] = useState(false);
   const dispatch = useDispatch();
   const dataPeckages = useSelector(state => state.packages.packages);
-
+  const lang  = useSelector(state => state.language.language);
+  
   useEffect(() => {
-    dispatch(fetchPachages()).then(setisLoaded(true));
+    dispatch(fetchPachages(lang)).then(setisLoaded(true));
   }, [dispatch]);
 
   const packagePressHandler = pack => {

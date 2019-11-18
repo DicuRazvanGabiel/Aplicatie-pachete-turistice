@@ -22,8 +22,6 @@ const RezervationForm = ({ navigation }) => {
       email,
       packege: packege.title
     }
-    console.log(msg);
-    
 
      sendWrapper = async () => {
       setLoadinSend(true)

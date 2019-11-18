@@ -15,9 +15,6 @@ const TestRedux = props => {
     dispatch(fetchPachages());
   };
 
-  console.log(availablePackages);
-  console.log(language);
-
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>{language}</Text>

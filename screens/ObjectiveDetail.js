@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import ImageViewer from "react-native-image-zoom-viewer";
 import { AntDesign } from "@expo/vector-icons";
-import DrawerButton from "../components/DrawerButton"
+import DrawerButton from "../components/DrawerButton";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -19,9 +19,12 @@ const ObjectiveDetail = ({ navigation }) => {
   const objectiv = navigation.getParam("objectiv");
 
   const images = [];
-  objectiv.imageObiectiv.map(image => {
-    images.push({ url: image.imageUrl });
-  });
+  
+  if(objectiv.imageObiectiv){
+    objectiv.imageObiectiv.map(image => {
+      images.push({ url: image.imageUrl });
+    });
+  }
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -45,25 +48,33 @@ const ObjectiveDetail = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <DrawerButton navigation={navigation} backButton={true} />
-      <View>
-        <TouchableOpacity onPress={toggleModal}>
-          <Image
-            style={{ width: width, height: height / 2 }}
-            source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
-      <Modal visible={isModalVisible} transparent={true}>
-        <ImageViewer
-          imageUrls={images}
-          enableImageZoom={true}
-          onSwipeDown={toggleModal}
-          enableSwipeDown={true}
-          enablePreload={true}
-          renderHeader={renderImageModalHeader}
-        />
-      </Modal>
+
+      {images.length !== 0 ? (
+        <View>
+          <View>
+            <TouchableOpacity onPress={toggleModal}>
+              <Image
+                style={{ width: width, height: height / 2 }}
+                source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+          <Modal visible={isModalVisible} transparent={true}>
+            <ImageViewer
+              imageUrls={images}
+              enableImageZoom={true}
+              onSwipeDown={toggleModal}
+              enableSwipeDown={true}
+              enablePreload={true}
+              renderHeader={renderImageModalHeader}
+            />
+          </Modal>
+        </View>
+      ) : (
+        <Text>No image</Text>
+      )}
+
     </View>
   );
 };
@@ -84,7 +95,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   closeModalImage: {
-      marginHorizontal: 5
+    marginHorizontal: 5
   }
 });
 
