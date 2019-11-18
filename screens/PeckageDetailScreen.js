@@ -79,6 +79,7 @@ const PeckageDetailScreen = props => {
 
           const googleApi = GOOGLE_API_KEY;
           const color = randomColor({
+            count: listObjectives.length,
             luminosity: 'dark'
           });
 
