@@ -14,7 +14,7 @@ const RezervationForm = ({ navigation }) => {
 
   const sendHandler = () =>{
     const msg = {
-      emailtoSend: 'd749198@urhen.com',
+      emailtoSend: 'dicu.razvan.gabriel@gmail.com',
       textInputNume,
       textInputPrenume,
       dateFrom,

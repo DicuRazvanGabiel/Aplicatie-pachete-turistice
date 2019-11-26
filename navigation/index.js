@@ -7,8 +7,10 @@ import PeckagesScreen from "../screens/Peckages";
 import PeckageDetailScreen from "../screens/PeckageDetailScreen";
 import ObjectiveList from "../screens/ObjectiveList";
 import ObjectiveDetail from "../screens/ObjectiveDetail";
-import SearchObjective from "../screens/SearchObjective"
-import RezervationForm from "../screens/RezervationForm"
+import SearchObjective from "../screens/SearchObjective";
+import RezervationForm from "../screens/RezervationForm";
+import AdvantagesNatbiot from "../screens/AdvantagesNatbiot";
+import Services from "../screens/Services";
 
 const packegNavigator = createStackNavigator(
   {
@@ -25,22 +27,37 @@ const packegNavigator = createStackNavigator(
   }
 );
 
-const drawer = createDrawerNavigator({
-  PrezentarePachete: {
-    screen: packegNavigator,
-    navigationOptions: ({ navigation }) => ({
-      title: `Pachete Natbiot`
-    })
+const drawer = createDrawerNavigator(
+  {
+    PrezentarePachete: {
+      screen: packegNavigator,
+      navigationOptions: ({ navigation }) => ({
+        title: `Pachete Natbiot`
+      })
+    },
+    SearchObjective: {
+      screen: SearchObjective,
+      navigationOptions: ({ navigation }) => ({
+        title: `Cautare`
+      })
+    },
+    AdvantagesNatbiot: {
+      screen: AdvantagesNatbiot,
+      navigationOptions: ({ navigation }) => ({
+        title: `Avantaje Natbiot`
+      })
+    },
+    Services: {
+      screen: Services,
+      navigationOptions: ({ navigation }) => ({
+        title: `Cazare / Masa`
+      })
+    },
   },
-  SearchObjective: {
-    screen: SearchObjective,
-    navigationOptions: ({ navigation }) => ({
-      title: `Cautare`
-    })
+  {
+    edgeWidth: 0
   }
-},{
-  edgeWidth: 0
-});
+);
 
 const AppContainer = createAppContainer(drawer);
 

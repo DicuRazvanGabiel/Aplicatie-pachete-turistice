@@ -16,7 +16,7 @@ import ReduxThunk from "redux-thunk";
 
 import packagesReducers from "./store/reducers/packages";
 import langugeReducer from "./store/reducers/languge";
-import locationReducer from "./store/reducers/location"
+import locationReducer from "./store/reducers/location";
 //end
 
 import { setLocation } from "./store/actions/location";
@@ -31,7 +31,7 @@ useScreens();
 const rootReducer = combineReducers({
   packages: packagesReducers,
   language: langugeReducer,
-  location: locationReducer
+  location: locationReducer,
 });
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
