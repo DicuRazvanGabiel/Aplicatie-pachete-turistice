@@ -112,7 +112,7 @@ const PeckageDetailScreen = props => {
           />
         </View>
         
-        <View style={styles.buttonView}>
+        {/* <View style={styles.buttonView}>
           <Button
             title="Unitati de cazare"
             onPress={() => {}}
@@ -123,6 +123,14 @@ const PeckageDetailScreen = props => {
         <View style={styles.buttonView}>
           <Button
             title="Unitati de servire a mesei"
+            onPress={() => {}}
+            color={Colors.lightGreen}
+          />
+        </View> */}
+        
+        <View style={styles.buttonView}>
+          <Button
+            title="Trailer"
             onPress={() => {}}
             color={Colors.lightGreen}
           />
