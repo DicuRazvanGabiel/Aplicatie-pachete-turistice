@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import * as TaskManager from 'expo-task-manager';
 import { useScreens } from 'react-native-screens';
 
 //redux import
@@ -25,6 +26,8 @@ import Header from './components/Header'
 import Disclaimer from './components/Disclaimer'
 
 import AppContainer from "./navigation";
+
+const LOCATION_TASK_NAME = 'background-location-task';
 
 useScreens();
 
@@ -55,6 +58,15 @@ const images = [
   require("./assets/images/header/ro/mrc.png")
 ];
 
+TaskManager.defineTask(LOCATION_TASK_NAME, ({ data: { locations }, error }) => {
+  if (error) {
+    console.log(error);
+    return;
+  }
+  console.log('Received new locations', locations);
+});
+
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -82,6 +94,11 @@ export default class App extends React.Component {
 
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
+    
+    await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+      accuracy: Location.Accuracy.Balanced,
+      timeInterval: 1000
+    });
   };
 
   handleResourcesAsync = async () => {

@@ -54,9 +54,9 @@ const RezervationForm = ({ navigation }) => {
     setLoadinSend(false);
   };
 
-  useEffect(() => {
+  if(agentiiOptions.length === 0){
     fetchAgency();
-  });
+  }
 
   const sendHandler = () => {
     const msg = {
