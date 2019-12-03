@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   ScrollView,
-  Button
+  Button,
+  Modal
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
@@ -20,6 +21,8 @@ import DrawerButton from "../components/DrawerButton"
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
   const currentLocation = useSelector(state => state.location.location);
+
+  const [trailerModalVisibilty, setTrailerModalVisibilty] = useState(false);
 
   const packege = props.navigation.getParam("package");
   const listObjectives = [];
@@ -131,7 +134,7 @@ const PeckageDetailScreen = props => {
         <View style={styles.buttonView}>
           <Button
             title="Trailer"
-            onPress={() => {}}
+            onPress={() => {setTrailerModalVisibilty(true)}}
             color={Colors.lightGreen}
           />
         </View>
@@ -146,6 +149,18 @@ const PeckageDetailScreen = props => {
           />
         </View>
       </ScrollView>
+
+      <Modal
+          animationType="slide"
+          transparent={true}
+          visible={trailerModalVisibilty}
+          onRequestClose={() => {
+            setTrailerModalVisibilty(false)
+          }}>
+            <View style={styles.containerModal}>
+
+            </View>
+          </Modal>
     </View>
   );
 };
@@ -184,6 +199,9 @@ const styles = StyleSheet.create({
   },  
   buttonView: {
     marginVertical: 5,
+  },
+  containerModal: {
+    
   }
 });
 
