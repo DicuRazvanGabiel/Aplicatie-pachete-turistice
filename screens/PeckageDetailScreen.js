@@ -6,13 +6,15 @@ import {
   Dimensions,
   ScrollView,
   Button,
-  Modal
+  Modal,
+  TouchableOpacity
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { getCenterOfBounds } from "geolib";
 import MapViewDirections from "react-native-maps-directions";
 import randomColor from "randomcolor";
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
@@ -115,22 +117,6 @@ const PeckageDetailScreen = props => {
           />
         </View>
         
-        {/* <View style={styles.buttonView}>
-          <Button
-            title="Unitati de cazare"
-            onPress={() => {}}
-            color={Colors.lightGreen}
-          />
-        </View>
-
-        <View style={styles.buttonView}>
-          <Button
-            title="Unitati de servire a mesei"
-            onPress={() => {}}
-            color={Colors.lightGreen}
-          />
-        </View> */}
-        
         <View style={styles.buttonView}>
           <Button
             title="Trailer"
@@ -148,6 +134,7 @@ const PeckageDetailScreen = props => {
             color={Colors.lightGreen}
           />
         </View>
+        
       </ScrollView>
 
       <Modal
