@@ -40,6 +40,9 @@
         }
       }
     },
-    "description": ""
+    "description": "",
+    "packagerOpts": {
+      "nonPersistent": "--nonPersistent"
+}
   }
 }
