@@ -31,7 +31,6 @@ const RezervationForm = ({ navigation }) => {
       "https://natbiot-travelling-d0a35.firebaseio.com/flamelink/environments/production/content/agentii/en-US.json"
     );
     const objResponse = await response.json();
-    console.log(objResponse);
     let agentii = [];
 
     for (const [id, value] of Object.entries(objResponse)) {
@@ -162,6 +161,10 @@ const RezervationForm = ({ navigation }) => {
             select={idx => {
               setselectedoption(idx);
             }}
+            textStyle={{fontSize: 15}}
+            dropdownTextStyle={{fontSize: 15}}
+            dropdownStyle={{padding: 5, width: '90%'}}
+            style={styles.modalDropdown}
           />
         </View>
         <View>
@@ -189,6 +192,12 @@ const styles = StyleSheet.create({
   datePicker: {
     flexDirection: "row",
     alignItems: "center"
+  },
+  modalDropdown:{
+    backgroundColor: '#cecece',
+    padding: 5,
+    margin: 5,
+    borderRadius: 5
   }
 });
 

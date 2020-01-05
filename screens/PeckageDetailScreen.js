@@ -1,17 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   ScrollView,
-  Button
+  Button,
+  Modal,
+  WebView,
+  TouchableOpacity
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { getCenterOfBounds } from "geolib";
 import MapViewDirections from "react-native-maps-directions";
 import randomColor from "randomcolor";
+import { Col, Row, Grid } from "react-native-easy-grid";
+import { AntDesign } from "@expo/vector-icons";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
@@ -20,6 +25,8 @@ import DrawerButton from "../components/DrawerButton"
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
   const currentLocation = useSelector(state => state.location.location);
+
+  const [trailerModalVisibilty, setTrailerModalVisibilty] = useState(false);
 
   const packege = props.navigation.getParam("package");
   const listObjectives = [];
@@ -112,26 +119,10 @@ const PeckageDetailScreen = props => {
           />
         </View>
         
-        {/* <View style={styles.buttonView}>
-          <Button
-            title="Unitati de cazare"
-            onPress={() => {}}
-            color={Colors.lightGreen}
-          />
-        </View>
-
-        <View style={styles.buttonView}>
-          <Button
-            title="Unitati de servire a mesei"
-            onPress={() => {}}
-            color={Colors.lightGreen}
-          />
-        </View> */}
-        
         <View style={styles.buttonView}>
           <Button
             title="Trailer"
-            onPress={() => {}}
+            onPress={() => {setTrailerModalVisibilty(true)}}
             color={Colors.lightGreen}
           />
         </View>
@@ -146,6 +137,27 @@ const PeckageDetailScreen = props => {
           />
         </View>
       </ScrollView>
+
+      <Modal
+          animationType="slide"
+          transparent={true}
+          visible={trailerModalVisibilty}
+          onRequestClose={() => {
+            setTrailerModalVisibilty(false)
+          }}>
+            <View style={styles.containerModal}>
+            <TouchableOpacity onPress={() => {setTrailerModalVisibilty(false)}}>
+              <View style={styles.closeModalImage}>
+                <AntDesign name="closecircleo" size={32} color="red" />
+              </View>
+            </TouchableOpacity>
+            <View style={{flex: 1}}>
+              <WebView
+                source={{uri: 'https://www.youtube.com/embed/RoAQ0TDgDEY'}}
+              />
+            </View>
+            </View>
+          </Modal>
     </View>
   );
 };
@@ -184,6 +196,13 @@ const styles = StyleSheet.create({
   },  
   buttonView: {
     marginVertical: 5,
+  },
+  containerModal: {
+    flex: 1,
+    backgroundColor: "black",
+  },
+  closeModalImage: {
+    margin: 5
   }
 });
 
