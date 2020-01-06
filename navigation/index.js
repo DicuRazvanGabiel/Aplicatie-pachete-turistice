@@ -1,4 +1,4 @@
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
@@ -11,6 +11,8 @@ import SearchObjective from "../screens/SearchObjective";
 import RezervationForm from "../screens/RezervationForm";
 import AdvantagesNatbiot from "../screens/AdvantagesNatbiot";
 import Services from "../screens/Services";
+import Settings from "../screens/Settings";
+import AuthScreen from "../screens/AuthScreen";
 
 const packegNavigator = createStackNavigator(
   {
@@ -53,12 +55,23 @@ const drawer = createDrawerNavigator(
         title: `Cazare / Masa`
       })
     },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        title: `Setari`
+      })
+    },
   },
   {
     edgeWidth: 0
   }
 );
 
-const AppContainer = createAppContainer(drawer);
+const authNavigator = createSwitchNavigator({
+  AuthScreen,
+  drawer
+})
+
+const AppContainer = createAppContainer(authNavigator);
 
 export default AppContainer;

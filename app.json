@@ -43,6 +43,6 @@
     "description": "",
     "packagerOpts": {
       "nonPersistent": "--nonPersistent"
-}
+    }
   }
 }
