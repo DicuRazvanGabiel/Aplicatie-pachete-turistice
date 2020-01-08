@@ -1,4 +1,4 @@
-import { SINGIN, SINGUP } from "../actions/auth";
+import { SINGIN, SINGUP, LOGIN, LOGOUT } from "../actions/auth";
 
 const initalState = {
   token: null,
@@ -8,18 +8,30 @@ const initalState = {
 export default (state = initalState, action) => {
   switch (action.type) {
     case SINGUP:
-        return {
-            token: action.token,
-            userId: action.userId
-        }
+      return {
+        token: action.token,
+        userId: action.userId
+      };
 
     case SINGIN:
-        return {
-            token: action.token,
-            userId: action.userId
-        }
+      return {
+        token: action.token,
+        userId: action.userId
+      };
 
-      default:
-        return state;
+    case LOGIN:
+      return {
+        token: action.token,
+        userId: action.userId
+      };
+
+    case LOGOUT:
+      return {
+        token: action.token,
+        userId: action.userId
+      };
+
+    default:
+      return state;
   }
 };

@@ -14,6 +14,7 @@ import Services from "../screens/Services";
 import Settings from "../screens/Settings";
 import AuthScreen from "../screens/AuthScreen";
 import RegisterScreen from "../screens/RegisterScreen"
+import StartupScreenAutoLogin from "../screens/StartupScreenAutoLogin"
 
 const packegNavigator = createStackNavigator(
   {
@@ -69,6 +70,7 @@ const drawer = createDrawerNavigator(
 );
 
 const authNavigator = createSwitchNavigator({
+  StartupScreenAutoLogin,
   AuthScreen,
   RegisterScreen,
   MainApplication: drawer

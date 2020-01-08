@@ -6,21 +6,38 @@ import {
   Image,
   Dimensions,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import ImageViewer from "react-native-image-zoom-viewer";
 import { AntDesign } from "@expo/vector-icons";
 import DrawerButton from "../components/DrawerButton";
+import { useSelector } from "react-redux";
 
 const { width, height } = Dimensions.get("screen");
 
 const ObjectiveDetail = ({ navigation }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const objectiv = navigation.getParam("objectiv");
-
+  const lang = useSelector(state => state.language.language);
   const images = [];
-  
-  if(objectiv.imageObiectiv){
+  description = null;
+
+  switch (lang) {
+    case "ro":
+      description = objectiv.descriereRo;
+      break;
+
+    case "bg":
+      description = objectiv.descriereBg;
+      break;
+
+    case "en":
+      description = objectiv.descriereEn;
+      break;
+  }
+
+  if (objectiv.imageObiectiv) {
     objectiv.imageObiectiv.map(image => {
       images.push({ url: image.imageUrl });
     });
@@ -48,18 +65,27 @@ const ObjectiveDetail = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <DrawerButton navigation={navigation} backButton={true} />
-
       {images.length !== 0 ? (
         <View>
-          <View>
-            <TouchableOpacity onPress={toggleModal}>
-              <Image
-                style={{ width: width, height: height / 2 }}
-                source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          </View>
+          <ScrollView>
+            <View style={{paddingBottom: 60}}>
+
+            
+            <View>
+              <TouchableOpacity onPress={toggleModal}>
+                <Image
+                  style={{ width: width, height: height / 2 }}
+                  source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={{margin: 5}}>
+              <Text>{description}</Text>
+            </View>
+            </View>
+          </ScrollView>
+
           <Modal visible={isModalVisible} transparent={true}>
             <ImageViewer
               imageUrls={images}
@@ -74,7 +100,6 @@ const ObjectiveDetail = ({ navigation }) => {
       ) : (
         <Text>No image</Text>
       )}
-
     </View>
   );
 };

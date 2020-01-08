@@ -11,7 +11,10 @@ import {
   Input,
   Label,
   Button,
-  Text
+  Text,
+  CheckBox,
+  Body,
+  ListItem
 } from "native-base";
 
 const RegisterScreen = ({ navigation }) => {
@@ -21,6 +24,7 @@ const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [tncAccept, setTncAccept] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -28,7 +32,7 @@ const RegisterScreen = ({ navigation }) => {
     setIsLoading(true);
     setError();
     try {
-      await dispatch(authAuctions.singup(email, password, navigation));
+      await dispatch(authAuctions.singup(email, password, city, name));
       setIsLoading(false);
       navigation.navigate("AuthScreen");
     } catch (error) {
@@ -72,6 +76,12 @@ const RegisterScreen = ({ navigation }) => {
             <Input onChangeText={name => setName(name)} />
           </Item>
         </Form>
+        <ListItem>
+            <CheckBox checked={tncAccept}  onPress={() => {setTncAccept(!tncAccept)}}/>
+            <Body>
+              <Text>Sunt de acord cu GDPR</Text>
+            </Body>
+          </ListItem>
         <Button
           full
           onPress={() => {
