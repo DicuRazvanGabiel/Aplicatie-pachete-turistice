@@ -25,7 +25,7 @@ const AuthScreen = ({ navigation }) => {
     setIsLoading(true);
     setError();
     try {
-        await dispatch(authAuctions.singin(email, password));
+        await dispatch(authAuctions.singin(email.toLocaleLowerCase(), password.toLocaleLowerCase()));
         setIsLoading(false);
         navigation.navigate("MainApplication");
     } catch (error) {
@@ -54,6 +54,7 @@ const AuthScreen = ({ navigation }) => {
         <Form>
           <Item>
             <Input
+            keyboardType="email-address"
               placeholder="Email"
               onChangeText={email => {
                 setEmail(email);

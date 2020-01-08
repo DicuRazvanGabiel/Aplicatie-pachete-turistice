@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ActivityIndicator, Alert } from "react-native";
+import { StyleSheet, ActivityIndicator, Alert, ScrollView, View } from "react-native";
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
 
@@ -32,7 +32,7 @@ const RegisterScreen = ({ navigation }) => {
     setIsLoading(true);
     setError();
     try {
-      await dispatch(authAuctions.singup(email, password, city, name));
+      await dispatch(authAuctions.singup(email.toLocaleLowerCase(), password.toLocaleLowerCase(), city, name));
       setIsLoading(false);
       navigation.navigate("AuthScreen");
     } catch (error) {
@@ -58,14 +58,15 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <Container>
       <Content>
+      <ScrollView>
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
-            <Input onChangeText={email => setEmail(email)} />
+            <Input onChangeText={email => setEmail(email)} keyboardType="email-address" />
           </Item>
           <Item floatingLabel last>
             <Label>Password</Label>
-            <Input onChangeText={password => setPassword(password)} />
+            <Input onChangeText={password => setPassword(password)}  secureTextEntry />
           </Item>
           <Item floatingLabel last>
             <Label>City</Label>
@@ -89,8 +90,20 @@ const RegisterScreen = ({ navigation }) => {
           }}
           style={styles.loginButton}
         >
+          <Text>SINGUP</Text>
+        </Button>
+        <View style={{marginTop: 10}}>
+        <Button
+          full
+          onPress={() => {
+            navigation.navigate("AuthScreen");
+          }}
+          style={styles.loginButton}
+        >
           <Text>Login</Text>
         </Button>
+        </View>
+        </ScrollView>
       </Content>
     </Container>
   );

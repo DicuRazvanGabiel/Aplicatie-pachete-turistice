@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   },
   containerText: {
     margin: 5,
-    fontSize: 30
+    fontSize: 30,
+    maxWidth: 150
   },
   cotumeButton: {
     backgroundColor: Color.lightGreen,

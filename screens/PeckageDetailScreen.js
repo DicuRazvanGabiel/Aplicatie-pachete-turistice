@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -20,7 +20,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
-import DrawerButton from "../components/DrawerButton"
+import DrawerButton from "../components/DrawerButton";
 
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
@@ -86,7 +86,7 @@ const PeckageDetailScreen = props => {
 
           const googleApi = GOOGLE_API_KEY;
           const color = randomColor({
-            luminosity: 'dark'
+            luminosity: "dark"
           });
 
           return (
@@ -103,61 +103,83 @@ const PeckageDetailScreen = props => {
       </MapView>
 
       <ScrollView style={styles.scrollViewButtons}>
-        <View style={styles.buttonView}>
-          <Button
-            title="Obiective Romania"
-            onPress={() => viewObjectivesHandler("ro")}
-            color={Colors.lightGreen}
-          />
-        </View>
-
-        <View style={styles.buttonView}>
-          <Button
-            title="Obiective Bulgaria"
-            onPress={() => viewObjectivesHandler("bg")}
-            color={Colors.lightGreen}
-          />
-        </View>
-        
-        <View style={styles.buttonView}>
-          <Button
-            title="Trailer"
-            onPress={() => {setTrailerModalVisibilty(true)}}
-            color={Colors.lightGreen}
-          />
-        </View>
-
-        <View style={styles.buttonView}>
-          <Button
-            title="Rezerva Pachet"
-            onPress={() => {props.navigation.navigate('RezervationForm', {
-              packege
-            })}}
-            color={Colors.lightGreen}
-          />
-        </View>
+        <Grid>
+          <Col>
+            <Row>
+              <View style={styles.buttonView}>
+                <Button
+                  title="Obiective Romania"
+                  onPress={() => viewObjectivesHandler("ro")}
+                  color={Colors.lightGreen}
+                />
+              </View>
+            </Row>
+            <Row>
+              <View style={styles.buttonView}>
+                <Button
+                  title="Trailer"
+                  onPress={() => {
+                    setTrailerModalVisibilty(true);
+                  }}
+                  color={Colors.lightGreen}
+                />
+              </View>
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              <View style={styles.buttonView}>
+                <Button
+                  title="Obiective Bulgaria"
+                  onPress={() => viewObjectivesHandler("bg")}
+                  color={Colors.lightGreen}
+                />
+              </View>
+            </Row>
+            <Row>
+              <View style={styles.buttonView}>
+                <Button
+                  title="Rezerva Pachet"
+                  onPress={() => {
+                    props.navigation.navigate("RezervationForm", {
+                      packege
+                    });
+                  }}
+                  color={Colors.lightGreen}
+                />
+              </View>
+            </Row>
+          </Col>
+        </Grid>
       </ScrollView>
 
       <Modal
-          animationType="slide"
-          transparent={true}
-          visible={trailerModalVisibilty}
-          onRequestClose={() => {
-            setTrailerModalVisibilty(false)
-          }}>
-            <View style={styles.containerModal}>
-            <TouchableOpacity onPress={() => {setTrailerModalVisibilty(false)}}>
-              <View style={styles.closeModalImage}>
-                <AntDesign name="closecircleo" size={32} color="red" />
-              </View>
-            </TouchableOpacity>
-            <View style={{flex: 1}}>
-              <WebView
-                source={{uri: 'https://www.youtube.com/embed/' + packege.idYoutubeVideo}}
-              />
+        animationType="slide"
+        transparent={true}
+        visible={trailerModalVisibilty}
+        onRequestClose={() => {
+          setTrailerModalVisibilty(false);
+        }}
+      >
+        <View style={styles.containerModal}>
+          <TouchableOpacity
+            onPress={() => {
+              setTrailerModalVisibilty(false);
+            }}
+          >
+            <View style={styles.closeModalImage}>
+              <AntDesign name="closecircleo" size={32} color="red" />
             </View>
-            </View>
-          </Modal>
+          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <WebView
+              source={{
+                uri: "https://www.youtube.com/embed/" + packege.idYoutubeVideo
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -192,14 +214,16 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   scrollViewButtons: {
-    width: '90%'
-  },  
+    width: "90%"
+  },
   buttonView: {
     marginVertical: 5,
+    marginHorizontal: 5,
+    flex: 1
   },
   containerModal: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   closeModalImage: {
     margin: 5
