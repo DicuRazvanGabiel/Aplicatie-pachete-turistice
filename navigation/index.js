@@ -13,6 +13,7 @@ import AdvantagesNatbiot from "../screens/AdvantagesNatbiot";
 import Services from "../screens/Services";
 import Settings from "../screens/Settings";
 import AuthScreen from "../screens/AuthScreen";
+import RegisterScreen from "../screens/RegisterScreen"
 
 const packegNavigator = createStackNavigator(
   {
@@ -69,7 +70,8 @@ const drawer = createDrawerNavigator(
 
 const authNavigator = createSwitchNavigator({
   AuthScreen,
-  drawer
+  RegisterScreen,
+  MainApplication: drawer
 })
 
 const AppContainer = createAppContainer(authNavigator);

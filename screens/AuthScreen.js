@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, ActivityIndicator, Alert } from "react-native";
 
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
@@ -14,14 +14,39 @@ import {
   Text
 } from "native-base";
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
-  const singupHandler = () => {
-    dispatch(authAuctions.singup(email, password));
+  const singinHandler = async () => {
+    setIsLoading(true);
+    setError();
+    try {
+        await dispatch(authAuctions.singin(email, password));
+        setIsLoading(false);
+        navigation.navigate("MainApplication");
+    } catch (error) {
+        setError(error.message)
+        setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+      if(error){
+          Alert.alert('Error', error, [{text: 'Okay'}]);
+      }
+  }, [error])
+
+  if (isLoading) {
+    return (
+      <Container style={{ justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -45,14 +70,19 @@ const AuthScreen = () => {
             />
           </Item>
         </Form>
-        <Button full onPress={singupHandler}>
+        <Button full onPress={singinHandler}>
           <Text>Login</Text>
         </Button>
         <View style={styles.orContainer}>
           <Text>OR</Text>
         </View>
-        <Button full>
-          <Text>Sing Up</Text>
+        <Button
+          full
+          onPress={() => {
+            navigation.navigate("RegisterScreen");
+          }}
+        >
+          <Text>Register</Text>
         </Button>
       </Content>
     </Container>
