@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
-  View,
-  Button
 } from "react-native";
 import { Container, Content, Card, CardItem, Body, Text } from "native-base";
 import { FlatList } from "react-native-gesture-handler";
@@ -33,9 +31,6 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data: { locations }, error }
     return;
   }
 
-  console.log(locations[0].coords.latitude);
-  console.log(locations[0].coords.longitude);
-  
   for(const [ id, value ] of Object.entries(objectives)){
     const distance = getDistance({ latitude: locations[0].coords.latitude, longitude: locations[0].coords.longitude },
       { latitude: value.latitudine, longitude: value.longitudine }) / 1000;
