@@ -11,13 +11,14 @@ import * as TaskManager from 'expo-task-manager';
 import { useScreens } from 'react-native-screens';
 
 //redux import
-import { createStore, combineReducers, applyMiddleware } from "redux";
+// import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import ReduxThunk from "redux-thunk";
+import store from "./store"
+// import ReduxThunk from "redux-thunk";
 
-import packagesReducers from "./store/reducers/packages";
-import langugeReducer from "./store/reducers/languge";
-import locationReducer from "./store/reducers/location";
+// import packagesReducers from "./store/reducers/packages";
+// import langugeReducer from "./store/reducers/languge";
+// import locationReducer from "./store/reducers/location";
 //end
 
 import { setLocation } from "./store/actions/location";
@@ -29,12 +30,12 @@ import AppContainer from "./navigation";
 
 useScreens();
 
-const rootReducer = combineReducers({
-  packages: packagesReducers,
-  language: langugeReducer,
-  location: locationReducer,
-});
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+// const rootReducer = combineReducers({
+//   packages: packagesReducers,
+//   language: langugeReducer,
+//   location: locationReducer,
+// });
+// const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const images = [
   require("./assets/images/01_NATBIOT_CMYK.png"),
@@ -83,11 +84,6 @@ export default class App extends React.Component {
     
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
-    
-    // await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-    //   accuracy: Location.Accuracy.Balanced,
-    //   timeInterval: 1000
-    // });
   };
 
   handleResourcesAsync = async () => {

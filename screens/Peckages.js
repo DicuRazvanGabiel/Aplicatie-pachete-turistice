@@ -18,21 +18,38 @@ import * as TaskManager from 'expo-task-manager';
 import Colors from "../constants/Colors";
 import DrawerButton from "../components/DrawerButton";
 import { getDistance } from "geolib";
+import store from "../store";
 
 const LOCATION_TASK_NAME = 'background-location-task';
 
-TaskManager.defineTask(LOCATION_TASK_NAME, ({ data: { locations }, error }) => {
+TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data: { locations }, error }) => {
   if (error) {
     console.log(error);
     return;
   }
-  sendNotificationImmediately();
+  const objectives = store.getState().packages.objectives;
+  
+  if(!objectives){
+    return;
+  }
+
+  console.log(locations[0].coords.latitude);
+  console.log(locations[0].coords.longitude);
+  
+  for(const [ id, value ] of Object.entries(objectives)){
+    const distance = getDistance({ latitude: locations[0].coords.latitude, longitude: locations[0].coords.longitude },
+      { latitude: value.latitudine, longitude: value.longitudine }) / 1000;
+      if(distance < 100) {
+        await sendNotificationImmediately(distance, value.title);
+        return;
+      }
+  }
 });
 
-sendNotificationImmediately = async () => {
+sendNotificationImmediately = async (distance, objective) => {
   let notificationId = await Notifications.presentLocalNotificationAsync({
     title: 'Natbiot Travelling',
-    body: 'You are ' + 'km away from' ,
+    body: 'You are ' + distance + ' km away from ' + objective,
   });
 };
 
