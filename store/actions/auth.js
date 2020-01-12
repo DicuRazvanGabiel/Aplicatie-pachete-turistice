@@ -38,7 +38,6 @@ export const singup = (email, password, city, name) => {
         },
         body: JSON.stringify({
           email,
-          password,
           city,
           name
         })

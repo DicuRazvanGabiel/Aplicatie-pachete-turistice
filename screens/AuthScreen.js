@@ -25,20 +25,25 @@ const AuthScreen = ({ navigation }) => {
     setIsLoading(true);
     setError();
     try {
-        await dispatch(authAuctions.singin(email.toLocaleLowerCase(), password.toLocaleLowerCase()));
-        setIsLoading(false);
-        navigation.navigate("MainApplication");
+      await dispatch(
+        authAuctions.singin(
+          email.toLocaleLowerCase(),
+          password.toLocaleLowerCase()
+        )
+      );
+      setIsLoading(false);
+      navigation.navigate("MainApplication");
     } catch (error) {
-        setError(error.message)
-        setIsLoading(false);
+      setError(error.message);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-      if(error){
-          Alert.alert('Error', error, [{text: 'Okay'}]);
-      }
-  }, [error])
+    if (error) {
+      Alert.alert("Error", error, [{ text: "Okay" }]);
+    }
+  }, [error]);
 
   if (isLoading) {
     return (
@@ -54,7 +59,8 @@ const AuthScreen = ({ navigation }) => {
         <Form>
           <Item>
             <Input
-            keyboardType="email-address"
+              autoCapitalize="none"
+              keyboardType="email-address"
               placeholder="Email"
               onChangeText={email => {
                 setEmail(email);
@@ -63,6 +69,7 @@ const AuthScreen = ({ navigation }) => {
           </Item>
           <Item last>
             <Input
+              autoCapitalize="none"
               placeholder="Password"
               secureTextEntry
               onChangeText={password => {

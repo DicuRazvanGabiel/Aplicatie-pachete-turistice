@@ -17,6 +17,7 @@ import MapViewDirections from "react-native-maps-directions";
 import randomColor from "randomcolor";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { AntDesign } from "@expo/vector-icons";
+import RatingStars from "../components/RatingStars"
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
@@ -151,6 +152,12 @@ const PeckageDetailScreen = props => {
             </Row>
           </Col>
         </Grid>
+        <View style={styles.ratingTexContainer}>
+          <Text style={styles.ratingText}>
+            Rate this package
+          </Text>
+        </View>
+        <RatingStars />
       </ScrollView>
 
       <Modal
@@ -227,6 +234,13 @@ const styles = StyleSheet.create({
   },
   closeModalImage: {
     margin: 5
+  },
+  ratingTexContainer: {
+    margin: 5
+  },
+  ratingText:{
+    fontSize: 20,
+    color: "blue"
   }
 });
 

@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Container } from "native-base"
 import { useDispatch } from "react-redux";
 import { changeLanguage } from "../store/actions/language";
+import RatingStart from "../components/RatingStars";
 
 const LeanguageSelectScreen = props => {
 
