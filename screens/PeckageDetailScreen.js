@@ -8,7 +8,8 @@ import {
   Button,
   Modal,
   WebView,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
@@ -17,7 +18,7 @@ import MapViewDirections from "react-native-maps-directions";
 import randomColor from "randomcolor";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { AntDesign } from "@expo/vector-icons";
-import RatingStars from "../components/RatingStars"
+import RatingStars from "../components/RatingStars";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
@@ -152,10 +153,15 @@ const PeckageDetailScreen = props => {
             </Row>
           </Col>
         </Grid>
+        <View style={styles.buttonView}>
+          <Button
+            title="Descarca Brosura"
+            onPress={() => Linking.openURL(packege.linkBrosura)}
+            color="blue"
+          />
+        </View>
         <View style={styles.ratingTexContainer}>
-          <Text style={styles.ratingText}>
-            Rate this package
-          </Text>
+          <Text style={styles.ratingText}>Rate this package</Text>
         </View>
         <RatingStars />
       </ScrollView>
@@ -238,7 +244,7 @@ const styles = StyleSheet.create({
   ratingTexContainer: {
     margin: 5
   },
-  ratingText:{
+  ratingText: {
     fontSize: 20,
     color: "blue"
   }
