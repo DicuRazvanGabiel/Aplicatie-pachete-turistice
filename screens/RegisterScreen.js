@@ -66,6 +66,8 @@ const RegisterScreen = ({ navigation }) => {
     setIsLoading(true);
     setError();
     try {
+      console.log(email.toLocaleLowerCase(), password.toLocaleLowerCase());
+      
       await dispatch(
         authAuctions.singup(
           email.toLocaleLowerCase(),
@@ -114,7 +116,7 @@ const RegisterScreen = ({ navigation }) => {
                 <Label>Password</Label>
                 <Input
                   autoCapitalize="none"
-                  ÍonChangeText={password => setPassword(password)}
+                  onChangeText={password => setPassword(password)}
                   secureTextEntry
                 />
               </Item>

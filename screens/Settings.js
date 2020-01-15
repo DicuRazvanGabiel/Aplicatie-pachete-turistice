@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextInput, View } from "react-native";
+import { TextInput, View, AsyncStorage } from "react-native";
 import {
   Container,
   Content,
@@ -11,7 +11,7 @@ import {
   Body,
   Right,
   Switch,
-  Input
+  Input, 
 } from "native-base";
 import { useDispatch } from "react-redux";
 import * as Auth from "../store/actions/auth";
@@ -22,12 +22,39 @@ const Settings = ({ navigation }) => {
     true
   );
   const [metersToNotificate, setMetersToNotificate] = useState(10000);
+  const [settingsChanged, setSettingsChanged] = useState(false);
+  const [settingsObj, setSettingsObj] = useState(null);
+
+  const getSettings = async () => {
+    const setObj = await AsyncStorage.getItem("settingsObj");
+    if(setObj){
+      setSettingsObj(JSON.parse(setObj));
+      if(setSettingsObj.dNotificatifications && settingsObj.metersToNotificate){
+        setEnableDistaneNotifications(settingsObj.dNotificatifications);
+        metersToNotificate(settingsObj.metersToNotificate)
+      }
+    }else {
+      setSettingsObj({
+        dNotificatifications: true,
+        metersToNotificate: 100
+      })
+      setEnableDistaneNotifications(true);
+      setMetersToNotificate(100)
+    }
+  };
+
+  useEffect( () => {
+      if (!settingsObj) {
+        getSettings();
+      }
+  },[])
 
   const dispatch = useDispatch();
 
   const chageMeters = text => {
     const meters = text.replace(/[^0-9]/g, "");
     setMetersToNotificate(meters);
+    setSettingsChanged(true);
   };
 
   const changePasswordHandler = () => {
@@ -39,7 +66,12 @@ const Settings = ({ navigation }) => {
     navigation.navigate("AuthScreen");
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    AsyncStorage.setItem('settingsObj', JSON.stringify({
+      dNotificatifications: enableDistaneNotifications,
+      metersToNotificate: metersToNotificate
+    }))
+    setSettingsChanged(false);
     navigation.navigate("PeckagesScreen");
   };
 
@@ -59,7 +91,10 @@ const Settings = ({ navigation }) => {
           <Right>
             <Switch
               value={enableDistaneNotifications}
-              onValueChange={setEnableDistaneNotifications}
+              onValueChange={val => {
+                setEnableDistaneNotifications(val);
+                setSettingsChanged(true);
+              }}
             />
           </Right>
         </ListItem>
@@ -98,11 +133,21 @@ const Settings = ({ navigation }) => {
             <Text>Change</Text>
           </Button>
         </ListItem>
-        <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
+
+        {settingsChanged ? (
+          <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
+            <Button rounded block success onPress={handleSave}>
+              <Text>SAVE</Text>
+            </Button>
+          </View>
+        ) : (
+          <View></View>
+        )}
+        {/* <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
           <Button rounded block success onPress={handleSave}>
             <Text>SAVE</Text>
           </Button>
-        </View>
+        </View> */}
 
         <View style={{ padding: 10 }}>
           <Button rounded block danger onPress={handleLogout}>
