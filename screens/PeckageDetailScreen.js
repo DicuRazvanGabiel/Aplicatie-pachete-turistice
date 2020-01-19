@@ -17,7 +17,7 @@ import { getCenterOfBounds } from "geolib";
 import MapViewDirections from "react-native-maps-directions";
 import randomColor from "randomcolor";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import RatingStars from "../components/RatingStars";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
@@ -63,12 +63,20 @@ const PeckageDetailScreen = props => {
       <DrawerButton navigation={props.navigation} backButton={true} />
       <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
         {listObjectives.map(object => {
+          // console.log(object.iconita);
+          
           const latlng = {
             latitude: parseFloat(object.latitudine),
             longitude: parseFloat(object.longitudine)
           };
           return (
-            <Marker key={object.id} coordinate={latlng} title={object.title} />
+            <Marker key={object.id} coordinate={latlng} title={object.title}>
+              {/* <MaterialCommunityIcons
+                name="bridge"
+                size={32}
+                color="black"
+              /> */}
+            </Marker>
           );
         })}
 
@@ -87,9 +95,15 @@ const PeckageDetailScreen = props => {
           };
 
           const googleApi = GOOGLE_API_KEY;
-          const color = randomColor({
-            luminosity: "dark"
-          });
+
+          let color;
+          if (object.culoareTraseu) {
+            color = object.culoareTraseu;
+          } else {
+            color = randomColor({
+              luminosity: "dark"
+            });
+          }
 
           return (
             <MapViewDirections
