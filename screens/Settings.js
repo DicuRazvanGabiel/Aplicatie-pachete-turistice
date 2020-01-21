@@ -10,7 +10,9 @@ import {
   Left,
   Body,
   Right,
+  Form,
   Switch,
+  Item,
   Input, 
 } from "native-base";
 import { useDispatch } from "react-redux";
@@ -24,6 +26,10 @@ const Settings = ({ navigation }) => {
   const [metersToNotificate, setMetersToNotificate] = useState(10000);
   const [settingsChanged, setSettingsChanged] = useState(false);
   const [settingsObj, setSettingsObj] = useState(null);
+  const [changePasswordField, setChangePasswordField] = useState(false);
+
+  const [password, setPassword] = useState();
+  const [rePassword, setRePassword] = useState();
 
   const getSettings = async () => {
     const setObj = await AsyncStorage.getItem("settingsObj");
@@ -58,7 +64,7 @@ const Settings = ({ navigation }) => {
   };
 
   const changePasswordHandler = () => {
-    navigation.navigate("ChangePasswordScreen");
+    setChangePasswordField(true);
   };
 
   const handleLogout = () => {
@@ -72,7 +78,6 @@ const Settings = ({ navigation }) => {
       metersToNotificate: metersToNotificate
     }))
     setSettingsChanged(false);
-    navigation.navigate("PeckagesScreen");
   };
 
   return (
@@ -133,6 +138,33 @@ const Settings = ({ navigation }) => {
             <Text>Change</Text>
           </Button>
         </ListItem>
+
+        {changePasswordField ? (<View>
+          <Form>
+          <Item>
+            <Input
+              autoCapitalize="none"
+              placeholder="Password"
+              secureTextEntry
+              onChangeText={pass => {
+                setPassword(pass);
+              }}
+            />
+          </Item>
+          <Item last>
+            <Input
+              autoCapitalize="none"
+              placeholder="Re Password"
+              secureTextEntry
+              onChangeText={password => {
+                setRePassword(password);
+              }}
+            />
+          </Item>
+        </Form>
+        </View>) : (<View></View>)
+
+        }
 
         {settingsChanged ? (
           <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
