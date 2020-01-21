@@ -58,19 +58,38 @@ const PeckageDetailScreen = props => {
     });
   };
 
+  const createNewHandler = country => {
+    props.navigation.navigate("CreateNewRoute", {
+      listObjectives,
+      country
+    });
+  };
+
   return (
     <View style={styles.container}>
       <DrawerButton navigation={props.navigation} backButton={true} />
       <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
         {listObjectives.map(object => {
           // console.log(object.iconita);
-          
+
           const latlng = {
             latitude: parseFloat(object.latitudine),
             longitude: parseFloat(object.longitudine)
           };
           return (
             <Marker key={object.id} coordinate={latlng} title={object.title}>
+              {object.iconita === 1579445103301 ? (
+                <MaterialCommunityIcons name="bridge" size={32} color="black" />
+              ) : (
+                <View></View>
+              )}
+
+              {object.iconita === 1579445113198 ? (
+                <MaterialCommunityIcons name="castle" size={32} color="black" />
+              ) : (
+                <View></View>
+              )}
+
               {/* <MaterialCommunityIcons
                 name="bridge"
                 size={32}
@@ -119,6 +138,13 @@ const PeckageDetailScreen = props => {
       </MapView>
 
       <ScrollView style={styles.scrollViewButtons}>
+        <View style={styles.buttonView}>
+          <Button
+            title="Creeaza-ti prorpiul traseu"
+            onPress={() => createNewHandler("ro")}
+            color={Colors.lightGreen}
+          />
+        </View>
         <Grid>
           <Col>
             <Row>

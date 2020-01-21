@@ -15,6 +15,7 @@ import Settings from "../screens/Settings";
 import AuthScreen from "../screens/AuthScreen";
 import RegisterScreen from "../screens/RegisterScreen"
 import StartupScreenAutoLogin from "../screens/StartupScreenAutoLogin"
+import CreateNewRoute from "../screens/CreateNewRoute";
 
 const packegNavigator = createStackNavigator(
   {
@@ -23,6 +24,7 @@ const packegNavigator = createStackNavigator(
     PeckageDetailScreen,
     ObjectiveList,
     ObjectiveDetail,
+    CreateNewRoute,
     RezervationForm
   },
   {

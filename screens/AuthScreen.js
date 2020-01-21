@@ -3,6 +3,7 @@ import { StyleSheet, View, ActivityIndicator, Alert } from "react-native";
 
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
+import * as Facebook from 'expo-facebook';
 
 import {
   Form,
@@ -20,6 +21,31 @@ const AuthScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+
+  const logInFacebook = async () => {
+    try {
+      await Facebook.initializeAsync('2275759055840212');
+      const {
+        type,
+        token,
+        expires,
+        permissions,
+        declinedPermissions,
+      } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ['public_profile'],
+      });
+      if (type === 'success') {
+        // Get the user's name using Facebook's Graph API
+        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+        Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+      console.log(message)
+    }
+  }
 
   const singinHandler = async () => {
     setIsLoading(true);
@@ -91,6 +117,12 @@ const AuthScreen = ({ navigation }) => {
           }}
         >
           <Text>Register</Text>
+        </Button>
+        <View style={styles.orContainer}>
+          <Text>OR</Text>
+        </View>
+        <Button full onPress={logInFacebook}>
+          <Text>FACEBOOK</Text>
         </Button>
       </Content>
     </Container>
