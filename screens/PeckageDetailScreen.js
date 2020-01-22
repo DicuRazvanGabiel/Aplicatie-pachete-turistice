@@ -8,9 +8,10 @@ import {
   Button,
   Modal,
   TouchableOpacity,
-  Linking
+  Linking,
+  Image
 } from "react-native";
-import { WebView } from 'react-native-webview';
+import { WebView } from "react-native-webview";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { getCenterOfBounds } from "geolib";
@@ -76,20 +77,52 @@ const PeckageDetailScreen = props => {
             latitude: parseFloat(object.latitudine),
             longitude: parseFloat(object.longitudine)
           };
+          
+          let icon = '';
+
+          switch (object.iconita) {
+            case 1579445103301:
+              icon = require('../assets/images/obiective/pod.png')
+              break;
+
+            case 1579445113198:
+              icon = require('../assets/images/obiective/castel.jpg')
+              break;
+
+            case 1579445125722:
+              icon = require('../assets/images/obiective/muzeu.png')
+              break;
+
+            case 1579445137976:
+              icon = require('../assets/images/obiective/lake.png')
+              break;
+
+            case 1579445151622:
+              icon = require('../assets/images/obiective/monastery.png')
+              break;
+              
+            case 1579445163207:
+              icon = require('../assets/images/obiective/cave.png')
+              break;
+
+            case 1579445177979:
+              icon = require('../assets/images/obiective/rezervatie.png')
+              break;
+
+            case 1579445189982:
+              icon = require('../assets/images/obiective/medieval.png')
+              break;
+
+            case 1579445202728:
+              icon = require('../assets/images/obiective/monument.png')
+              break;
+          
+            default:
+              break;
+          }
           return (
-            <Marker key={object.id} coordinate={latlng} title={object.title}>
-              {object.iconita === 1579445103301 ? (
-                <MaterialCommunityIcons name="bridge" size={32} color="black" />
-              ) : (
-                <View></View>
-              )}
-
-              {object.iconita === 1579445113198 ? (
-                <MaterialCommunityIcons name="castle" size={32} color="black" />
-              ) : (
-                <View></View>
-              )}
-
+            <Marker key={object.id} coordinate={latlng} title={object.title} image={icon}>
+              
               {/* <MaterialCommunityIcons
                 name="bridge"
                 size={32}

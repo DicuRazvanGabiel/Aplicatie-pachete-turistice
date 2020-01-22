@@ -54,7 +54,16 @@ const images = [
   require("./assets/images/header/ro/LogoEuRoCorecta2.png"),
   require("./assets/images/header/ro/Logo-ROGov_ro.jpg"),
   require("./assets/images/header/ro/Interreg_ro.jpg"),
-  require("./assets/images/header/ro/mrc.png")
+  require("./assets/images/header/ro/mrc.png"),
+  require("./assets/images/obiective/muzeu.png"),
+  require("./assets/images/obiective/castel.jpg"),
+  require("./assets/images/obiective/cave.png"),
+  require("./assets/images/obiective/lake.png"),
+  require("./assets/images/obiective/medieval.png"),
+  require("./assets/images/obiective/monastery.png"),
+  require("./assets/images/obiective/monument.png"),
+  require("./assets/images/obiective/pod.png"),
+  require("./assets/images/obiective/rezervatie.png"),
 ];
 
 export default class App extends React.Component {
