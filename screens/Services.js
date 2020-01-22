@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, WebView, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
+import { WebView } from 'react-native-webview';
 import { useSelector } from "react-redux";
 
 import DrawerButton from "../components/DrawerButton";

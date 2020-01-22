@@ -7,10 +7,10 @@ import {
   ScrollView,
   Button,
   Modal,
-  WebView,
   TouchableOpacity,
   Linking
 } from "react-native";
+import { WebView } from 'react-native-webview';
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { getCenterOfBounds } from "geolib";

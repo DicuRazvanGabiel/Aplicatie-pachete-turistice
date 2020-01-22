@@ -3,7 +3,7 @@
     "name": "Natbiot travelling",
     "slug": "natbiot-travelling",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android"
@@ -40,9 +40,6 @@
         }
       }
     },
-    "description": "",
-    "packagerOpts": {
-      "nonPersistent": "--nonPersistent"
-    }
+    "description": ""
   }
 }
