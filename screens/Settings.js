@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextInput, View, AsyncStorage } from "react-native";
+import { TextInput, View, AsyncStorage, Alert, ActivityIndicator } from "react-native";
 import {
   Container,
   Content,
@@ -27,6 +27,7 @@ const Settings = ({ navigation }) => {
   const [settingsChanged, setSettingsChanged] = useState(false);
   const [settingsObj, setSettingsObj] = useState(null);
   const [changePasswordField, setChangePasswordField] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [password, setPassword] = useState();
   const [rePassword, setRePassword] = useState();
@@ -79,6 +80,53 @@ const Settings = ({ navigation }) => {
     }))
     setSettingsChanged(false);
   };
+
+  const hendleChangePassword = async () => {
+    if(password !== rePassword) {
+      Alert.alert("Error", "Campurile pentru parola nu corespund");
+      return;
+    }
+
+    setIsLoading(true);
+
+    let userData = await AsyncStorage.getItem("userData");
+    userData = JSON.parse(userData);
+    console.log(userData.token);
+    
+    const response = await fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idToken: userData.token,
+          password,
+          returnSecureToken: true
+        })
+      }
+    );
+    let responseObj = await response.json();
+    console.log(responseObj);
+    
+    setChangePasswordField(false);
+    setIsLoading(false);
+
+    if(responseObj.error){
+      Alert.alert("Error", responseObj.error.message);
+    }
+  }
+
+  if(isLoading){
+    return(
+      <Container>
+        <Content>
+          <ActivityIndicator size='large' />
+        </Content>
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -162,6 +210,9 @@ const Settings = ({ navigation }) => {
             />
           </Item>
         </Form>
+        <Button onPress={hendleChangePassword}>
+          <Text>Change Password</Text>
+        </Button>
         </View>) : (<View></View>)
 
         }

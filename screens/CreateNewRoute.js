@@ -44,10 +44,9 @@ const CreateNewRoute = props => {
       Alert.alert('Atentie!', `Alege cel putin un obiective`);
       return;
     }
-
-    
-
-
+    props.navigation.navigate("ViewNewRoute",{
+      routes: newRoute
+    })
   };
 
   const removeFromRoot = item => {

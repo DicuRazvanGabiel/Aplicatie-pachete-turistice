@@ -74,7 +74,7 @@ export const singin = (email, password) => {
 
     dispatch({ type: SINGIN, token: resData.idToken, userId: resData.localId });
     const exparitionDate = new Date(
-      new Date().getTime() + parseInt(resData.expiresIn) * 1000
+      new Date().getTime() + parseInt(resData.expiresIn) * 100000000
     );
     saveDataToStorage(resData.localId, resData.idToken, exparitionDate);
   };

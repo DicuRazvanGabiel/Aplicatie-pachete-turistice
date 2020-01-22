@@ -16,6 +16,7 @@ import AuthScreen from "../screens/AuthScreen";
 import RegisterScreen from "../screens/RegisterScreen"
 import StartupScreenAutoLogin from "../screens/StartupScreenAutoLogin"
 import CreateNewRoute from "../screens/CreateNewRoute";
+import ViewNewRoute from "../screens/ViewNewRoute"
 
 const packegNavigator = createStackNavigator(
   {
@@ -25,7 +26,8 @@ const packegNavigator = createStackNavigator(
     ObjectiveList,
     ObjectiveDetail,
     CreateNewRoute,
-    RezervationForm
+    RezervationForm,
+    ViewNewRoute
   },
   {
     initialRouteName: "LanguageSelectScreen",
