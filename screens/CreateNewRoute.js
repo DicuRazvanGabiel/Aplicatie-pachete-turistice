@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Platform,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { useSelector } from "react-redux";
 import {
@@ -31,18 +32,27 @@ const CreateNewRoute = props => {
   const objectives = props.navigation.getParam("listObjectives");
   const country = props.navigation.getParam("country");
   const userLocation = useSelector(state => state.location.location);
-  
+
   let newRoute = [];
 
   const addToRoute = item => {
-    newRoute = [...newRoute, item]
+    newRoute = [...newRoute, item];
+  };
+
+  startNewRoute = () => {
+    if(newRoute.length < 1){
+      Alert.alert('Atentie!', `Alege cel putin un obiective`);
+      return;
+    }
+
+    
+
+
   };
 
   const removeFromRoot = item => {
-    newRoute = newRoute.filter(function(value, index, arr){
-
-        return value.id !== item.id;
-    
+    newRoute = newRoute.filter(function(value, index, arr) {
+      return value.id !== item.id;
     });
   };
 
@@ -66,7 +76,6 @@ const CreateNewRoute = props => {
 
   const renderObjectiv = itemObj => {
     const { item } = itemObj;
-    console.log(item);
     return (
       <CreateNewItem
         item={item}
@@ -103,6 +112,12 @@ const CreateNewRoute = props => {
             onPress={() => toogleButton("naturale")}
           >
             <Text>Naturale</Text>
+          </Button>
+          <Button
+            success
+            onPress={() => startNewRoute()}
+          >
+            <Text>Start Traseu</Text>
           </Button>
           <Button
             active={typeObjetivesToShow === "culturale" ? true : false}
