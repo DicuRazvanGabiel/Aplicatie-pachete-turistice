@@ -17,6 +17,7 @@ import RegisterScreen from "../screens/RegisterScreen"
 import StartupScreenAutoLogin from "../screens/StartupScreenAutoLogin"
 import CreateNewRoute from "../screens/CreateNewRoute";
 import ViewNewRoute from "../screens/ViewNewRoute"
+import HowMuchTime from "../screens/HowMuchTime"
 
 const packegNavigator = createStackNavigator(
   {
@@ -53,6 +54,12 @@ const drawer = createDrawerNavigator(
       screen: AdvantagesNatbiot,
       navigationOptions: ({ navigation }) => ({
         title: `Avantaje Natbiot`
+      })
+    },
+    HowMuchTime: {
+      screen: HowMuchTime,
+      navigationOptions: ({ navigation }) => ({
+        title: `Cum ajung si cat dureaza?`
       })
     },
     Services: {

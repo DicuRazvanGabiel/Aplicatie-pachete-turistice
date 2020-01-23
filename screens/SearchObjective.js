@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,28 +6,51 @@ import {
   StyleSheet,
   TouchableOpacity,
   Keyboard,
-  FlatList
+  FlatList,
+  AsyncStorage,
+  ActivityIndicator
 } from "react-native";
 import DrawerButton from "../components/DrawerButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import ObjectivItemList from "../components/ObjectiveItemList"
+import ObjectivItemList from "../components/ObjectiveItemList";
 
 let matchingObjetives = [];
 
 const SearchObjective = ({ navigation }) => {
   const userLocation = useSelector(state => state.location.location);
   const [valueTextInput, onChangeText] = useState("");
+  const [isloading, setIsloading] = useState(false);
+  const [historyState, setHistoryState] = useState();
   const objetives = useSelector(state => state.packages.objectives);
   const listOfObjectives = [];
+  let historySearches = [];
 
   for (const [id, value] of Object.entries(objetives)) {
     listOfObjectives.push(value);
   }
 
-  const searchIconPressHandler = () => {
+  const searchIconPressHandler = async () => {
     Keyboard.dismiss();
+    // historySearches = await AsyncStorage.getItem("historySearch");
+
+    // if (!historySearches) {
+    //   historySearches = [valueTextInput];
+    // } else {
+    //   if (historySearches.lenght <= 2) {
+    //     historySearches.push(valueTextInput);
+    //   } else {
+    //     historySearches.splice(0, 1);
+    //     historySearches.push(valueTextInput);
+    //   }
+    // }
+
+    // await AsyncStorage.setItem(
+    //   "historySearch",
+    //   JSON.stringify(historySearches)
+    // );
+
     onChangeText("");
     matchingObjetives = listOfObjectives.filter(objectiv =>
       objectiv.title.toLowerCase().includes(valueTextInput.toLowerCase())
@@ -36,7 +59,6 @@ const SearchObjective = ({ navigation }) => {
 
   const renderObjectiv = itemObj => {
     const { item } = itemObj;
-
     return (
       <ObjectivItemList
         item={item}
@@ -45,6 +67,14 @@ const SearchObjective = ({ navigation }) => {
       />
     );
   };
+
+  if (isloading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -58,6 +88,10 @@ const SearchObjective = ({ navigation }) => {
         <TouchableOpacity onPress={searchIconPressHandler}>
           <AntDesign name="search1" size={32} color="green" />
         </TouchableOpacity>
+      </View>
+      <View>
+        <Text>History</Text>
+        {console.log(historySearches)}
       </View>
       <View>
         <FlatList

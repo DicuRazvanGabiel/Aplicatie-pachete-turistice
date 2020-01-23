@@ -77,59 +77,77 @@ const PeckageDetailScreen = props => {
             latitude: parseFloat(object.latitudine),
             longitude: parseFloat(object.longitudine)
           };
-          
-          let icon = '';
+
+          let icon = false;
 
           switch (object.iconita) {
             case 1579445103301:
-              icon = require('../assets/images/obiective/pod.png')
+              icon = require("../assets/images/obiective/pod.png");
               break;
 
             case 1579445113198:
-              icon = require('../assets/images/obiective/castel.jpg')
+              icon = require("../assets/images/obiective/castel.jpg");
               break;
 
             case 1579445125722:
-              icon = require('../assets/images/obiective/muzeu.png')
+              icon = require("../assets/images/obiective/muzeu.png");
               break;
 
             case 1579445137976:
-              icon = require('../assets/images/obiective/lake.png')
+              icon = require("../assets/images/obiective/lake.png");
               break;
 
             case 1579445151622:
-              icon = require('../assets/images/obiective/monastery.png')
+              icon = require("../assets/images/obiective/monastery.png");
               break;
-              
+
             case 1579445163207:
-              icon = require('../assets/images/obiective/cave.png')
+              icon = require("../assets/images/obiective/cave.png");
               break;
 
             case 1579445177979:
-              icon = require('../assets/images/obiective/rezervatie.png')
+              icon = require("../assets/images/obiective/rezervatie.png");
               break;
 
             case 1579445189982:
-              icon = require('../assets/images/obiective/medieval.png')
+              icon = require("../assets/images/obiective/medieval.png");
               break;
 
             case 1579445202728:
-              icon = require('../assets/images/obiective/monument.png')
+              icon = require("../assets/images/obiective/monument.png");
               break;
-          
+
             default:
               break;
           }
-          return (
-            <Marker key={object.id} coordinate={latlng} title={object.title} image={icon}>
-              
-              {/* <MaterialCommunityIcons
+
+          if (icon) {
+            return (
+              <Marker
+                key={object.id}
+                coordinate={latlng}
+                title={object.title}
+                image={icon}
+              >
+                <Image style={{ width: 32, height: 32 }} source={icon} />
+
+                {/* <MaterialCommunityIcons
                 name="bridge"
                 size={32}
                 color="black"
               /> */}
-            </Marker>
-          );
+              </Marker>
+            );
+          } else {
+            return (
+              <Marker
+                key={object.id}
+                coordinate={latlng}
+                title={object.title}
+                image={icon}
+              />
+            );
+          }
         })}
 
         {listObjectives.map(object => {

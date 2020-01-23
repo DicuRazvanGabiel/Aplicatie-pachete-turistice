@@ -8,7 +8,8 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import * as TaskManager from 'expo-task-manager';
-import { useScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
+import NetInfo from "@react-native-community/netinfo";
 
 //redux import
 // import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -28,7 +29,7 @@ import Disclaimer from './components/Disclaimer'
 
 import AppContainer from "./navigation";
 
-useScreens();
+enableScreens();
 
 // const rootReducer = combineReducers({
 //   packages: packagesReducers,
@@ -71,6 +72,7 @@ export default class App extends React.Component {
     isLoadingComplete: false,
     location: null,
     errorMessage: null,
+    isConnected: true
   };
 
   componentWillMount() {
@@ -106,6 +108,11 @@ export default class App extends React.Component {
       return Asset.fromModule(image).downloadAsync();
     });
 
+    NetInfo.fetch().then(state => {
+      console.log('Is connected?', state.isConnected);
+      this.setState({isConnected: state.isConnected});
+    });
+
     return Promise.all(cacheImages);
   };
 
@@ -122,6 +129,10 @@ export default class App extends React.Component {
 
     if(this.state.location){
       store.dispatch(setLocation(this.state.location));
+    }
+
+    if(!this.state.isConnected){
+      
     }
 
     return (
