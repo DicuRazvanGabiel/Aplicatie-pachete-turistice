@@ -10,6 +10,7 @@ import * as Permissions from 'expo-permissions';
 import * as TaskManager from 'expo-task-manager';
 import { enableScreens } from 'react-native-screens';
 import NetInfo from "@react-native-community/netinfo";
+import NoInternetContainer from "./navigation/noInternetNavigator"
 
 //redux import
 // import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -132,7 +133,15 @@ export default class App extends React.Component {
     }
 
     if(!this.state.isConnected){
-      
+      return (
+        <Provider store={store}>
+          <View style={{ flex: 1 }}>
+            <Header />
+            <NoInternetContainer />
+            <Disclaimer />
+          </View>
+        </Provider>
+      );
     }
 
     return (
