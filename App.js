@@ -110,7 +110,6 @@ export default class App extends React.Component {
     });
 
     NetInfo.fetch().then(state => {
-      console.log('Is connected?', state.isConnected);
       this.setState({isConnected: state.isConnected});
     });
 

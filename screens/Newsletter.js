@@ -15,7 +15,6 @@ const Newsletter = ({navigation}) => {
       email,
       textToSend: text
     };
-    console.log(msg)
     setIsLoading(true);
     const res = await fetch(
       "https://us-central1-natbiot-travelling-d0a35.cloudfunctions.net/newsletter",

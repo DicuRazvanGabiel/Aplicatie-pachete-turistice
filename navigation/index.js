@@ -19,6 +19,7 @@ import CreateNewRoute from "../screens/CreateNewRoute";
 import ViewNewRoute from "../screens/ViewNewRoute"
 import HowMuchTime from "../screens/HowMuchTime"
 import Newsletter from "../screens/Newsletter";
+import TermeniGDPR from "../screens/TermeniGDPR";
 
 const packegNavigator = createStackNavigator(
   {
@@ -79,6 +80,12 @@ const drawer = createDrawerNavigator(
       screen: Newsletter,
       navigationOptions: ({ navigation }) => ({
         title: `Newsletter`
+      })
+    },
+    TermeniGDPR: {
+      screen: TermeniGDPR,
+      navigationOptions: ({ navigation }) => ({
+        title: `GDPR`
       })
     },
   },
