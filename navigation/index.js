@@ -18,6 +18,7 @@ import StartupScreenAutoLogin from "../screens/StartupScreenAutoLogin"
 import CreateNewRoute from "../screens/CreateNewRoute";
 import ViewNewRoute from "../screens/ViewNewRoute"
 import HowMuchTime from "../screens/HowMuchTime"
+import Newsletter from "../screens/Newsletter";
 
 const packegNavigator = createStackNavigator(
   {
@@ -72,6 +73,12 @@ const drawer = createDrawerNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         title: `Setari`
+      })
+    },
+    Newsletter: {
+      screen: Newsletter,
+      navigationOptions: ({ navigation }) => ({
+        title: `Newsletter`
       })
     },
   },

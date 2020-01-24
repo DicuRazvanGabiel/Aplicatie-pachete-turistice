@@ -76,7 +76,7 @@ export default class App extends React.Component {
     isConnected: true
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',

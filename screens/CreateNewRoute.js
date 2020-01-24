@@ -92,7 +92,7 @@ const CreateNewRoute = props => {
 
   return (
     <Container>
-      <Content>
+      <View style={{flex: 1}}>
         <DrawerButton navigation={props.navigation} backButton={true} />
         <FlatList
           data={
@@ -103,7 +103,7 @@ const CreateNewRoute = props => {
           renderItem={renderObjectiv}
           keyExtractor={item => item.title}
         />
-      </Content>
+      </View>
       <Footer>
         <FooterTab>
           <Button

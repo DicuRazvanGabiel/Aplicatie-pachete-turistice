@@ -12,7 +12,7 @@ import {
 import Color from "../constants/Colors";
 import { getDistance } from "geolib";
 
-const ObjectiveItemList = ({ item, userLocation, navigation }) => {
+const ObjectiveItemList = ({ item, userLocation, navigation, callBackFunction }) => {
   const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
   let distance = null;
   if (userLocation) {
@@ -36,7 +36,10 @@ const ObjectiveItemList = ({ item, userLocation, navigation }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => {
+      onPress={async () => {
+        if(callBackFunction){
+          await callBackFunction(item);
+        }
         navigation.navigate("ObjectiveDetail", {
           objectiv: item
         });

@@ -18,8 +18,8 @@ import {
   Text
 } from "native-base";
 
-import ObjectivItemList from "../components/ObjectiveItemList"
-import DrawerButton from "../components/DrawerButton"
+import ObjectivItemList from "../components/ObjectiveItemList";
+import DrawerButton from "../components/DrawerButton";
 
 const ObjectiveList = props => {
   const [typeObjetivesToShow, setTypeObjetivesToShow] = useState("naturale");
@@ -48,16 +48,22 @@ const ObjectiveList = props => {
   const renderObjectiv = itemObj => {
     const { item } = itemObj;
 
-    return ( <ObjectivItemList item={item} navigation={props.navigation} userLocation={userLocation}/>)
+    return (
+      <ObjectivItemList
+        item={item}
+        navigation={props.navigation}
+        userLocation={userLocation}
+      />
+    );
   };
 
   const toogleButton = type => {
     setTypeObjetivesToShow(type);
   };
- 
+
   return (
     <Container>
-      <Content>
+      <View style={{flex: 1}}>
         <DrawerButton navigation={props.navigation} backButton={true} />
         <FlatList
           data={
@@ -68,7 +74,7 @@ const ObjectiveList = props => {
           renderItem={renderObjectiv}
           keyExtractor={item => item.title}
         />
-      </Content>
+      </View>
       <Footer>
         <FooterTab>
           <Button
@@ -89,8 +95,6 @@ const ObjectiveList = props => {
   );
 };
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
 
 export default ObjectiveList;
