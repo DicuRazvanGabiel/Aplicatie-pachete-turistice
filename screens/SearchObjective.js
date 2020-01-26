@@ -103,7 +103,7 @@ const SearchObjective = ({ navigation }) => {
           {historyState.map(item => {
             return (
               <TouchableOpacity key={item} onPress={() => {onChangeText(item)}}>
-                <Text style={{ textAlign: "center", fontSize: 15 }}>{item}</Text>
+                <Text style={{ textAlign: "center", fontSize: 17, margin: 7 }}>{item}</Text>
               </TouchableOpacity>
             );
           })}
