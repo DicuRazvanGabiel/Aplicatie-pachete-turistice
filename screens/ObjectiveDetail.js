@@ -65,9 +65,9 @@ const ObjectiveDetail = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <DrawerButton navigation={navigation} backButton={true} />
+      <ScrollView>
       {images.length !== 0 ? (
         <View>
-          <ScrollView>
             <View style={{ paddingBottom: 60 }}>
               <View>
                 <TouchableOpacity onPress={toggleModal}>
@@ -78,11 +78,8 @@ const ObjectiveDetail = ({ navigation }) => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={{ margin: 5 }}>
-                <Text>{description}</Text>
-              </View>
             </View>
-          </ScrollView>
+              
 
           <Modal visible={isModalVisible} transparent={true}>
             <ImageViewer
@@ -92,12 +89,16 @@ const ObjectiveDetail = ({ navigation }) => {
               enableSwipeDown={true}
               enablePreload={true}
               renderHeader={renderImageModalHeader}
-            />
+              />
           </Modal>
         </View>
       ) : (
-        <Text>No image</Text>
-      )}
+        <Text> </Text>
+        )}
+        <View style={{ margin: 5 }}>
+                <Text>{description}</Text>
+              </View>
+        </ScrollView>
     </View>
   );
 };
