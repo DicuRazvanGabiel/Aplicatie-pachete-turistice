@@ -43,6 +43,8 @@ TaskManager.defineTask(
       return;
     }
 
+    const onjWithNeededDistance = [];
+
     for (const [id, value] of Object.entries(objectives)) {
       const distance =
         getDistance(
@@ -52,11 +54,23 @@ TaskManager.defineTask(
           },
           { latitude: value.latitudine, longitude: value.longitudine }
         ) / 1000;
+
       if (distance < settingsObj.metersToNotificate) {
-        await sendNotificationImmediately(distance, value.title);
-        return;
+        onjWithNeededDistance.push({distance, title: value.title})
       }
     }
+
+    let minDistance = 0;
+    if(onjWithNeededDistance.length > 0){
+      minDistance = onjWithNeededDistance[0];
+      onjWithNeededDistance.forEach(obj => {
+        if(minDistance.distance > obj.distance){
+          minDistance = obj;
+        }
+      });
+    }
+    
+    await sendNotificationImmediately(minDistance.distance, minDistance.title);
   }
 );
 
@@ -72,7 +86,7 @@ _getLocationAsync = async () => {
   if (status === "granted") {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
       accuracy: Location.Accuracy.Balanced,
-      timeInterval: 100000
+      timeInterval: 1000
     });
   }
   const { status: existingStatus } = await Permissions.getAsync(

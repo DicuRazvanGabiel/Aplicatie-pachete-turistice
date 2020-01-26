@@ -68,21 +68,19 @@ const ObjectiveDetail = ({ navigation }) => {
       {images.length !== 0 ? (
         <View>
           <ScrollView>
-            <View style={{paddingBottom: 60}}>
-
-            
-            <View>
-              <TouchableOpacity onPress={toggleModal}>
-                <Image
-                  style={{ width: width, height: height / 2 }}
-                  source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{margin: 5}}>
-              <Text>{description}</Text>
-            </View>
+            <View style={{ paddingBottom: 60 }}>
+              <View>
+                <TouchableOpacity onPress={toggleModal}>
+                  <Image
+                    style={{ width: width, height: height / 2 }}
+                    source={{ uri: objectiv.imageObiectiv[0].imageUrl }}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={{ margin: 5 }}>
+                <Text>{description}</Text>
+              </View>
             </View>
           </ScrollView>
 
@@ -112,6 +110,7 @@ const styles = StyleSheet.create({
     width,
     flexDirection: "row",
     marginTop: 10,
+    paddingTop: 15,
     alignItems: "center"
   },
   titleModalImage: {
@@ -120,6 +119,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   closeModalImage: {
+    backgroundColor: "black",
     marginHorizontal: 5
   }
 });
