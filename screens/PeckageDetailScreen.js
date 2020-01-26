@@ -326,6 +326,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   containerModal: {
+    paddingTop: 15,
     flex: 1,
     backgroundColor: "black"
   },

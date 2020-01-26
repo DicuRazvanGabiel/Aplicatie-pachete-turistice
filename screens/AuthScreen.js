@@ -97,7 +97,7 @@ const AuthScreen = ({ navigation }) => {
           <Item last>
             <Input
               autoCapitalize="none"
-              placeholder="Password"
+              placeholder="Parola"
               secureTextEntry
               onChangeText={password => {
                 setPassword(password);
@@ -109,7 +109,7 @@ const AuthScreen = ({ navigation }) => {
           <Text>Login</Text>
         </Button>
         <View style={styles.orContainer}>
-          <Text>OR</Text>
+          <Text>SAU</Text>
         </View>
         <Button
           full
@@ -117,10 +117,10 @@ const AuthScreen = ({ navigation }) => {
             navigation.navigate("RegisterScreen");
           }}
         >
-          <Text>Register</Text>
+          <Text>Creare Cont</Text>
         </Button>
         <View style={styles.orContainer}>
-          <Text>OR</Text>
+          <Text>SAU</Text>
         </View>
         <Button full onPress={logInFacebook}>
           <Text>FACEBOOK</Text>

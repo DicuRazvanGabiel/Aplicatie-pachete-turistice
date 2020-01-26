@@ -5,7 +5,8 @@ import {
   Alert,
   ScrollView,
   View,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Modal,TouchableOpacity
 } from "react-native";
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
@@ -23,6 +24,7 @@ import {
   Body,
   ListItem
 } from "native-base";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -33,16 +35,19 @@ const RegisterScreen = ({ navigation }) => {
   const [error, setError] = useState();
   const [tncAccept, setTncAccept] = useState(false);
   const [capchaNumber, setCapchaNumber] = useState();
-  
+  const [viewGDPR, setViewGDPR] = useState(false);
+
   const dispatch = useDispatch();
-  
+
   const getRandomInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  
-  const [capchaNumberORG, setCapchaNumberORG] = useState(getRandomInt(1000, 9999));
+
+  const [capchaNumberORG, setCapchaNumberORG] = useState(
+    getRandomInt(1000, 9999)
+  );
 
   const singupHandler = async () => {
     if (!tncAccept) {
@@ -54,12 +59,8 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
 
-    if(capchaNumberORG+'' !== capchaNumber){
-      Alert.alert(
-        "CAPCHA",
-        "CAPCHA GRESIT",
-        [{ text: "Okay" }]
-      );
+    if (capchaNumberORG + "" !== capchaNumber) {
+      Alert.alert("CAPCHA", "CAPCHA GRESIT", [{ text: "Okay" }]);
       return;
     }
 
@@ -67,7 +68,7 @@ const RegisterScreen = ({ navigation }) => {
     setError();
     try {
       console.log(email.toLocaleLowerCase(), password.toLocaleLowerCase());
-      
+
       await dispatch(
         authAuctions.singup(
           email.toLocaleLowerCase(),
@@ -113,7 +114,7 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </Item>
               <Item floatingLabel last>
-                <Label>Password</Label>
+                <Label>Parola</Label>
                 <Input
                   autoCapitalize="none"
                   onChangeText={password => setPassword(password)}
@@ -121,11 +122,11 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </Item>
               <Item floatingLabel last>
-                <Label>City</Label>
+                <Label>Oras</Label>
                 <Input onChangeText={city => setCity(city)} />
               </Item>
               <Item floatingLabel last>
-                <Label>Name</Label>
+                <Label>Nume / Prenume</Label>
                 <Input onChangeText={name => setName(name)} />
               </Item>
             </Form>
@@ -137,8 +138,36 @@ const RegisterScreen = ({ navigation }) => {
                 }}
               />
               <Body>
-                <Text>Sunt de acord cu politica GDPR</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Sunt de acord cu politica</Text>
+                  <TouchableOpacity
+                    style={{ marginLeft: -15 }}
+                    onPress={() => {
+                      setViewGDPR(true);
+                    }}
+                  >
+                    <Text style={{ color: "blue" }}>GDPR</Text>
+                  </TouchableOpacity>
+                </View>
               </Body>
+              <Modal
+                animationType="slide"
+                transparent={false}
+                visible={viewGDPR}
+                onRequestClose={() => {
+                  setViewGDPR(false);
+                }}
+              >
+                <View style={{ paddingTop: 15, flex: 1 }}>
+                  <TouchableOpacity onPress={() => setViewGDPR(false)}>
+                    <View style={{ margin: 5 }}>
+                      <AntDesign name="closecircleo" size={32}  />
+                    </View>
+                  </TouchableOpacity>
+
+                  <Text>GDPR</Text>
+                </View>
+              </Modal>
             </ListItem>
             <ListItem>
               <View>
@@ -157,7 +186,7 @@ const RegisterScreen = ({ navigation }) => {
               }}
               style={styles.loginButton}
             >
-              <Text>SINGUP</Text>
+              <Text>Creare Cont</Text>
             </Button>
             <View style={{ marginTop: 10 }}>
               <Button
