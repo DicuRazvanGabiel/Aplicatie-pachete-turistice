@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, TouchableOpacity, AsyncStorage } from "react-native";
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  AsyncStorage,
+  Image,
+  View
+} from "react-native";
 import { Container, Content, Card, CardItem, Body, Text } from "native-base";
 import { FlatList } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,6 +30,11 @@ TaskManager.defineTask(
       console.log(error);
       return;
     }
+
+    if (!locations) {
+      return;
+    }
+
     let settingsObj = {
       dNotificatifications: true,
       metersToNotificate: 100
@@ -56,20 +67,24 @@ TaskManager.defineTask(
         ) / 1000;
 
       if (distance < settingsObj.metersToNotificate) {
-        onjWithNeededDistance.push({distance, title: value.title})
+        onjWithNeededDistance.push({ distance, title: value.title });
       }
     }
 
     let minDistance = 0;
-    if(onjWithNeededDistance.length > 0){
+    if (onjWithNeededDistance.length > 0) {
       minDistance = onjWithNeededDistance[0];
       onjWithNeededDistance.forEach(obj => {
-        if(minDistance.distance > obj.distance){
+        if (minDistance.distance > obj.distance) {
           minDistance = obj;
         }
       });
     }
-    
+
+    if(!minDistance){
+      return;
+    }
+
     await sendNotificationImmediately(minDistance.distance, minDistance.title);
   }
 );
@@ -118,13 +133,19 @@ const Peckages = props => {
 
   const renderPeckageComponent = itemObj => {
     const { item } = itemObj;
-
     return (
       <Content style={{ padding: 10 }}>
         <TouchableOpacity onPress={() => packagePressHandler(item)}>
           <Card>
             <CardItem style={{ backgroundColor: Colors.lightGreen }}>
               <Body>
+                <View style={{width: '100%', alignItems:'center'}}>
+                  <Image
+                    resizeMod="stretch"
+                    style={{height: 200, width: '100%', margin: 10}}
+                    source={{ uri: item.imageLink }}
+                  />
+                </View>
                 <Text style={{ color: "white" }}>{item.title}</Text>
                 <Text style={{ color: "white" }}>{item.content}</Text>
               </Body>

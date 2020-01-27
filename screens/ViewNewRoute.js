@@ -5,11 +5,12 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Button,
   Modal,
   TouchableOpacity,
   Linking
 } from "react-native";
+
+import { takeSnapshotAsync } from 'expo';
 import { WebView } from "react-native-webview";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
@@ -20,6 +21,8 @@ import randomColor from "randomcolor";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import DrawerButton from "../components/DrawerButton";
+
+import { Button } from "native-base";
 
 const ViewNewRoute = ({ navigation }) => {
   let routes = navigation.getParam("routes");
@@ -78,6 +81,10 @@ const ViewNewRoute = ({ navigation }) => {
       });
     });
 
+    const handleSaveMap = () => {
+      
+    }
+
     return (
       <MapViewDirections
         origin={origin}
@@ -124,6 +131,11 @@ const ViewNewRoute = ({ navigation }) => {
           );
         })}
       </MapView>
+      <View>
+        <Button bordered success style={{padding: 5, margin: 5}} onPress={handleSaveMap}>
+          <Text style={{color: 'green'}}>Save for offline</Text>
+        </Button>
+      </View>
     </View>
   );
 };
@@ -136,7 +148,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+    height: (2 * Dimensions.get("window").height) / 3
   }
 });
 

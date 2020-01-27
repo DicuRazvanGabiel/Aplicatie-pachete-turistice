@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { Button, View, ActivityIndicator } from "react-native";
-import { Container, Content, Form, Item, Input, Label } from "native-base";
+import {
+  Container,
+  Content,
+  Form,
+  Item,
+  Input,
+  Label,
+  Switch,
+  Text
+} from "native-base";
 import DrawerButton from "../components/DrawerButton";
 
-const Newsletter = ({navigation}) => {
+const Newsletter = ({ navigation }) => {
   const [nume, setNume] = useState();
   const [email, setEmail] = useState();
   const [text, setText] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [enableDistaneNotifications, setEnableDistaneNotifications] = useState(
+    false
+  );
 
   const hendleSend = async () => {
     const msg = {
@@ -42,7 +54,7 @@ const Newsletter = ({navigation}) => {
   return (
     <Container>
       <Content>
-      <DrawerButton navigation={navigation} backButton={true} />
+        <DrawerButton navigation={navigation} backButton={true} />
         <Form>
           <Item floatingLabel last>
             <Label>Nume</Label>
@@ -59,6 +71,15 @@ const Newsletter = ({navigation}) => {
             <Input onChangeText={t => setText(t)} />
           </Item>
         </Form>
+        <View style={{justifyContent: 'space-between', alignItems:'center', flexDirection: 'row', margin: 10}}>
+          <Text>Vreau sa ma abonez</Text>
+          <Switch
+            value={enableDistaneNotifications}
+            onValueChange={val => {
+              setEnableDistaneNotifications(val);
+            }}
+          />
+        </View>
 
         <View style={{ margin: 10 }}>
           <Button onPress={hendleSend} title="Send" />

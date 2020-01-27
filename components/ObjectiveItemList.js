@@ -11,8 +11,14 @@ import {
 } from "react-native";
 import Color from "../constants/Colors";
 import { getDistance } from "geolib";
+import { Notifications } from "expo";
 
-const ObjectiveItemList = ({ item, userLocation, navigation, callBackFunction }) => {
+const ObjectiveItemList = ({
+  item,
+  userLocation,
+  navigation,
+  callBackFunction
+}) => {
   const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
   let distance = null;
   if (userLocation) {
@@ -37,7 +43,7 @@ const ObjectiveItemList = ({ item, userLocation, navigation, callBackFunction })
   return (
     <TouchableOpacity
       onPress={async () => {
-        if(callBackFunction){
+        if (callBackFunction) {
           await callBackFunction(item);
         }
         navigation.navigate("ObjectiveDetail", {
@@ -54,7 +60,7 @@ const ObjectiveItemList = ({ item, userLocation, navigation, callBackFunction })
               resizeMode="contain"
             />
           ) : (
-            <Text>Image</Text>
+            <Text> </Text>
           )}
           {/* <Image
               style={{ height: 90, width: 90 }}
@@ -66,15 +72,34 @@ const ObjectiveItemList = ({ item, userLocation, navigation, callBackFunction })
           <Text>{item.title}</Text>
           {userLocation ? <Text>{distance / 1000} KM</Text> : <Text></Text>}
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL(url);
-          }}
-        >
-          <View style={styles.cotumeButton}>
-            <Text style={styles.textButtonView}>Navigate</Text>
-          </View>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL(url);
+            }}
+            style={{ margin: 2 }}
+          >
+            <View style={styles.cotumeButton}>
+              <Text style={styles.textButtonView}>Navigate</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification
+              Notifications.cancelAllScheduledNotificationsAsync()
+              // Notifications.scheduleLocalNotificationAsync({title: "notificare" + new Date().getTime(), body: "test"}, {
+              //   time: new Date().getTime() + 1000,
+              //   repeat: "minute"
+              // });
+            }}
+            style={{ margin: 2 }}
+          >
+            <View style={styles.cotumeButton}>
+              <Text style={styles.textButtonView}>Notify Me</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </TouchableOpacity>
   );

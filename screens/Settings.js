@@ -186,6 +186,19 @@ const Settings = ({ navigation }) => {
             <Text>Change</Text>
           </Button>
         </ListItem>
+        <ListItem icon>
+          <Left>
+            <Button style={{ backgroundColor: "#34ebe5" }}>
+              <Icon active name="globe" />
+            </Button>
+          </Left>
+          <Body>
+            <Text>Change language</Text>
+          </Body>
+          <Button bordered onPress={() => {navigation.navigate("LanguageSelectScreen")}}>
+            <Text>Change</Text>
+          </Button>
+        </ListItem>
 
         {changePasswordField ? (<View>
           <Form>
