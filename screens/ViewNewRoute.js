@@ -10,7 +10,6 @@ import {
   Linking,
   Image
 } from "react-native";
-import ViewShot from "react-native-view-shot";
 import { WebView } from "react-native-webview";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
@@ -18,6 +17,7 @@ import { getCenterOfBounds } from "geolib";
 import MapViewDirections from "react-native-maps-directions";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import randomColor from "randomcolor";
+import * as FileSystem from 'expo-file-system';
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import DrawerButton from "../components/DrawerButton";
@@ -28,7 +28,6 @@ const ViewNewRoute = ({ navigation }) => {
   let routes = navigation.getParam("routes");
   const currentLocation = useSelector(state => state.location.location);
   const coordsForCenter = [];
-  let mapRef = null;
   routes.map(object => {
     coordsForCenter.push({
       latitude: parseFloat(object.latitudine),
@@ -44,6 +43,24 @@ const ViewNewRoute = ({ navigation }) => {
   };
   const [uriImage, setUriImage] = useState(null);
 
+
+
+      //Here is the solution for this problem
+      // Gasi solutia
+      //descarc de pe server de la google o poza cu harta care imi trebuie si gata
+      //mai imi trebuie decat o solutie de gasit cum sa construiesc url-ul
+      FileSystem.downloadAsync(
+          'https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap%5C&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA&key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw',
+          FileSystem.documentDirectory + 'test.jpg'
+      )
+      .then(({ uri }) => {
+        console.log('Finished downloading to ', uri);
+        setUriImage(uri);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
   function compare(a, b) {
     if (a.order < b.order) {
       return -1;
@@ -57,18 +74,6 @@ const ViewNewRoute = ({ navigation }) => {
   const googleApi = GOOGLE_API_KEY;
 
   routes.sort(compare);
-
-  const handleSaveMap = () => {
-    const snapshot = mapRef.takeSnapshot({
-      width: 300,      // optional, when omitted the view-width is used
-      height: 300,     // optional, when omitted the view-height is used
-      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
-      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-      result: 'base64'   // result types: 'file', 'base64' (default: 'file')
-    });
-    snapshot.then(uri => {
-      console.log(uri)})
-  }
 
   const directions = () => {
     if (!currentLocation) return;
@@ -116,14 +121,7 @@ const ViewNewRoute = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
       <DrawerButton backButton={true} navigation={navigation} />
-      <ViewShot  captureMode="mount" options={{
-        width: 300,      // optional, when omitted the view-width is used
-        height: 300,     // optional, when omitted the view-height is used
-        format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
-        quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-        result: 'data-uri'
-      }}>
-      <MapView style={styles.mapStyle} region={region} ref={map => { mapRef = map }} showsUserLocation={true} >
+      <MapView style={styles.mapStyle} region={region} showsUserLocation={true} >
         {directions()}
         {routes.map(object => {
           const latlng = {
@@ -154,8 +152,7 @@ const ViewNewRoute = ({ navigation }) => {
           );
         })}
       </MapView>
-        <Button onPress={handleSaveMap} title={'ScrennShot'} />
-      </ViewShot>
+
         {uriImage ? (
             <View style={{flex: 1 }}>
               <Image style={{width: 500, height: 500}} source={{uri: uriImage}}/>
@@ -178,7 +175,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: (2 * Dimensions.get("window").height) / 3
+    height:Dimensions.get("window").height / 2
   }
 });
 
