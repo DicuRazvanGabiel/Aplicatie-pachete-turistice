@@ -64,7 +64,7 @@ const ViewNewRoute = ({ navigation }) => {
       height: 300,     // optional, when omitted the view-height is used
       format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
       quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-      result: 'file'   // result types: 'file', 'base64' (default: 'file')
+      result: 'base64'   // result types: 'file', 'base64' (default: 'file')
     });
     snapshot.then(uri => {
       console.log(uri)})
@@ -116,14 +116,14 @@ const ViewNewRoute = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
       <DrawerButton backButton={true} navigation={navigation} />
-      <ViewShot onCapture={onCapture} captureMode="mount" options={{
+      <ViewShot  captureMode="mount" options={{
         width: 300,      // optional, when omitted the view-width is used
         height: 300,     // optional, when omitted the view-height is used
         format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
         quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
         result: 'data-uri'
       }}>
-      <MapView style={styles.mapStyle} region={region} showsUserLocation={true} >
+      <MapView style={styles.mapStyle} region={region} ref={map => { mapRef = map }} showsUserLocation={true} >
         {directions()}
         {routes.map(object => {
           const latlng = {
@@ -154,6 +154,7 @@ const ViewNewRoute = ({ navigation }) => {
           );
         })}
       </MapView>
+        <Button onPress={handleSaveMap} title={'ScrennShot'} />
       </ViewShot>
         {uriImage ? (
             <View style={{flex: 1 }}>
