@@ -7,10 +7,10 @@ import {
   ScrollView,
   Modal,
   TouchableOpacity,
-  Linking
+  Linking,
+  Image
 } from "react-native";
-
-import { takeSnapshotAsync } from 'expo';
+import ViewShot from "react-native-view-shot";
 import { WebView } from "react-native-webview";
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const ViewNewRoute = ({ navigation }) => {
   let routes = navigation.getParam("routes");
   const currentLocation = useSelector(state => state.location.location);
   const coordsForCenter = [];
-
+  let mapRef = null;
   routes.map(object => {
     coordsForCenter.push({
       latitude: parseFloat(object.latitudine),
@@ -42,6 +42,7 @@ const ViewNewRoute = ({ navigation }) => {
     latitudeDelta: 1.2922,
     longitudeDelta: 1.2421
   };
+  const [uriImage, setUriImage] = useState(null);
 
   function compare(a, b) {
     if (a.order < b.order) {
@@ -56,6 +57,18 @@ const ViewNewRoute = ({ navigation }) => {
   const googleApi = GOOGLE_API_KEY;
 
   routes.sort(compare);
+
+  const handleSaveMap = () => {
+    const snapshot = mapRef.takeSnapshot({
+      width: 300,      // optional, when omitted the view-width is used
+      height: 300,     // optional, when omitted the view-height is used
+      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+      result: 'file'   // result types: 'file', 'base64' (default: 'file')
+    });
+    snapshot.then(uri => {
+      console.log(uri)})
+  }
 
   const directions = () => {
     if (!currentLocation) return;
@@ -81,9 +94,6 @@ const ViewNewRoute = ({ navigation }) => {
       });
     });
 
-    const handleSaveMap = () => {
-      
-    }
 
     return (
       <MapViewDirections
@@ -97,10 +107,23 @@ const ViewNewRoute = ({ navigation }) => {
     );
   };
 
+  const onCapture = uri => {
+    console.log("do something with ", uri);
+    setUriImage(uri)
+  }
+
   return (
     <View style={styles.container}>
+      <ScrollView>
       <DrawerButton backButton={true} navigation={navigation} />
-      <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
+      <ViewShot onCapture={onCapture} captureMode="mount" options={{
+        width: 300,      // optional, when omitted the view-width is used
+        height: 300,     // optional, when omitted the view-height is used
+        format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+        quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+        result: 'data-uri'
+      }}>
+      <MapView style={styles.mapStyle} region={region} showsUserLocation={true} >
         {directions()}
         {routes.map(object => {
           const latlng = {
@@ -131,11 +154,17 @@ const ViewNewRoute = ({ navigation }) => {
           );
         })}
       </MapView>
-      <View>
-        <Button bordered success style={{padding: 5, margin: 5}} onPress={handleSaveMap}>
-          <Text style={{color: 'green'}}>Save for offline</Text>
-        </Button>
-      </View>
+      </ViewShot>
+        {uriImage ? (
+            <View style={{flex: 1 }}>
+              <Image style={{width: 500, height: 500}} source={{uri: uriImage}}/>
+            </View>
+
+        ):(
+            <View></View>
+        )}
+
+      </ScrollView>
     </View>
   );
 };
