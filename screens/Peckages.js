@@ -144,6 +144,7 @@ const Peckages = props => {
                     resizeMod="stretch"
                     style={{height: 200, width: '100%', margin: 10}}
                     source={{ uri: item.imageLink }}
+                    // source={{ uri: 'https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\\&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA&key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw' }}
                   />
                 </View>
                 <Text style={{ color: "white" }}>{item.title}</Text>
