@@ -64,10 +64,12 @@ const ViewNewRoute = ({ navigation }) => {
       height: 300,     // optional, when omitted the view-height is used
       format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
       quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-      result: 'base64'   // result types: 'file', 'base64' (default: 'file')
+      result: 'file'   // result types: 'file', 'base64' (default: 'file')
     });
     snapshot.then(uri => {
-      console.log(uri)})
+      console.log(uri)
+      setUriImage(uri)
+    })
   }
 
   const directions = () => {
