@@ -1,182 +1,191 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  Modal,
-  TouchableOpacity,
-  Linking,
-  Image
+    View,
+    Text,
+    StyleSheet,
+    Dimensions,
+    ScrollView,
+    Modal,
+    TouchableOpacity,
+    Linking,
+    AsyncStorage,
+    ActivityIndicator,
+    Image,
+    Button
 } from "react-native";
-import { WebView } from "react-native-webview";
-import MapView, { Marker } from "react-native-maps";
-import { useSelector } from "react-redux";
-import { getCenterOfBounds } from "geolib";
+import {WebView} from "react-native-webview";
+import MapView, {Marker} from "react-native-maps";
+import {useSelector} from "react-redux";
+import {getCenterOfBounds} from "geolib";
 import MapViewDirections from "react-native-maps-directions";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import {AntDesign, MaterialCommunityIcons} from "@expo/vector-icons";
 import randomColor from "randomcolor";
 import * as FileSystem from 'expo-file-system';
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import DrawerButton from "../components/DrawerButton";
 
-import { Button } from "native-base";
-
-const ViewNewRoute = ({ navigation }) => {
-  let routes = navigation.getParam("routes");
-  const currentLocation = useSelector(state => state.location.location);
-  const coordsForCenter = [];
-  routes.map(object => {
-    coordsForCenter.push({
-      latitude: parseFloat(object.latitudine),
-      longitude: parseFloat(object.longitudine)
-    });
-  });
-  const { latitude, longitude } = getCenterOfBounds(coordsForCenter);
-  const region = {
-    latitude,
-    longitude,
-    latitudeDelta: 1.2922,
-    longitudeDelta: 1.2421
-  };
-  const [uriImage, setUriImage] = useState(null);
-
-
-
-      //Here is the solution for this problem
-      // Gasi solutia
-      //descarc de pe server de la google o poza cu harta care imi trebuie si gata
-      //mai imi trebuie decat o solutie de gasit cum sa construiesc url-ul
-      FileSystem.downloadAsync(
-          'https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap%5C&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA&key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw',
-          FileSystem.documentDirectory + 'test.jpg'
-      )
-      .then(({ uri }) => {
-        console.log('Finished downloading to ', uri);
-        setUriImage(uri);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-  function compare(a, b) {
-    if (a.order < b.order) {
-      return -1;
-    }
-    if (a.order > b.order) {
-      return 1;
-    }
-    return 0;
-  }
-
-  const googleApi = GOOGLE_API_KEY;
-
-  routes.sort(compare);
-
-  const directions = () => {
-    if (!currentLocation) return;
-    const origin = {
-      latitude: currentLocation.coords.latitude,
-      longitude: currentLocation.coords.longitude
-    };
-
-    color = randomColor({
-      luminosity: "dark"
-    });
-
-    const destination = {
-      latitude: parseFloat(routes[routes.length - 1].latitudine),
-      longitude: parseFloat(routes[routes.length - 1].longitudine)
-    };
-
-    let waypoints = [];
-    routes.map(r => {
-      waypoints.push({
-        latitude: parseFloat(r.latitudine),
-        longitude: parseFloat(r.longitudine)
-      });
-    });
-
-
-    return (
-      <MapViewDirections
-        origin={origin}
-        destination={destination}
-        apikey={googleApi}
-        waypoints={waypoints}
-        strokeWidth={3}
-        strokeColor={color}
-      />
-    );
-  };
-
-  const onCapture = uri => {
-    console.log("do something with ", uri);
-    setUriImage(uri)
-  }
-
-  return (
-    <View style={styles.container}>
-      <ScrollView>
-      <DrawerButton backButton={true} navigation={navigation} />
-      <MapView style={styles.mapStyle} region={region} showsUserLocation={true} >
-        {directions()}
-        {routes.map(object => {
-          const latlng = {
+const ViewNewRoute = ({navigation}) => {
+    let routes = navigation.getParam("routes");
+    const currentLocation = useSelector(state => state.location.location);
+    const coordsForCenter = [];
+    routes.map(object => {
+        coordsForCenter.push({
             latitude: parseFloat(object.latitudine),
             longitude: parseFloat(object.longitudine)
-          };
+        });
+    });
+    const {latitude, longitude} = getCenterOfBounds(coordsForCenter);
+    const region = {
+        latitude,
+        longitude,
+        latitudeDelta: 1.2922,
+        longitudeDelta: 1.2421
+    };
+    const [uriImage, setUriImage] = useState(null);
+    const [isDownloading, setIsDownloading] = useState(false);
 
-          return (
-            <Marker key={object.id} coordinate={latlng} title={object.title}>
-              {object.iconita === 1579445103301 ? (
-                <MaterialCommunityIcons name="bridge" size={32} color="black" />
-              ) : (
-                <View></View>
-              )}
+    const handleOffLineSave = () => {
+        let coordinatesString = '';
+      routes.map(obj => {
+        coordinatesString = coordinatesString + '%7C' + obj.latitudine + ',' + obj.longitudine;
+      })
+        setIsDownloading(true)
+        FileSystem.downloadAsync(
+            'https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap%5C&markers=size:mid%7Ccolor:red' + coordinatesString + '&key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw',
+            FileSystem.documentDirectory + 'test.jpg'
+        )
+            .then(({uri}) => {
+                console.log('Finished downloading to ', uri);
+                setUriImage(uri);
+                AsyncStorage.setItem('offlineImage', uri).then(() => {
+                    setIsDownloading(false);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
-              {object.iconita === 1579445113198 ? (
-                <MaterialCommunityIcons name="castle" size={32} color="black" />
-              ) : (
-                <View></View>
-              )}
+    function compare(a, b) {
+        if (a.order < b.order) {
+            return -1;
+        }
+        if (a.order > b.order) {
+            return 1;
+        }
+        return 0;
+    }
 
-              {/* <MaterialCommunityIcons
+    const googleApi = GOOGLE_API_KEY;
+
+    routes.sort(compare);
+
+    const directions = () => {
+        if (!currentLocation) return;
+        const origin = {
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude
+        };
+
+        color = randomColor({
+            luminosity: "dark"
+        });
+
+        const destination = {
+            latitude: parseFloat(routes[routes.length - 1].latitudine),
+            longitude: parseFloat(routes[routes.length - 1].longitudine)
+        };
+
+        let waypoints = [];
+        routes.map(r => {
+            waypoints.push({
+                latitude: parseFloat(r.latitudine),
+                longitude: parseFloat(r.longitudine)
+            });
+        });
+
+
+        return (
+            <MapViewDirections
+                origin={origin}
+                destination={destination}
+                apikey={googleApi}
+                waypoints={waypoints}
+                strokeWidth={3}
+                strokeColor={color}
+            />
+        );
+    };
+
+    const onCapture = uri => {
+        console.log("do something with ", uri);
+        setUriImage(uri)
+    }
+
+    if(isDownloading){
+        return (
+            <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
+                < ActivityIndicator size="large"/>
+            </View>
+        )
+    }
+
+    return (
+        <View style={styles.container}>
+            <ScrollView>
+                <DrawerButton backButton={true} navigation={navigation}/>
+                <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
+                    {directions()}
+                    {routes.map(object => {
+                        const latlng = {
+                            latitude: parseFloat(object.latitudine),
+                            longitude: parseFloat(object.longitudine)
+                        };
+
+                        return (
+                            <Marker key={object.id} coordinate={latlng} title={object.title}>
+                                {object.iconita === 1579445103301 ? (
+                                    <MaterialCommunityIcons name="bridge" size={32} color="black"/>
+                                ) : (
+                                    <View></View>
+                                )}
+
+                                {object.iconita === 1579445113198 ? (
+                                    <MaterialCommunityIcons name="castle" size={32} color="black"/>
+                                ) : (
+                                    <View></View>
+                                )}
+
+                                {/* <MaterialCommunityIcons
                 name="bridge"
                 size={32}
                 color="black"
               /> */}
-            </Marker>
-          );
-        })}
-      </MapView>
-
-        {uriImage ? (
-            <View style={{flex: 1 }}>
-              <Image style={{width: 500, height: 500}} source={{uri: uriImage}}/>
-            </View>
-
-        ):(
-            <View></View>
-        )}
-
-      </ScrollView>
-    </View>
-  );
+                            </Marker>
+                        );
+                    })}
+                </MapView>
+                <View style={{margin: 10}}>
+                    <Button onPress={() => {
+                        handleOffLineSave()
+                    }} title="Salvare pentru offline"/>
+                </View>
+            </ScrollView>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center"
-  },
-  mapStyle: {
-    width: Dimensions.get("window").width,
-    height:Dimensions.get("window").height / 2
-  }
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center"
+    },
+    mapStyle: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height / 2
+    }
 });
 
 export default ViewNewRoute;

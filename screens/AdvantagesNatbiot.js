@@ -10,11 +10,15 @@ const AdvantagesNatbiot = ({ navigation }) => {
   const [htmlToShow, setHtmlToShow] = useState('')
   const lang  = useSelector(state => state.language.language);
   
-  fetchAdvantages = async () => {
-    const response = await fetch(`https://natbiot-travelling-d0a35.firebaseio.com/flamelink/environments/production/content/avantajeleServiciilorNatbiot/en-US/1574757605444/${lang}.json`);
+  const fetchAdvantages = async () => {
+    let html = '';
+    const response = await fetch(`https://natbiot-travelling-d0a35.firebaseio.com/flamelink/environments/production/content/avantajeleServiciilorNatbiot/en-US.json`);
     const objResponse = await response.json();
-    setHtmlToShow(objResponse);
-    setIsLodaing(false);    
+    for (const [id, value] of Object.entries(objResponse)) {
+      html += value[lang];
+    }
+    setHtmlToShow(html);
+    setIsLodaing(false);
   }
   
   useEffect(() => {
