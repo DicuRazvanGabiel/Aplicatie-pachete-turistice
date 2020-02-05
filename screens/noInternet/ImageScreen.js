@@ -46,28 +46,28 @@ const ImageScreen = () => {
           )}
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/1.JPG")}
+              source={require("../../assets/images/noInternet/1.png")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/2.jpg")}
+              source={require("../../assets/images/noInternet/2.png")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../aassets/images/noInternet/3.JPG")}
+              source={require("../../assets/images/noInternet/3.png")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/4.JPG")}
+              source={require("../../assets/images/noInternet/4.png")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
