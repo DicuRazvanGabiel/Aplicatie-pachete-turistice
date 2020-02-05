@@ -88,10 +88,10 @@ const ObjectiveItemList = ({
             onPress={() => {
               //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification
               Notifications.cancelAllScheduledNotificationsAsync()
-              // Notifications.scheduleLocalNotificationAsync({title: "notificare" + new Date().getTime(), body: "test"}, {
-              //   time: new Date().getTime() + 1000,
-              //   repeat: "minute"
-              // });
+              Notifications.scheduleLocalNotificationAsync({title: "notificare" + new Date().getMinutes(), body: "test"}, {
+                time: new Date().getTime() + 1000,
+                repeat: "minute"
+              });
             }}
             style={{ margin: 2 }}
           >
