@@ -6,14 +6,19 @@ const ImageScreen = () => {
   const [imageUrl, setImageUrl] = useState(null);
   let offlineImage = null;
 
-  useEffect(() => {
-    offlineImage = AsyncStorage.getItem("offlineImage")
+  const loadImage = async () => {
+    offlineImage = await AsyncStorage.getItem("offlineImage")
     if(offlineImage !== null){
           setImageUrl(offlineImage)
+          console.log(offlineImage);
     }
     console.log(imageUrl)
     setIsLoading(false);
-  })
+  }
+  useEffect(() => {
+    loadImage();
+  },[imageUrl])
+  
 
   if(isLoading){
     return (
@@ -28,59 +33,46 @@ const ImageScreen = () => {
       <View style={{ justifyContent: "center", width: "100%" }}>
         <Text style={{ textAlign: "center", fontSize: 20 }}>No internet</Text>
         <ScrollView>
-          {/*{imageUrl ? (*/}
-          {/*    <View style={{margin: 7, borderColor: 'green',}}>*/}
-          {/*      <Image*/}
-          {/*          source={{uri: imageUrl}}*/}
-          {/*          resizeMode="stretch"*/}
-          {/*          style={{ height: 200, width: "100%", borderRadius: 10 }}*/}
-          {/*      />*/}
-          {/*    </View>*/}
-          {/*) : (*/}
-          {/*    <View></View>*/}
-          {/*)}*/}
+          {imageUrl ? (
+             <View style={{margin: 7, borderColor: 'green',}}>
+             <Image
+                   source={{uri: imageUrl}}
+                    resizeMode="stretch"
+                    style={{ height: 200, width: "100%", borderRadius: 10 }}
+                />
+              </View>
+          ) : (
+           <View></View>
+          )}
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
+              source={require("../../assets/images/noInternet/1.JPG")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
+              source={require("../../assets/images/noInternet/2.jpg")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
+              source={require("../../aassets/images/noInternet/3.JPG")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
           <View style={{margin: 7, borderColor: 'green',}}>
             <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
+              source={require("../../assets/images/noInternet/4.JPG")}
               resizeMode="stretch"
               style={{ height: 200, width: "100%", borderRadius: 10 }}
             />
           </View>
-          <View style={{margin: 7, borderColor: 'green',}}>
-            <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
-              resizeMode="stretch"
-              style={{ height: 200, width: "100%", borderRadius: 10 }}
-            />
-          </View>
-          <View style={{margin: 7, borderColor: 'green',}}>
-            <Image
-              source={require("../../assets/images/noInternet/testImage.jpg")}
-              resizeMode="stretch"
-              style={{ height: 200, width: "100%", borderRadius: 10 }}
-            />
-          </View>
+          
         </ScrollView>
       </View>
     </View>

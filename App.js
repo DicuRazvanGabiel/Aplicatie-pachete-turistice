@@ -131,7 +131,7 @@ export default class App extends React.Component {
       store.dispatch(setLocation(this.state.location));
     }
 
-    if(!this.state.isConnected){
+    if(this.state.isConnected){
       return (
         <Provider store={store}>
           <View style={{ flex: 1 }}>
