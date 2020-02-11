@@ -28,6 +28,7 @@ import DrawerButton from "../components/DrawerButton";
 const PeckageDetailScreen = props => {
   const objectivesAvailable = useSelector(state => state.packages.objectives);
   const currentLocation = useSelector(state => state.location.location);
+  const lang = useSelector(state => state.language.language);
 
   const [trailerModalVisibilty, setTrailerModalVisibilty] = useState(false);
 
@@ -247,7 +248,16 @@ const PeckageDetailScreen = props => {
         <View style={styles.buttonView}>
           <Button
             title="Descarca Brosura"
-            onPress={() => Linking.openURL(packege.linkBrosura)}
+            onPress={() => {
+              if(lang === "ro"){
+                Linking.openURL(packege.linkBrosuraRo)
+              } else if(lang === "bg"){
+                Linking.openURL(packege.linkBrosuraBg)
+              } else {
+                Linking.openURL(packege.linkBrosuraEn)
+              }
+
+            }}
             color="blue"
           />
         </View>

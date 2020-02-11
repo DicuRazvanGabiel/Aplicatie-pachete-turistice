@@ -35,6 +35,11 @@ TaskManager.defineTask(
       return;
     }
 
+    const timeInterval = await AsyncStorage.getItem("timeNotifications")
+      if(timeInterval){
+          console.log(timeInterval)
+      }
+
     let settingsObj = {
       dNotificatifications: true,
       metersToNotificate: 100
