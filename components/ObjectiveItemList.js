@@ -7,7 +7,8 @@ import {
   Platform,
   Linking,
   TouchableOpacity,
-  Text
+  Text,
+  AsyncStorage
 } from "react-native";
 import Color from "../constants/Colors";
 import { getDistance } from "geolib";
@@ -88,10 +89,12 @@ const ObjectiveItemList = ({
             onPress={() => {
               //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification
               Notifications.cancelAllScheduledNotificationsAsync()
-              Notifications.scheduleLocalNotificationAsync({title: "notificare" + new Date().getMinutes(), body: "test"}, {
-                time: new Date().getTime() + 1000,
-                repeat: "minute"
-              });
+
+              if(item.inchidereL){
+                AsyncStorage.setItem("timeNotifications", item.inchidereL)
+              }
+
+
             }}
             style={{ margin: 2 }}
           >
