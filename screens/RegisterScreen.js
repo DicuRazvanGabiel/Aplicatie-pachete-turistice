@@ -165,7 +165,38 @@ const RegisterScreen = ({ navigation }) => {
                     </View>
                   </TouchableOpacity>
 
-                  <Text>GDPR</Text>
+                  <Text>POLITICA DE PRELUCRARE A DATELOR CU CARACTER PERSONAL
+
+Mișcarea Română pentru Calitate prelucrează datele cu caracter personal în conformitate cu prevederile Regulamentului (UE) 2016/679 al Parlamentului European și al Consiliului din 27 Aprilie 2016 privind protecția persoanelor fizice în ceea ce privește prelucrarea datelor cu caracter personal și libera circulație a acestor date.
+Mișcarea Română pentru Calitate prelucrează datele cu caracter personal în scopuri determinate, precum:
+- solicitarea primită de către Mișcarea Română pentru Calitate cu privire la informații pe care trebuie să le ofere (de exemplu, de la autoritățile publice sau organisme de control).
+- marketing, prin trimiterea de noutati de interes public cu referire la pachetele dezvoltate sau la activitati legate de proiect .
+În cadrul Mișcării Române pentru Calitate, orice prelucrare de date cu caracter personal este legală, dar și echitabilă. Datele cu caracter personal sunt prelucrate și in vederea satisfacerii unor interese legitime, precum: prevenirea, detectarea și investigarea infracțiunilor; cooperarea cu autoritățile publice; 
+	Datele prelucrate de către Mișcarea Română pentru Calitate sunt divulgate altor terțe părți, în vederea facilitării derulării activităților în legătură directă cu scopurile prelucrării detaliate anterior. Aceste terțe părți includ partenerii Mișcării Române pentru Calitate, printre care:
+-	Colaboratori profesioniști, precum Agentiile de turism. 
+-	Autorități de control si management în domeniu, organe profesionale, autorități publice, la cererea expresă a acestora.
+Vizitatorii/turistii beneficiază de următoarele drepturi, cu excepția cazurilor în care legea prevede altfel:
+-  dreptul de acces la datele personale prelucrate de către Mișcarea Română pentru Calitate, precum și informații despre modalitate de prelucrare și stocare a acestora.
+-  dreptul la rectificarea datelor cu caracter personal care nu sunt exacte, precum și la completarea datelor incomplete.
+-    dreptul la ștergerea datelor cu caracter personal/ dreptul de a fi uitat, în cazul în care datele cu caracter personal nu mai sunt necesare și nu mai justifică scopurile pentru care au fost colectate inițial.
+-    dreptul la restricționarea prelucrării datelor cu caracter personal, în cazul în care:
+⎫	Vizitatorul/turistul contestă exactitatea datelor.
+⎫	Prelucrarea este ilegală, iar vizitatorul/turistul se opune ștergerii datelor, solicitând în schimb restricționarea utilizării acestora.
+⎫	MRC nu mai are nevoie de prelucrarea datelor cu caracter personal ale vizitatorului/turistului, însă le solicită pentru contestarea, exercitarea sau apărarea unui drept în instanță.
+⎫	Vizitatorul/turistul se opune prelucrării datelor cu caracter personal pentru perioada de timp în care se verifică dacă interesele legitime ale MRC asupra prelucrării datelor prevalează asupra drepturilor clientului.
+-     dreptul de a se opune prelucrării datelor cu caracter personal de către Mișcarea Română pentru Calitate.
+-    dreptul la notificare din partea Mișcării Române pentru Calitate cu privire la prelucrarea datelor cu caracter personal.
+-     dreptul la portabilitatea datelor cu caracter personal, respectiv dreptul vizitatorului/turistului MRC de a primit datele cu caracter personal într-un format structural, utilizat în mod curent și care poate fi citit în mod automat, precum și dreptul de a trimite aceste date unui alt operator.
+- dreptul de a depune o plângere față de modalitatea de prelucrare a datelor personale la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal.
+- dreptul de retragere a consimțământului acordat Mișcării Române pentru Calitate de prelucrare a datelor cu caracter personal. Retragerea ulterioară a consimțământului nu afecteaza legalitatea folosirii datelor cu caracter personal efectuate în baza consimțământului acordat anterior Mișcării Române pentru Calitate înainte de retragerea acestuia. Retragerea consimțământului trebuie făcută în scris.
+-    dreptul de a nu face obiectul unei decizii bazate exlusiv pe prelucrare automatizată, inclusiv profilarea, care produce efecte asupra clientului sau îl afecteaza în mod similar, cu excepția cazului în care o astfel de prelucrare este necesară  pentru executarea contractului individual de muncă sau este permisă de către lege.
+Vizitatorii/turistii MRC își pot exercita drepturile mai sus menționate prin transmiterea unei cereri scrise la office@mrco.ro sau la adresa Mișcării Române pentru Calitate din Craiova, str. Părului, nr. 8, jud. Dolj.
+Mișcare Română pentru Calitate își rezervă dreptul de a pune la dispoziția autorităților sau a otganismelor de control cu care lucrează, la solicitarea acestora, datele cu caracter personal ce reies din solicitari, de exemplu. În cazul în care legea o cere, Mișcarea Română pentru Calitate va furniza toate informațiile solicitate. 
+Mișcarea Română pentru Calitate garanteaza siguranța prelucrării datelor cu caracter personal ale clienților săi, precum și confidențialitatea acestora. Atât angajații, cât și colaboratorii MRC (agentiile de turism inscrise) semnează angajamente de confidențialitate încă de la începutul colaborării cu Mișcarea Română pentru Calitate.
+Mișcarea Română pentru Calitate va păstra datele cu caracter personal ale vizitatorilor/turistilor săi chiar și după expirarea contractului, conform obligațiilor legale specifice domeniului de activitate sau conform termenelor de prescripție aplicabile.
+Managementul de la cel mai înalt nivel isi mentine angajamentul permanent pentru îmbunatățirea continuă a măsurilor de securitate în ceea ce privește activitățile de prelucrare a datelor cu caracter personal in vederea creșterii performanței în ceea ce privește confidențialitatea, disponibilitatea și integritatea datelor cu caracter personal.
+Prezenta politică de prelucrare a datelor cu caracter personal va fi menținută permanent ca și informație documentată, adecvată scopului, parte integrantă a procedurilor interne ale Mișcării Române pentru Calitate. De asemenea, aceasta va fi adaptată în mod constant cerințelor de Securitate ale activităților de prelucrare a datelor cu caracter personal, comunicată și disponibilă atât în cadrul Mișcării Române pentru Calitate, cât și părților interesate.
+</Text>
                 </View>
               </Modal>
             </ListItem>
