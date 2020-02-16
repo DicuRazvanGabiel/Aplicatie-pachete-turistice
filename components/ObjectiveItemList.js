@@ -85,23 +85,23 @@ const ObjectiveItemList = ({
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification
-              Notifications.cancelAllScheduledNotificationsAsync()
+          {/*<TouchableOpacity*/}
+          {/*  onPress={() => {*/}
+          {/*    //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification*/}
+          {/*    Notifications.cancelAllScheduledNotificationsAsync()*/}
 
-              if(item.inchidereL){
-                AsyncStorage.setItem("timeNotifications", item.inchidereL)
-              }
+          {/*    if(item.inchidereL){*/}
+          {/*      AsyncStorage.setItem("timeNotifications", JSON.stringify(item))*/}
+          {/*    }*/}
 
 
-            }}
-            style={{ margin: 2 }}
-          >
-            <View style={styles.cotumeButton}>
-              <Text style={styles.textButtonView}>Notify Me</Text>
-            </View>
-          </TouchableOpacity>
+          {/*  }}*/}
+          {/*  style={{ margin: 2 }}*/}
+          {/*>*/}
+          {/*  <View style={styles.cotumeButton}>*/}
+          {/*    <Text style={styles.textButtonView}>Notify Me</Text>*/}
+          {/*  </View>*/}
+          {/*</TouchableOpacity>*/}
         </View>
       </View>
     </TouchableOpacity>
