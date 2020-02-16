@@ -7,22 +7,29 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  AsyncStorage,
 } from "react-native";
+import { Button } from "native-base";
 import ImageViewer from "react-native-image-zoom-viewer";
 import { AntDesign } from "@expo/vector-icons";
 import DrawerButton from "../components/DrawerButton";
 import { useSelector } from "react-redux";
+import * as Calendar from 'expo-calendar';
+import moment from 'moment';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const { width, height } = Dimensions.get("screen");
 
 const ObjectiveDetail = ({ navigation }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const objectiv = navigation.getParam("objectiv");
+  const [isModalNotificareVisible, setIsModalNotificareVisible] = useState(false);
   const lang = useSelector(state => state.language.language);
   const images = [];
   description = null;
-
+  
   switch (lang) {
     case "ro":
       description = objectiv.descriereRo;
@@ -62,13 +69,79 @@ const ObjectiveDetail = ({ navigation }) => {
     );
   };
 
+  async function getDefaultCalendarSource() {
+    const calendars = await Calendar.getCalendarsAsync();
+    const defaultCalendars = calendars.filter(
+      each => each.source.name === 'Default'
+    );
+    return defaultCalendars[0].source;
+  }
+
+  async function createCalendar() {
+    const defaultCalendarSource =
+      Platform.OS === 'ios'
+        ? await getDefaultCalendarSource()
+        : { isLocalAccount: true, name: 'Expo Calendar' };
+    const newCalendarID = await Calendar.createCalendarAsync({
+      title: 'Natbiot Calendar',
+      color: 'blue',
+      entityType: Calendar.EntityTypes.EVENT,
+      sourceId: defaultCalendarSource.id,
+      source: defaultCalendarSource,
+      name: 'internalCalendarName',
+      ownerAccount: 'personal',
+      accessLevel: Calendar.CalendarAccessLevel.OWNER,
+    });
+    AsyncStorage.setItem("calendarID", newCalendarID);
+    return newCalendarID;
+  }
+
+  const programeazaTraseu = async (date) => {
+    let calendarID = await AsyncStorage.getItem("calendarID");
+    if(!calendarID) {
+      calendarID = await createCalendar();
+    }
+    setIsDatePickerVisible(false);
+    Calendar.createEventAsync(calendarID, {
+      title: `Traseu programat ${objectiv.title}`,
+      startDate: date, 
+      endDate: date,
+      alarms: [{relativeOffset: -60}],
+      timeZone: "GMT+2"
+    })
+  }
+
+  const notificareOraInchidere = async (timeToNotify) => {
+    let calendarID = await AsyncStorage.getItem("calendarID");
+    if(!calendarID) {
+      calendarID = await createCalendar();
+    }
+    let oraInchidere =  moment(objectiv.inchidereMaV, "HH:mm");
+
+    Calendar.createEventAsync(calendarID, {
+      title: `Ora de inchidere a ${objectiv.title}`,
+      startDate: new Date(oraInchidere), 
+      endDate: new Date(oraInchidere),
+      alarms: [{relativeOffset: timeToNotify}],
+      timeZone: "GMT+2"
+    })
+
+    setIsModalNotificareVisible(false);
+  }
+
+  const modalNotificareTime = () => {
+    setIsModalNotificareVisible(true)
+
+    // notificareOraInchidere();
+  }
+
   return (
     <View style={styles.container}>
       <DrawerButton navigation={navigation} backButton={true} />
       <ScrollView>
       {images.length !== 0 ? (
         <View>
-            <View style={{ paddingBottom: 60 }}>
+            <View style={{ paddingBottom: 0 }}>
               <View>
                 <TouchableOpacity onPress={toggleModal}>
                   <Image
@@ -80,7 +153,6 @@ const ObjectiveDetail = ({ navigation }) => {
               </View>
             </View>
               
-
           <Modal visible={isModalVisible} transparent={true}>
             <ImageViewer
               imageUrls={images}
@@ -95,6 +167,64 @@ const ObjectiveDetail = ({ navigation }) => {
       ) : (
         <Text> </Text>
         )}
+
+        <View style={{flexDirection: 'row', justifyContent:'space-evenly', marginBottom: 15}}>
+          {objectiv.nonStop ? (
+            <Text>
+              Program NON-Stop
+            </Text>
+          ) : (
+            <Button rounded style={{paddingHorizontal: 10}} onPress={modalNotificareTime}>
+              <Text>Notificare ora inchidere</Text>
+            </Button>
+          )}
+
+          <Modal visible={isModalNotificareVisible}>
+            <View style={{flex: 1, backgroundColor: 'green', marginTop: 25, justifyContent:'center'}}>
+              <Text style={{fontSize: 20}}>
+                Selecteaza cu cat timp inainte vei primi notificarea
+              </Text>
+              <ScrollView>
+                <TouchableOpacity onPress={() => notificareOraInchidere(-5)}>
+                  <Text style={{textAlign: 'center', textDecorationLine: 'underline', fontSize: 15, marginVertical: 15}}>
+                    Cu 5 minute inainte
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => notificareOraInchidere(-30)}>
+                  <Text style={{textAlign: 'center', textDecorationLine: 'underline', fontSize: 15, marginVertical: 15}}>
+                    Cu 30 minute inainte
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => notificareOraInchidere(-60)}>
+                  <Text style={{textAlign: 'center', textDecorationLine: 'underline', fontSize: 15, marginVertical: 15}}>
+                    Cu o ora inainte
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => notificareOraInchidere(-420)}>
+                  <Text style={{textAlign: 'center', textDecorationLine: 'underline', fontSize: 15, marginVertical: 15}}>
+                    Cu 7 ore inainte
+                  </Text>
+                </TouchableOpacity>
+
+              </ScrollView>
+            </View>
+          </Modal>
+
+          <Button success rounded style={{paddingHorizontal: 10}} onPress={() => setIsDatePickerVisible(true)}> 
+            <Text>Programeaza traseu</Text>
+          </Button>
+        </View>
+
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="datetime"
+          onConfirm={programeazaTraseu}
+          onCancel={() => setIsDatePickerVisible(false)}
+        />
+
         <View style={{ margin: 5 }}>
                 <Text>{description}</Text>
               </View>

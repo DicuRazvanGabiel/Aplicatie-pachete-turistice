@@ -11,6 +11,7 @@ import * as TaskManager from 'expo-task-manager';
 import { enableScreens } from 'react-native-screens';
 import NetInfo from "@react-native-community/netinfo";
 import NoInternetContainer from "./navigation/noInternetNavigator"
+import * as Calendar from 'expo-calendar';
 
 //redux import
 // import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -96,6 +97,9 @@ export default class App extends React.Component {
     
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
+
+    const result = await Calendar.requestCalendarPermissionsAsync();
+
   };
 
   handleResourcesAsync = async () => {

@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "5.0.0",
+    "version": "6.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,22 +17,24 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 100
+      "fallbackToCacheTimeout": 1000
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "bundleIdentifier": "com.natbiottravelling",
-      "buildNumber": "5.0.0",
+      "buildNumber": "7.0.0",
       "supportsTablet": false
     },
     "android": {
       "package": "com.natbiottravelling",
-      "versionCode": 5,
+      "versionCode": 7,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "READ_CALENDAR", 
+        "WRITE_CALENDAR"
       ],
       "config": {
         "googleMaps": {
