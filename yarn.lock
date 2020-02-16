@@ -2843,6 +2843,11 @@ expo-av@~8.0.0:
     lodash "^4.17.15"
     nullthrows "^1.1.0"
 
+expo-calendar@~8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/expo-calendar/-/expo-calendar-8.0.0.tgz#d986e5c482a3e6c376bdf5d27835a649dff1a582"
+  integrity sha512-jltYJgYaJETCWL3pawjnDQ+spJD8aIpfdhk+GKwNHrMRS36BzgmQArfBm6MGkPT3cIxNIT40hNlTcJjbs69uNw==
+
 expo-constants@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-8.0.0.tgz#e2c5a072dacb4263ccfc57dcb4835ca791960d48"
@@ -4455,6 +4460,11 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 morgan@^1.9.0:
   version "1.9.1"
