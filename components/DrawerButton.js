@@ -5,8 +5,10 @@ import { Ionicons } from "@expo/vector-icons";
 
 
 const DrawerButton = ({ navigation, backButton = false }) => {
-  const login = useSelector(state => state.login.login);
-  
+  let login = useSelector(state => state.login.login);
+  if(login === undefined){
+    login = true
+  }
   const renderBackButton = () => {
     return(
       <TouchableOpacity onPress={() => navigation.goBack()}>

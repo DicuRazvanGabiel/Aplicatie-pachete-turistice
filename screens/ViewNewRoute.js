@@ -21,6 +21,7 @@ import MapViewDirections from "react-native-maps-directions";
 import {AntDesign, MaterialCommunityIcons} from "@expo/vector-icons";
 import randomColor from "randomcolor";
 import * as FileSystem from 'expo-file-system';
+import Translate from "../constants/Translate"
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import DrawerButton from "../components/DrawerButton";
@@ -29,6 +30,7 @@ const ViewNewRoute = ({navigation}) => {
     let routes = navigation.getParam("routes");
     const currentLocation = useSelector(state => state.location.location);
     const coordsForCenter = [];
+    const lang = useSelector(state => state.language.language);
     routes.map(object => {
         coordsForCenter.push({
             latitude: parseFloat(object.latitudine),
@@ -169,7 +171,7 @@ const ViewNewRoute = ({navigation}) => {
                 <View style={{margin: 10}}>
                     <Button onPress={() => {
                         handleOffLineSave()
-                    }} title="Salvare pentru offline"/>
+                    }} title={Translate.salvarePentruOffline[lang]}/>
                 </View>
             </ScrollView>
         </View>

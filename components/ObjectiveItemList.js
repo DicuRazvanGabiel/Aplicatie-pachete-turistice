@@ -12,7 +12,8 @@ import {
 } from "react-native";
 import Color from "../constants/Colors";
 import { getDistance } from "geolib";
-import { Notifications } from "expo";
+import Translate from "../constants/Translate";
+
 
 const ObjectiveItemList = ({
   item,
@@ -22,6 +23,7 @@ const ObjectiveItemList = ({
 }) => {
   const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
   let distance = null;
+  const lang = useSelector(state => state.language.language);
   if (userLocation) {
     distance = getDistance(
       { latitude: item.latitudine, longitude: item.longitudine },
@@ -81,27 +83,9 @@ const ObjectiveItemList = ({
             style={{ margin: 2 }}
           >
             <View style={styles.cotumeButton}>
-              <Text style={styles.textButtonView}>Navigate</Text>
+          <Text style={styles.textButtonView}>{Translate.navigare[lang]}</Text>
             </View>
           </TouchableOpacity>
-
-          {/*<TouchableOpacity*/}
-          {/*  onPress={() => {*/}
-          {/*    //https://docs.expo.io/versions/latest/sdk/notifications/#localnotification*/}
-          {/*    Notifications.cancelAllScheduledNotificationsAsync()*/}
-
-          {/*    if(item.inchidereL){*/}
-          {/*      AsyncStorage.setItem("timeNotifications", JSON.stringify(item))*/}
-          {/*    }*/}
-
-
-          {/*  }}*/}
-          {/*  style={{ margin: 2 }}*/}
-          {/*>*/}
-          {/*  <View style={styles.cotumeButton}>*/}
-          {/*    <Text style={styles.textButtonView}>Notify Me</Text>*/}
-          {/*  </View>*/}
-          {/*</TouchableOpacity>*/}
         </View>
       </View>
     </TouchableOpacity>

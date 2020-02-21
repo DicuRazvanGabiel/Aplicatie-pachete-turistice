@@ -20,6 +20,7 @@ import randomColor from "randomcolor";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import RatingStars from "../components/RatingStars";
+import Translate from "../constants/Translate";
 
 import GOOGLE_API_KEY from "../GOOGLE_API_KEY";
 import Colors from "../constants/Colors";
@@ -191,7 +192,7 @@ const PeckageDetailScreen = props => {
       <ScrollView style={styles.scrollViewButtons}>
         <View style={styles.buttonView}>
           <Button
-            title="Creeaza-ti prorpiul traseu"
+            title={Translate.creareTraseu[lang]}
             onPress={() => createNewHandler("ro")}
             color={Colors.lightGreen}
           />
@@ -201,7 +202,7 @@ const PeckageDetailScreen = props => {
             <Row>
               <View style={styles.buttonView}>
                 <Button
-                  title="Obiective Romania"
+                  title={Translate.obRo[lang]}
                   onPress={() => viewObjectivesHandler("ro")}
                   color={Colors.lightGreen}
                 />
@@ -210,7 +211,7 @@ const PeckageDetailScreen = props => {
             <Row>
               <View style={styles.buttonView}>
                 <Button
-                  title="Trailer"
+                  title={Translate.trailer[lang]}
                   onPress={() => {
                     setTrailerModalVisibilty(true);
                   }}
@@ -223,7 +224,7 @@ const PeckageDetailScreen = props => {
             <Row>
               <View style={styles.buttonView}>
                 <Button
-                  title="Obiective Bulgaria"
+                  title={Translate.obBg[lang]}
                   onPress={() => viewObjectivesHandler("bg")}
                   color={Colors.lightGreen}
                 />
@@ -232,7 +233,7 @@ const PeckageDetailScreen = props => {
             <Row>
               <View style={styles.buttonView}>
                 <Button
-                  title="Rezerva Pachet"
+                  title={Translate.rezervaPachet[lang]}
                   onPress={() => {
                     props.navigation.navigate("RezervationForm", {
                       packege
@@ -246,7 +247,7 @@ const PeckageDetailScreen = props => {
         </Grid>
         <View style={styles.buttonView}>
           <Button
-            title="Descarca Brosura"
+            title={Translate.Descarcabrosura[lang]}
             onPress={() => {
               if(lang === "ro"){
                 Linking.openURL(packege.linkBrosuraRo)

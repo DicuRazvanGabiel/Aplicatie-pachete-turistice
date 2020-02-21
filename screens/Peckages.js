@@ -102,7 +102,7 @@ _getLocationAsync = async () => {
     if (status === "granted") {
         await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
             accuracy: Location.Accuracy.Balanced,
-            timeInterval: 10000
+            timeInterval: 100000
         });
     }
     const {status: existingStatus} = await Permissions.getAsync(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ActivityIndicator, Alert } from "react-native";
+import { StyleSheet, View, ActivityIndicator, Alert, TouchableOpacity } from "react-native";
 
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
@@ -131,12 +131,12 @@ const AuthScreen = ({ navigation }) => {
         <Button full onPress={logInFacebook}>
           <Text>FACEBOOK</Text>
         </Button>
-        <View style={styles.orContainer}>
-          <Text>SAU</Text>
+        
+        <View style={{marginTop: 30,flex:1, height: '100%'}}>
+          <TouchableOpacity onPress={longInNoAccount}>
+            <Text style={{textAlign:'center'}}>Conectare fara cont</Text>
+          </TouchableOpacity>
         </View>
-        <Button full onPress={longInNoAccount}>
-          <Text>Conectare fara cont</Text>
-        </Button>
       </Content>
     </Container>
   );

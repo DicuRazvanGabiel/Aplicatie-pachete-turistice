@@ -12,6 +12,7 @@ import { DatePicker } from "native-base";
 import DrawerButton from "../components/DrawerButton";
 import ModalDropdown from "react-native-modal-dropdown";
 import { useSelector } from "react-redux";
+import Translate from "../constants/Translate";
 
 const RezervationForm = ({ navigation }) => {
   const [textInputNume, setTextInputNume] = useState("");
@@ -107,20 +108,20 @@ const RezervationForm = ({ navigation }) => {
             </Text>
           </View>
           <TextInput
-            placeholder="Nume"
+            placeholder={Translate.nume[lang]}
             style={styles.input}
             onChangeText={text => setTextInputNume(text)}
             value={textInputNume}
           />
 
           <TextInput
-            placeholder="Prenume"
+            placeholder={Translate.prenume[lang]}
             style={styles.input}
             onChangeText={text => setTextInputPrenume(text)}
             value={textInputPrenume}
           />
           <View style={styles.datePicker}>
-            <Text>From: </Text>
+            <Text>{Translate.dela[lang]}: </Text>
             <DatePicker
               locale={"en"}
               timeZoneOffsetInMinutes={undefined}
@@ -134,7 +135,7 @@ const RezervationForm = ({ navigation }) => {
               disabled={false}
             />
 
-            <Text>To: </Text>
+            <Text>{Translate.la[lang]}: </Text>
             <DatePicker
               locale={"en"}
               timeZoneOffsetInMinutes={undefined}
@@ -168,7 +169,7 @@ const RezervationForm = ({ navigation }) => {
           />
         </View>
         <View>
-          <Button title="Trimite" onPress={sendHandler} />
+          <Button title={Translate.trimite[lang]} onPress={sendHandler} />
         </View>
       </KeyboardAvoidingView>
     </View>

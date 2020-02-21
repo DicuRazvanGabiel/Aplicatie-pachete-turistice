@@ -26,12 +26,14 @@ import {
 import Color from "../constants/Colors";
 import DrawerButton from "../components/DrawerButton";
 import CreateNewItem from "../components/CreateNewItem";
+import Translate from "../constants/Translate"
 
 const CreateNewRoute = props => {
   const [typeObjetivesToShow, setTypeObjetivesToShow] = useState("naturale");
   const objectives = props.navigation.getParam("listObjectives");
   const country = props.navigation.getParam("country");
   const userLocation = useSelector(state => state.location.location);
+  const lang = useSelector(state => state.language.language);
 
   let newRoute = [];
 
@@ -39,7 +41,7 @@ const CreateNewRoute = props => {
     newRoute = [...newRoute, item];
   };
 
-  startNewRoute = () => {
+  const startNewRoute = () => {
     if(newRoute.length < 1){
       Alert.alert('Atentie!', `Alege cel putin un obiective`);
       return;
@@ -110,19 +112,19 @@ const CreateNewRoute = props => {
             active={typeObjetivesToShow === "naturale" ? true : false}
             onPress={() => toogleButton("naturale")}
           >
-            <Text>Naturale</Text>
+            <Text>{Translate.obNaturalle[lang]}</Text>
           </Button>
           <Button
             success
             onPress={() => startNewRoute()}
           >
-            <Text>Finalizare</Text>
+            <Text>{Translate.startTraseu[lang]}</Text>
           </Button>
           <Button
             active={typeObjetivesToShow === "culturale" ? true : false}
             onPress={() => toogleButton("culturale")}
           >
-            <Text>Culturale</Text>
+            <Text>{Translate.obCulturale[lang]}</Text>
           </Button>
         </FooterTab>
       </Footer>
