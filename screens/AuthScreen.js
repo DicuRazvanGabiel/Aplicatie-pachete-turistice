@@ -3,6 +3,7 @@ import { StyleSheet, View, ActivityIndicator, Alert } from "react-native";
 
 import { useDispatch } from "react-redux";
 import * as authAuctions from "../store/actions/auth";
+import { loginNoAccount } from "../store/actions/loginNoAccount";
 import * as Facebook from 'expo-facebook';
 
 import {
@@ -66,6 +67,11 @@ const AuthScreen = ({ navigation }) => {
     }
   };
 
+  const longInNoAccount = () => {
+    dispatch(loginNoAccount(false));
+    navigation.navigate("MainApplication");
+  }
+
   useEffect(() => {
     if (error) {
       Alert.alert("Error", error, [{ text: "Okay" }]);
@@ -124,6 +130,12 @@ const AuthScreen = ({ navigation }) => {
         </View>
         <Button full onPress={logInFacebook}>
           <Text>FACEBOOK</Text>
+        </Button>
+        <View style={styles.orContainer}>
+          <Text>SAU</Text>
+        </View>
+        <Button full onPress={longInNoAccount}>
+          <Text>Conectare fara cont</Text>
         </Button>
       </Content>
     </Container>

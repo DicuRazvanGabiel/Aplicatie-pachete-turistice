@@ -181,9 +181,14 @@ const ObjectiveDetail = ({ navigation }) => {
 
           <Modal visible={isModalNotificareVisible}>
             <View style={{flex: 1, backgroundColor: 'green', marginTop: 25, justifyContent:'center'}}>
-              <Text style={{fontSize: 20}}>
+              <View style={{flexDirection: 'row', justifyContent:'space-between', margin: 5}}>
+              <Text style={{fontSize: 13}}>
                 Selecteaza cu cat timp inainte vei primi notificarea
               </Text>
+                <TouchableOpacity onPress={() => {setIsModalNotificareVisible(false)}}>
+                  <AntDesign name="closecircle" size={25} />
+                </TouchableOpacity>
+              </View>
               <ScrollView>
                 <TouchableOpacity onPress={() => notificareOraInchidere(-5)}>
                   <Text style={{textAlign: 'center', textDecorationLine: 'underline', fontSize: 15, marginVertical: 15}}>

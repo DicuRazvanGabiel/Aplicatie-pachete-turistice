@@ -72,7 +72,6 @@ const PeckageDetailScreen = props => {
       <DrawerButton navigation={props.navigation} backButton={true} />
       <MapView style={styles.mapStyle} region={region} showsUserLocation={true}>
         {listObjectives.map(object => {
-          // console.log(object.iconita);
 
           const latlng = {
             latitude: parseFloat(object.latitudine),

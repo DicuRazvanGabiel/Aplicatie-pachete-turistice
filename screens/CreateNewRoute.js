@@ -116,7 +116,7 @@ const CreateNewRoute = props => {
             success
             onPress={() => startNewRoute()}
           >
-            <Text>Start Traseu</Text>
+            <Text>Finalizare</Text>
           </Button>
           <Button
             active={typeObjetivesToShow === "culturale" ? true : false}

@@ -20,6 +20,7 @@ import ViewNewRoute from "../screens/ViewNewRoute"
 import HowMuchTime from "../screens/HowMuchTime"
 import Newsletter from "../screens/Newsletter";
 import TermeniGDPR from "../screens/TermeniGDPR";
+import TermeniConditii from "../screens/TermeniConditii"
 
 const packegNavigator = createStackNavigator(
   {
@@ -85,7 +86,13 @@ const drawer = createDrawerNavigator(
     TermeniGDPR: {
       screen: TermeniGDPR,
       navigationOptions: ({ navigation }) => ({
-        title: `GDPR`
+        title: `GDPR - Politica de confidentialitate`
+      })
+    },
+    TermeniConditii: {
+      screen: TermeniConditii,
+      navigationOptions: ({ navigation }) => ({
+        title: `Termeni si Conditii`
       })
     },
   },

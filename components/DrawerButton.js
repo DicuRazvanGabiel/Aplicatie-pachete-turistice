@@ -1,8 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+
 const DrawerButton = ({ navigation, backButton = false }) => {
+  const login = useSelector(state => state.login.login);
+  
   const renderBackButton = () => {
     return(
       <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -14,11 +18,14 @@ const DrawerButton = ({ navigation, backButton = false }) => {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.openDrawer()}>
-        <View style={{ margin: 5 }}>
-          <Ionicons name="ios-menu" size={35} color="black" />
-        </View>
-      </TouchableOpacity>
+      {login && (
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <View style={{ margin: 5 }}>
+              <Ionicons name="ios-menu" size={35} color="black" />
+            </View>
+        </TouchableOpacity>
+      )}
+      
       <View style={styles.cotainerText}>
         <Text style={{ fontSize: 25 }}>Natbiot Travelling</Text>
       </View>
