@@ -13,6 +13,7 @@ import {
 import Color from "../constants/Colors";
 import { getDistance } from "geolib";
 import Translate from "../constants/Translate";
+import { useSelector } from "react-redux";
 
 
 const ObjectiveItemList = ({
