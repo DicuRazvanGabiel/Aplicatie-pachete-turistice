@@ -195,7 +195,9 @@ const ObjectiveDetail = ({ navigation }) => {
                             style={{ paddingHorizontal: 10 }}
                             onPress={modalNotificareTime}
                         >
-                            <Text>Notificare ora inchidere</Text>
+                            <Text>
+                                {Translate.notificareorainchidere[lang]}
+                            </Text>
                         </Button>
                     )}
 
@@ -216,8 +218,7 @@ const ObjectiveDetail = ({ navigation }) => {
                                 }}
                             >
                                 <Text style={{ fontSize: 13 }}>
-                                    Selecteaza cu cat timp inainte vei primi
-                                    notificarea
+                                    {Translate.selecteazaTimpInainte[lang]}
                                 </Text>
                                 <TouchableOpacity
                                     onPress={() => {
@@ -239,7 +240,7 @@ const ObjectiveDetail = ({ navigation }) => {
                                             marginVertical: 15,
                                         }}
                                     >
-                                        Cu 5 minute inainte
+                                        5 {Translate.minuteinainte[lang]}
                                     </Text>
                                 </TouchableOpacity>
 
@@ -254,7 +255,7 @@ const ObjectiveDetail = ({ navigation }) => {
                                             marginVertical: 15,
                                         }}
                                     >
-                                        Cu 30 minute inainte
+                                        30 {Translate.minuteinainte[lang]}
                                     </Text>
                                 </TouchableOpacity>
 
@@ -269,7 +270,7 @@ const ObjectiveDetail = ({ navigation }) => {
                                             marginVertical: 15,
                                         }}
                                     >
-                                        Cu o ora inainte
+                                        60 {Translate.minuteinainte[lang]}
                                     </Text>
                                 </TouchableOpacity>
 
@@ -284,7 +285,7 @@ const ObjectiveDetail = ({ navigation }) => {
                                             marginVertical: 15,
                                         }}
                                     >
-                                        Cu 7 ore inainte
+                                        7 {Translate.oreinainte[lang]}
                                     </Text>
                                 </TouchableOpacity>
                             </ScrollView>

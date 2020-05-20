@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import * as Auth from "../store/actions/auth";
 import DrawerButton from "../components/DrawerButton";
 import store from "../store";
+import { useSelector } from "react-redux";
 import Translate from "../constants/Translate";
 
 const Settings = ({ navigation }) => {
@@ -40,6 +41,8 @@ const Settings = ({ navigation }) => {
 
     const [password, setPassword] = useState();
     const [rePassword, setRePassword] = useState();
+
+    const lang = useSelector((state) => state.language.language);
 
     const getSettings = async () => {
         const setObj = await AsyncStorage.getItem("settingsObj");
@@ -106,7 +109,6 @@ const Settings = ({ navigation }) => {
 
         let userData = await AsyncStorage.getItem("userData");
         userData = JSON.parse(userData);
-        console.log(userData.token);
 
         const response = await fetch(
             "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAT9f4YN5uSmzKLcBW-5JQrR5YqptRSHRw",
@@ -154,7 +156,7 @@ const Settings = ({ navigation }) => {
                         </Button>
                     </Left>
                     <Body>
-                        <Text>Distance notifications</Text>
+                        <Text>{Translate.notificariDis[lang]}</Text>
                     </Body>
                     <Right>
                         <Switch
@@ -173,7 +175,7 @@ const Settings = ({ navigation }) => {
                         </Button>
                     </Left>
                     <Body>
-                        <Text>Meters to notificate</Text>
+                        <Text>{Translate.metriiNot[lang]}</Text>
                     </Body>
                     <Right>
                         <View style={{ width: 100 }}>
@@ -185,7 +187,7 @@ const Settings = ({ navigation }) => {
                                 style={{ width: 100 }}
                             />
                         </View>
-                        <Text>Meters</Text>
+                        <Text>{Translate.metri[lang]}</Text>
                     </Right>
                 </ListItem>
                 <ListItem icon>
@@ -195,10 +197,10 @@ const Settings = ({ navigation }) => {
                         </Button>
                     </Left>
                     <Body>
-                        <Text>Change passwod</Text>
+                        <Text>{Translate.schimbparrola[lang]}</Text>
                     </Body>
                     <Button bordered onPress={changePasswordHandler}>
-                        <Text>Change</Text>
+                        <Text>{Translate.schimba[lang]}</Text>
                     </Button>
                 </ListItem>
                 <ListItem icon>
@@ -208,7 +210,7 @@ const Settings = ({ navigation }) => {
                         </Button>
                     </Left>
                     <Body>
-                        <Text>Change language</Text>
+                        <Text>{Translate.schimbaLimba[lang]}</Text>
                     </Body>
                     <Button
                         bordered
@@ -216,7 +218,7 @@ const Settings = ({ navigation }) => {
                             navigation.navigate("LanguageSelectScreen");
                         }}
                     >
-                        <Text>Change</Text>
+                        <Text>{Translate.schimba[lang]}</Text>
                     </Button>
                 </ListItem>
 

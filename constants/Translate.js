@@ -199,4 +199,34 @@ export default {
         en: "Schedule the route",
         bg: "График на маршрута",
     },
+    notificareorainchidere: {
+        ro: "Notificare ora inchidere",
+        en: "Closing time notification",
+        bg: "Известие за крайно време",
+    },
+    selecteazaTimpInainte: {
+        ro: "Selecteaza cu cat timp inainte vei primi notificarea",
+        en: "Select how long before you will receive the notification",
+        bg: "Изберете колко време преди да получите известието",
+    },
+    minuteinainte: {
+        ro: "minute inainte",
+        en: "minutes before",
+        bg: "минути преди това",
+    },
+    oreinainte: {
+        ro: "ore inainte",
+        en: "hours before",
+        bg: "часове преди",
+    },
+    metriiNot: {
+        ro: "Metrii pentru notificare",
+        en: "Meters to notificate",
+        bg: "Метри за уведомяване",
+    },
+    metri: {
+        ro: "Metri",
+        en: "Meters",
+        bg: "Метри",
+    },
 };
